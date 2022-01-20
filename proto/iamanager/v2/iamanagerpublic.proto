@@ -14,6 +14,8 @@ service IAMPublicService {
     rpc GetUsers(google.protobuf.Empty) returns (Users) {}
     rpc SubscribeUsersChanged(google.protobuf.Empty) returns (stream Users) {}
     rpc GetAPIVersion(google.protobuf.Empty) returns (APIVersion) {}
+    rpc GetSubjects(google.protobuf.Empty) returns (Subjects) {}
+    rpc SubscribeSubjectsChanged(google.protobuf.Empty) returns (stream Subjects) {}
 }
 
 message SystemInfo {
