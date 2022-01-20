@@ -9,3 +9,7 @@ message Permissions {
 message Users {
     repeated string users = 1;
 }
+
+message Subjects {
+    repeated string subjects = 1;
+}
