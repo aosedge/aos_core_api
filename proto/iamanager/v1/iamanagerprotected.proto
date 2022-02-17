@@ -7,15 +7,15 @@ import "iamanager/v1/iamanagercommon.proto";
 package iamanager.v1;
 
 service IAMProtectedService {
-    rpc FinishProvisioning(google.protobuf.Empty) returns (google.protobuf.Empty) {}
-    rpc Clear(ClearRequest) returns (google.protobuf.Empty) {}
     rpc SetOwner(SetOwnerRequest) returns (google.protobuf.Empty) {}
+    rpc Clear(ClearRequest) returns (google.protobuf.Empty) {}
     rpc CreateKey(CreateKeyRequest) returns (CreateKeyResponse) {}
     rpc ApplyCert(ApplyCertRequest) returns (ApplyCertResponse) {}
+    rpc EncryptDisk(EncryptDiskRequest) returns (google.protobuf.Empty) {}
+    rpc FinishProvisioning(google.protobuf.Empty) returns (google.protobuf.Empty) {}
     rpc SetUsers(Users) returns (google.protobuf.Empty) {}
     rpc RegisterService(RegisterServiceRequest) returns (RegisterServiceResponse) {}
     rpc UnregisterService(UnregisterServiceRequest) returns (google.protobuf.Empty) {}
-    rpc EncryptDisk(EncryptDiskRequest) returns (google.protobuf.Empty) {}
 }
 
 message ClearRequest {
