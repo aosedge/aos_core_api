@@ -7,21 +7,15 @@ import "iamanager/v1/iamanagercommon.proto";
 package iamanager.v1;
 
 service IAMProtectedService {
-    rpc GetCertTypes(google.protobuf.Empty) returns (CertTypes) {}
     rpc FinishProvisioning(google.protobuf.Empty) returns (google.protobuf.Empty) {}
     rpc Clear(ClearRequest) returns (google.protobuf.Empty) {}
     rpc SetOwner(SetOwnerRequest) returns (google.protobuf.Empty) {}
     rpc CreateKey(CreateKeyRequest) returns (CreateKeyResponse) {}
     rpc ApplyCert(ApplyCertRequest) returns (ApplyCertResponse) {}
-    rpc GetCert(GetCertRequest) returns (GetCertResponse) {}
     rpc SetUsers(Users) returns (google.protobuf.Empty) {}
     rpc RegisterService(RegisterServiceRequest) returns (RegisterServiceResponse) {}
     rpc UnregisterService(UnregisterServiceRequest) returns (google.protobuf.Empty) {}
     rpc EncryptDisk(EncryptDiskRequest) returns (google.protobuf.Empty) {}
-}
-
-message CertTypes {
-    repeated string types = 1;
 }
 
 message ClearRequest {
@@ -51,18 +45,6 @@ message ApplyCertRequest {
 message ApplyCertResponse {
     string type     = 1;
     string cert_url = 2;
-}
-
-message GetCertRequest {
-    string type   = 1;
-    bytes issuer  = 2;
-    string serial = 3;
-}
-
-message GetCertResponse {
-    string type     = 1;
-    string cert_url = 2;
-    string key_url  = 3;
 }
 
 message RegisterServiceRequest {
