@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package iamanager.v2;
+
+message Permissions {
+    map<string, string> permissions = 1;
+}
+
+message Users {
+    repeated string users = 1;
+}

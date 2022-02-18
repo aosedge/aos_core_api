@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+import "iamanager/v2/iamanagercommon.proto";
+
+package iamanager.v2;
+
+service IAMProtectedService {
+    rpc SetOwner(SetOwnerRequest) returns (google.protobuf.Empty) {}
+    rpc Clear(ClearRequest) returns (google.protobuf.Empty) {}
+    rpc CreateKey(CreateKeyRequest) returns (CreateKeyResponse) {}
+    rpc ApplyCert(ApplyCertRequest) returns (ApplyCertResponse) {}
+    rpc EncryptDisk(EncryptDiskRequest) returns (google.protobuf.Empty) {}
+    rpc FinishProvisioning(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc SetUsers(Users) returns (google.protobuf.Empty) {}
+    rpc RegisterService(RegisterServiceRequest) returns (RegisterServiceResponse) {}
+    rpc UnregisterService(UnregisterServiceRequest) returns (google.protobuf.Empty) {}
+}
+
+message ClearRequest {
+    string type = 1;
+}
+
+message SetOwnerRequest {
+    string type     = 1;
+    string password = 2;
+}
+
+message CreateKeyRequest {
+    string type     = 1;
+    string password = 2;
+}
+
+message CreateKeyResponse {
+    string type = 1;
+    string csr  = 2;
+}
+
+message ApplyCertRequest {
+    string type = 1;
+    string cert = 2;
+}
+
+message ApplyCertResponse {
+    string type     = 1;
+    string cert_url = 2;
+}
+
+message RegisterServiceRequest {
+    string service_id                    = 1;
+    map<string, Permissions> permissions = 2;
+}
+
+message RegisterServiceResponse {
+    string secret = 1;
+}
+
+message UnregisterServiceRequest {
+    string service_id = 1;
+}
+
+message EncryptDiskRequest {
+    string password = 1;
+}
