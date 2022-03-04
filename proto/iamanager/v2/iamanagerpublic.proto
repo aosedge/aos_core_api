@@ -13,6 +13,7 @@ service IAMPublicService {
     rpc GetPermissions(PermissionsRequest) returns (PermissionsResponse) {}
     rpc GetUsers(google.protobuf.Empty) returns (Users) {}
     rpc SubscribeUsersChanged(google.protobuf.Empty) returns (stream Users) {}
+    rpc GetAPIVersion(google.protobuf.Empty) returns (APIVersion) {}
 }
 
 message SystemInfo {
@@ -44,4 +45,8 @@ message PermissionsRequest {
 message PermissionsResponse {
     string service_id       = 1;
     Permissions permissions = 2;
+}
+
+message APIVersion {
+    uint64 version = 1;
 }
