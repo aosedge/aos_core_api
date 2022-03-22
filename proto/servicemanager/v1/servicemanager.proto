@@ -219,6 +219,7 @@ message ServiceLogRequest {
     string service_id              = 2;
     google.protobuf.Timestamp from = 3;
     google.protobuf.Timestamp till = 4;
+    repeated uint32 instance_ids   = 5;
 }
 
 message LogData {
