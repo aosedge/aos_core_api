@@ -81,29 +81,29 @@ message RunInstancesRequest {
     repeated RunInstanceRequest instances = 1;
 }
 
-message InstanceStateRequest {
+message InstanceIdent {
     string service_id = 1;
     string subject_id = 2;
     uint64 instance   = 3;
-    bool default      = 4;
+}
+
+message InstanceStateRequest {
+    InstanceIdent instance = 1;
+    bool default           = 2;
 }
 
 message StateAcceptance {
-    string correlation_id = 1;
-    string service_id     = 2;
-    string subject_id     = 3;
-    uint64 instance       = 4;
-    string state_checksum = 5;
-    string result         = 6;
-    string reason         = 7;
+    string correlation_id  = 1;
+    InstanceIdent instance = 2;
+    string state_checksum  = 3;
+    string result          = 4;
+    string reason          = 5;
 }
 
 message InstanceState {
-    string service_id     = 1;
-    string subject_id     = 2;
-    uint64 instance       = 3;
-    string state_checksum = 4;
-    bytes state           = 5;
+    InstanceIdent instance = 1;
+    string state_checksum  = 2;
+    bytes state            = 3;
 }
 
 message NewInstanceState {
@@ -116,10 +116,8 @@ message OverrideEnvVarsRequest {
 }
 
 message OverrideInstanceEnvVar {
-    string service_id        = 1;
-    string subject_id        = 2;
-    uint64 instance          = 3;
-    repeated EnvVarInfo vars = 4;
+    InstanceIdent instance   = 1;
+    repeated EnvVarInfo vars = 2;
 }
 
 message EnvVarInfo {
@@ -133,10 +131,8 @@ message OverrideEnvVarStatus {
 }
 
 message EnvVarInstanceStatus {
-    string service_id                 = 1;
-    string subject_id                 = 2;
-    uint64 instance                   = 3;
-    repeated EnvVarStatus vars_status = 4;
+    InstanceIdent instance            = 1;
+    repeated EnvVarStatus vars_status = 2;
 }
 
 message EnvVarStatus {
@@ -198,26 +194,22 @@ message SystemMonitoring {
 }
 
 message InstanceMonitoring {
-    string service_id  = 1;
-    string subject_id  = 2;
-    uint64 instance    = 3;
-    uint64 ram         = 4;
-    uint64 cpu         = 5;
-    uint64 used_disk   = 6;
-    uint64 in_traffic  = 7;
-    uint64 out_traffic = 8;
+    InstanceIdent instance = 1;
+    uint64 ram             = 2;
+    uint64 cpu             = 3;
+    uint64 used_disk       = 4;
+    uint64 in_traffic      = 5;
+    uint64 out_traffic     = 6;
 }
 
 message Alert {
     google.protobuf.Timestamp timestamp = 1;
     string tag                          = 2;
-    string source                       = 3;
-    uint64 aosVersion                   = 4;
     oneof Payload {
-        ResourceAlert resource_alert                  = 5;
-        ResourceValidateAlert resource_validate_alert = 6;
-        SystemAlert system_alert                      = 7;
-        InstanceAlert instance_alert                  = 8;
+        ResourceAlert resource_alert                  = 3;
+        ResourceValidateAlert resource_validate_alert = 4;
+        SystemAlert system_alert                      = 5;
+        InstanceAlert instance_alert                  = 6;
     }
 }
 
@@ -241,10 +233,9 @@ message SystemAlert {
 }
 
 message InstanceAlert {
-    string service_id = 1;
-    string subject_id = 3;
-    uint64 instance   = 4;
-    string message    = 5;
+    InstanceIdent instance = 1;
+    uint64 aos_version     = 2;
+    string message         = 3;
 }
 
 message ErrorInfo {
@@ -260,13 +251,11 @@ message ServiceError {
 }
 
 message InstanceStatus {
-    string service_id     = 1;
-    uint64 aos_version    = 2;
-    string subject_id     = 3;
-    uint64 instance       = 4;
-    string state_checksum = 5;
-    string run_state      = 6;
-    ErrorInfo error_info  = 7;
+    InstanceIdent instance = 1;
+    uint64 aos_version     = 2;
+    string state_checksum  = 3;
+    string run_state       = 4;
+    ErrorInfo error_info   = 5;
 }
 
 message UpdateInstancesStatus {
@@ -289,11 +278,9 @@ message SystemLogRequest {
 
 message InstanceLogRequest {
     string log_id                  = 1;
-    string service_id              = 2;
-    string subject_id              = 3;
-    uint64 instance                = 4;
-    google.protobuf.Timestamp from = 5;
-    google.protobuf.Timestamp till = 6;
+    InstanceIdent instance         = 2;
+    google.protobuf.Timestamp from = 3;
+    google.protobuf.Timestamp till = 4;
 }
 
 message LogData {
