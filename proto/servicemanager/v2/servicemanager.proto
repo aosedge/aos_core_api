@@ -209,7 +209,8 @@ message Alert {
         ResourceAlert resource_alert                  = 3;
         ResourceValidateAlert resource_validate_alert = 4;
         SystemAlert system_alert                      = 5;
-        InstanceAlert instance_alert                  = 6;
+        CoreAlert core_alert                          = 6;
+        InstanceAlert instance_alert                  = 7;
     }
 }
 
@@ -230,6 +231,11 @@ message ResourceValidateErrors {
 
 message SystemAlert {
     string message = 1;
+}
+
+message CoreAlert {
+    string core_component = 1;
+    string message        = 2;
 }
 
 message InstanceAlert {
