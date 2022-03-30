@@ -206,17 +206,30 @@ message Alert {
     google.protobuf.Timestamp timestamp = 1;
     string tag                          = 2;
     oneof Payload {
-        ResourceAlert resource_alert                  = 3;
-        ResourceValidateAlert resource_validate_alert = 4;
-        SystemAlert system_alert                      = 5;
-        CoreAlert core_alert                          = 6;
-        InstanceAlert instance_alert                  = 7;
+        SystemQuotaAlert system_quota_alert           = 3;
+        InstanceQuotaAlert instance_quota_alert       = 4;
+        ResourceValidateAlert resource_validate_alert = 5;
+        DeviceAllocateAlert device_allocate_alert     = 6;
+        SystemAlert system_alert                      = 7;
+        CoreAlert core_alert                          = 8;
+        InstanceAlert instance_alert                  = 9;
     }
 }
 
-message ResourceAlert {
+message SystemQuotaAlert {
     string parameter = 1;
     uint64 value     = 2;
+}
+
+message InstanceQuotaAlert {
+    InstanceIdent instance = 1;
+    string parameter       = 2;
+    uint64 value           = 3;
+}
+
+message DeviceAllocateAlert {
+    InstanceIdent instance = 1;
+    string message         = 2;
 }
 
 message ResourceValidateAlert {
