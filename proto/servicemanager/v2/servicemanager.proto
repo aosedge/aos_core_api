@@ -229,7 +229,8 @@ message InstanceQuotaAlert {
 
 message DeviceAllocateAlert {
     InstanceIdent instance = 1;
-    string message         = 2;
+    string device          = 2;
+    string message         = 3;
 }
 
 message ResourceValidateAlert {
