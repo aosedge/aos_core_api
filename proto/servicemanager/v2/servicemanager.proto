@@ -233,8 +233,7 @@ message DeviceAllocateAlert {
 }
 
 message ResourceValidateAlert {
-    string type                            = 1;
-    repeated ResourceValidateErrors errors = 2;
+    repeated ResourceValidateErrors errors = 1;
 }
 
 message ResourceValidateErrors {
