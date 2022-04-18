@@ -14,8 +14,8 @@ service IAMProtectedService {
     rpc EncryptDisk(EncryptDiskRequest) returns (google.protobuf.Empty) {}
     rpc FinishProvisioning(google.protobuf.Empty) returns (google.protobuf.Empty) {}
     rpc SetUsers(Users) returns (google.protobuf.Empty) {}
-    rpc RegisterService(RegisterServiceRequest) returns (RegisterServiceResponse) {}
-    rpc UnregisterService(UnregisterServiceRequest) returns (google.protobuf.Empty) {}
+    rpc RegisterInstance(RegisterInstanceRequest) returns (RegisterInstanceResponse) {}
+    rpc UnregisterInstance(UnregisterInstanceRequest) returns (google.protobuf.Empty) {}
 }
 
 message ClearRequest {
@@ -47,17 +47,23 @@ message ApplyCertResponse {
     string cert_url = 2;
 }
 
-message RegisterServiceRequest {
-    string service_id                    = 1;
+message InstanceIdent {
+    string service_id = 1;
+    string subject_id = 2;
+    int64 instance    = 3;
+}
+
+message RegisterInstanceRequest {
+    InstanceIdent instance = 1;
     map<string, Permissions> permissions = 2;
 }
 
-message RegisterServiceResponse {
+message RegisterInstanceResponse {
     string secret = 1;
 }
 
-message UnregisterServiceRequest {
-    string service_id = 1;
+message UnregisterInstanceRequest {
+    InstanceIdent instance = 1;
 }
 
 message EncryptDiskRequest {
