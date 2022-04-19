@@ -13,3 +13,9 @@ message Users {
 message Subjects {
     repeated string subjects = 1;
 }
+
+message InstanceIdent {
+    string service_id = 1;
+    string subject_id = 2;
+    int64 instance    = 3;
+}
