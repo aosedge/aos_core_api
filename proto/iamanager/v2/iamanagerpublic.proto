@@ -45,7 +45,7 @@ message PermissionsRequest {
 }
 
 message PermissionsResponse {
-    string service_id       = 1;
+    InstanceIdent instance  = 1;
     Permissions permissions = 2;
 }
 
