@@ -13,7 +13,6 @@ service IAMProtectedService {
     rpc ApplyCert(ApplyCertRequest) returns (ApplyCertResponse) {}
     rpc EncryptDisk(EncryptDiskRequest) returns (google.protobuf.Empty) {}
     rpc FinishProvisioning(google.protobuf.Empty) returns (google.protobuf.Empty) {}
-    rpc SetUsers(Users) returns (google.protobuf.Empty) {}
     rpc RegisterInstance(RegisterInstanceRequest) returns (RegisterInstanceResponse) {}
     rpc UnregisterInstance(UnregisterInstanceRequest) returns (google.protobuf.Empty) {}
 }
