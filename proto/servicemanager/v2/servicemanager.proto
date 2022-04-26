@@ -64,11 +64,10 @@ message InstallServiceRequest {
     string provider_id    = 3;
     uint64 aos_version    = 4;
     string vendor_version = 5;
-    string alert_rules    = 6;
-    string description    = 7;
-    bytes sha256          = 8;
-    bytes sha512          = 9;
-    uint64 size           = 10;
+    string description    = 6;
+    bytes sha256          = 7;
+    bytes sha512          = 8;
+    uint64 size           = 9;
 }
 
 message RunInstanceRequest {
