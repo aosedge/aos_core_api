@@ -93,11 +93,10 @@ message InstanceStateRequest {
 }
 
 message StateAcceptance {
-    string correlation_id  = 1;
-    InstanceIdent instance = 2;
-    string state_checksum  = 3;
-    string result          = 4;
-    string reason          = 5;
+    InstanceIdent instance = 1;
+    string state_checksum  = 2;
+    string result          = 3;
+    string reason          = 4;
 }
 
 message InstanceState {
@@ -107,8 +106,7 @@ message InstanceState {
 }
 
 message NewInstanceState {
-    string correlation_id = 1;
-    InstanceState state   = 2;
+    InstanceState state   = 1;
 }
 
 message OverrideEnvVarsRequest {
