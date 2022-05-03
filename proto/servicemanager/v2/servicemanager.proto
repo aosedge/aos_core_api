@@ -17,6 +17,7 @@ service SMService {
     // Services
     rpc GetServicesStatus(google.protobuf.Empty) returns (ServicesStatus) {}
     rpc InstallService(InstallServiceRequest) returns (google.protobuf.Empty) {}
+    rpc RemoveService(RemoveServiceRequest) returns (google.protobuf.Empty) {}
     rpc RunInstances(RunInstancesRequest) returns (google.protobuf.Empty) {}
     rpc InstanceStateAcceptance(StateAcceptance) returns (google.protobuf.Empty) {}
     rpc SetInstanceState(InstanceState) returns (google.protobuf.Empty) {}
@@ -68,6 +69,10 @@ message InstallServiceRequest {
     bytes sha256          = 7;
     bytes sha512          = 8;
     uint64 size           = 9;
+}
+
+message RemoveServiceRequest {
+    string service_id     = 1;
 }
 
 message RunInstanceRequest {
