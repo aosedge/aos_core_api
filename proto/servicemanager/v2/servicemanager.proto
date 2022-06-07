@@ -57,6 +57,7 @@ message ServiceStatus {
     string service_id     = 1;
     uint64 aos_version    = 2;
     string vendor_version = 3;
+    bool cached           = 4;
 }
 
 message InstallServiceRequest {
