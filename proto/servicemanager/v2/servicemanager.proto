@@ -26,6 +26,8 @@ service SMService {
     // Layers
     rpc GetLayersStatus(google.protobuf.Empty) returns (LayersStatus) {}
     rpc InstallLayer(InstallLayerRequest) returns (google.protobuf.Empty) {}
+    rpc RemoveLayer(RemoveLayerRequest) returns (google.protobuf.Empty) {}
+    rpc RestoreLayer(RestoreLayerRequest) returns (google.protobuf.Empty) {}
     // Notifications
     rpc SubscribeSMNotifications(google.protobuf.Empty) returns (stream SMNotifications) {}
     // Logs
@@ -160,6 +162,7 @@ message LayerStatus {
     uint64 aos_version    = 2;
     string vendor_version = 3;
     string digest         = 4;
+    bool cached           = 5;
 }
 
 message InstallLayerRequest {
@@ -172,6 +175,14 @@ message InstallLayerRequest {
     bytes sha256          = 7;
     bytes sha512          = 8;
     uint64 size           = 9;
+}
+
+message RemoveLayerRequest {
+    string digest         = 1;
+}
+
+message RestoreLayerRequest {
+    string digest         = 1;
 }
 
 // Notifications
