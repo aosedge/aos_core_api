@@ -77,7 +77,6 @@ message InstallServiceRequest {
 
 message RestoreServiceRequest {
     string service_id     = 1;
-    uint64 aos_version    = 2;
 }
 
 message RemoveServiceRequest {
