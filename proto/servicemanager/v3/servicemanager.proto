@@ -1,0 +1,310 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package servicemanager.v3;
+
+/***********************************************************************************************************************
+ * SMService
+ **********************************************************************************************************************/
+
+service SMService {
+    rpc RegisterSM(stream SMOutgoingMessages ) returns (stream SMIncomingMessages) {}
+}
+
+message SMIncomingMessages {
+    oneof SMIncomingMessage {
+        GetUnitConfigStatus get_unit_config_status         = 1;
+        CheckUnitConfig check_unit_config                  = 2;
+        SetUnitConfig set_unit_config                      = 3;
+        RunInstances run_instances                         = 4;
+        InstanceStateAcceptance instance_state_acceptance  = 5;
+        SetInstanceState set_instance_state                = 6;
+        OverrideEnvVars override_env_vars                  = 7;
+        SystemLogRequest system_log_request                = 8;
+        InstanceLogRequest instance_log_request            = 9;
+        InstanceCrashLogRequest instance_crash_log_request = 10;
+        GetNodeMonitoring get_node_monitoring              = 11;
+    }
+}
+
+message GetUnitConfigStatus{}
+
+message CheckUnitConfig{
+    string unit_config    = 1;
+    string vendor_version = 2;
+}
+
+message SetUnitConfig{
+    string unit_config    = 1;
+    string vendor_version = 2;
+}
+
+message RunInstances {
+    repeated ServiceInfo services   = 1;
+    repeated LayerInfo layers       = 2;
+    repeated InstanceInfo instances = 3; 
+}
+
+message ServiceInfo {
+    VesionInfo version_info = 1;
+    string url             = 2;
+    string service_id      = 3;
+    string provider_id     = 4;
+    bytes sha256           = 5;
+    bytes sha512           = 6;
+    uint64 size            = 7;
+}
+
+message LayerInfo {
+    VesionInfo version_info = 1;
+    string url             = 2;
+    string layer_id        = 3;
+    string digest          = 4;
+    bytes sha256           = 5;
+    bytes sha512           = 6;
+    uint64 size            = 7;
+}
+
+message VesionInfo {
+    uint64 aos_version    = 1;
+    string vendor_version = 2;
+    string description    = 3;
+}
+
+message InstanceInfo {
+    InstanceIdent instance = 1;
+    uint32 uid             = 2;
+    uint32 gid             = 3;
+    uint64 priority        = 4;
+    string storage_path    = 5;
+    string state_path      = 6;
+}
+
+message InstanceStateAcceptance {
+    InstanceIdent instance = 1;
+    string state_checksum  = 2;
+    string result          = 3;
+    string reason          = 4;
+}
+
+message SetInstanceState {
+    InstanceState state = 1;
+}
+
+message OverrideEnvVars {
+    repeated OverrideInstanceEnvVar env_vars = 1;
+}
+
+message OverrideInstanceEnvVar {
+    InstanceIdent instance   = 1;
+    repeated EnvVarInfo vars = 2;
+}
+
+message EnvVarInfo {
+    string var_id                 = 1;
+    string variable               = 2;
+    google.protobuf.Timestamp ttl = 3;
+}
+
+message SystemLogRequest {
+    string log_id                  = 1;
+    google.protobuf.Timestamp from = 2;
+    google.protobuf.Timestamp till = 3;
+}
+
+message InstanceLogRequest {
+    string log_id                  = 1;
+    InstanceIdent instance         = 2;
+    google.protobuf.Timestamp from = 3;
+    google.protobuf.Timestamp till = 4;
+}
+
+message InstanceCrashLogRequest {
+    string log_id                  = 1;
+    InstanceIdent instance         = 2;
+    google.protobuf.Timestamp from = 3;
+    google.protobuf.Timestamp till = 4;
+}
+
+message GetNodeMonitoring {}
+
+message SMOutgoingMessages{
+    oneof SMOutgoingMessage {
+        NodeConfiguration node_configuration          = 1;
+        UnitConfigStatus unit_config_status           = 2;
+        RunInstancesStatus run_instances_status       = 3;
+        UpdateInstancesStatus update_instances_status = 4;
+        InstanceStateRequest instance_state_request   = 5;
+        NewInstanceState new_instance_state           = 6;
+        OverrideEnvVarStatus override_env_var_status  = 7;
+        LogData log                                   = 8;
+        NodeMonitoring node_monitoring                = 9;
+        Alert alert                                   = 10;
+    }
+}
+
+message NodeConfiguration {
+   string  node_id                 = 1;
+   bool remote_node                = 2;
+   repeated string runner_features = 3;
+   uint64 num_cpus                 = 4;
+   uint64 total_ram                = 5;
+   repeated Partition partitions   = 6;
+}
+
+message Partition{
+    string name          = 1;
+    repeated string type = 2;
+    uint64 total_size    = 3;
+}
+
+message UnitConfigStatus {
+    string vendor_version = 1;
+    string error          = 2;
+}
+
+message RunInstancesStatus {
+    repeated InstanceStatus instances    = 1;
+}
+
+message UpdateInstancesStatus {
+    repeated InstanceStatus instances = 1;
+}
+
+message InstanceStatus {
+    InstanceIdent instance = 1;
+    uint64 aos_version     = 2;
+    string state_checksum  = 3;
+    string run_state       = 4;
+    ErrorInfo error_info   = 5;
+}
+
+message InstanceIdent {
+    string service_id = 1;
+    string subject_id = 2;
+    int64 instance    = 3;
+}
+
+message ErrorInfo {
+    int32 AosCode  = 1;
+    int32 ExitCode = 2;
+    string message = 3;
+}
+
+message InstanceStateRequest {
+    InstanceIdent instance = 1;
+    bool default           = 2;
+}
+
+message NewInstanceState {
+    InstanceState state   = 1;
+}
+
+message InstanceState {
+    InstanceIdent instance = 1;
+    string state_checksum  = 2;
+    bytes state            = 3;
+}
+
+message OverrideEnvVarStatus {
+    repeated EnvVarInstanceStatus env_vars_status = 1;
+    string error                                  = 2;
+}
+
+message EnvVarInstanceStatus {
+    InstanceIdent instance            = 1;
+    repeated EnvVarStatus vars_status = 2;
+}
+
+message EnvVarStatus {
+    string var_id = 1;
+    string error  = 2;
+}
+
+message LogData {
+    string log_id     = 1;
+    uint64 part_count = 2;
+    uint64 part       = 3;
+    bytes data        = 4;
+    string error      = 5;
+}
+
+message NodeMonitoring {
+    google.protobuf.Timestamp timestamp             = 1;
+    MonitoringData monitoringData                   = 2;
+    repeated InstanceMonitoring instance_monitoring = 3;
+}
+
+message MonitoringData {
+    uint64 ram                   = 1;
+    uint64 cpu                   = 2;
+    repeated PartitionUsage disk = 3;
+    uint64 in_traffic            = 4;
+    uint64 out_traffic           = 5;
+}
+
+message PartitionUsage {
+    string name      = 1;
+    uint64 used_size = 2;
+}
+
+message InstanceMonitoring {
+    InstanceIdent instance        = 1;
+    MonitoringData monitoringData = 2;
+}
+
+message Alert {
+    google.protobuf.Timestamp timestamp = 1;
+    string tag                          = 2;
+    oneof Payload {
+        SystemQuotaAlert system_quota_alert           = 3;
+        InstanceQuotaAlert instance_quota_alert       = 4;
+        ResourceValidateAlert resource_validate_alert = 5;
+        DeviceAllocateAlert device_allocate_alert     = 6;
+        SystemAlert system_alert                      = 7;
+        CoreAlert core_alert                          = 8;
+        InstanceAlert instance_alert                  = 9;
+    }
+}
+
+message SystemQuotaAlert {
+    string parameter = 1;
+    uint64 value     = 2;
+}
+
+message InstanceQuotaAlert {
+    InstanceIdent instance = 1;
+    string parameter       = 2;
+    uint64 value           = 3;
+}
+
+message DeviceAllocateAlert {
+    InstanceIdent instance = 1;
+    string device          = 2;
+    string message         = 3;
+}
+
+message ResourceValidateAlert {
+    repeated ResourceValidateErrors errors = 1;
+}
+
+message ResourceValidateErrors {
+    string name              = 1;
+    repeated string errorMsg = 2;
+}
+
+message SystemAlert {
+    string message = 1;
+}
+
+message CoreAlert {
+    string core_component = 1;
+    string message        = 2;
+}
+
+message InstanceAlert {
+    InstanceIdent instance = 1;
+    uint64 aos_version     = 2;
+    string message         = 3;
+}
