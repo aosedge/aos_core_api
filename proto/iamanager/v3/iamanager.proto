@@ -1,0 +1,155 @@
+syntax = "proto3";
+
+package iamanager.v3;
+
+import "google/protobuf/empty.proto";
+
+service IAMPublicService {
+    rpc GetAPIVersion(google.protobuf.Empty) returns (APIVersion) {}
+    rpc GetNodeID(google.protobuf.Empty) returns (NodeID) {}
+    rpc GetCert(GetCertRequest) returns (GetCertResponse) {}
+}
+
+service IAMPublicIdentityService {
+    rpc GetSystemInfo(google.protobuf.Empty) returns (SystemInfo) {}
+    rpc GetSubjects(google.protobuf.Empty) returns (Subjects) {}
+    rpc SubscribeSubjectsChanged(google.protobuf.Empty) returns (stream Subjects) {}
+}
+
+service IAMPublicPermissionsService {
+    rpc GetPermissions(PermissionsRequest) returns (PermissionsResponse) {}
+}
+
+service IAMProvisioningService {
+    rpc GetAllNodeIDs(google.protobuf.Empty) returns (NodesID) {}
+    rpc GetCertTypes(GetCertTypesRequest) returns (CertTypes) {}
+    rpc SetOwner(SetOwnerRequest) returns (google.protobuf.Empty) {}
+    rpc Clear(ClearRequest) returns (google.protobuf.Empty) {}
+    rpc EncryptDisk(EncryptDiskRequest) returns (google.protobuf.Empty) {}
+    rpc FinishProvisioning(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}
+
+service IAMCertificateService {
+    rpc CreateKey(CreateKeyRequest) returns (CreateKeyResponse) {}
+    rpc ApplyCert(ApplyCertRequest) returns (ApplyCertResponse) {}
+}
+
+service IAMPermissionsService {
+    rpc RegisterInstance(RegisterInstanceRequest) returns (RegisterInstanceResponse) {}
+    rpc UnregisterInstance(UnregisterInstanceRequest) returns (google.protobuf.Empty) {}
+}
+
+message APIVersion {
+    uint64 version = 1;
+}
+
+message NodeID {
+    string node_id = 1;
+}
+
+message GetCertRequest {
+    string type   = 1;
+    bytes issuer  = 2;
+    string serial = 3;
+}
+
+message GetCertResponse {
+    string type     = 1;
+    string cert_url = 2;
+    string key_url  = 3;
+}
+
+message SystemInfo {
+    string system_id   = 1;
+    string board_model = 2;
+}
+
+message Subjects {
+    repeated string subjects = 1;
+}
+
+message PermissionsRequest {
+    string secret               = 1;
+    string functional_server_id = 2;
+}
+
+message InstanceIdent {
+    string service_id = 1;
+    string subject_id = 2;
+    uint64 instance   = 3;
+}
+
+message PermissionsResponse {
+    InstanceIdent instance  = 1;
+    Permissions permissions = 2;
+}
+
+message NodesID {
+    repeated string ids = 1;
+}
+
+message GetCertTypesRequest {
+    string node_id = 1;
+}
+
+message CertTypes {
+    repeated string types = 1;
+}
+
+message SetOwnerRequest {
+    string node_id  = 1;
+    string type     = 2;
+    string password = 3;
+}
+
+message ClearRequest {
+    string node_id = 1;
+    string type    = 2;
+}
+
+message EncryptDiskRequest {
+    string node_id  = 1;
+    string password = 2;
+}
+
+message CreateKeyRequest {
+    string node_id  = 1;
+    string subject  = 2;
+    string type     = 3;
+    string password = 4;
+}
+
+message CreateKeyResponse {
+    string node_id = 1;
+    string type    = 2;
+    string csr     = 3;
+}
+
+message ApplyCertRequest {
+    string node_id = 1;
+    string type    = 2;
+    string cert    = 3;
+}
+
+message ApplyCertResponse {
+    string node_id  = 1;
+    string type     = 2;
+    string cert_url = 3;
+}
+
+message Permissions {
+    map<string, string> permissions = 1;
+}
+
+message RegisterInstanceRequest {
+    InstanceIdent instance               = 1;
+    map<string, Permissions> permissions = 2;
+}
+
+message RegisterInstanceResponse {
+    string secret = 1;
+}
+
+message UnregisterInstanceRequest {
+    InstanceIdent instance = 1;
+}
