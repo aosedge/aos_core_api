@@ -1,0 +1,18 @@
+lint:
+  rules:
+    all_default: true
+
+    remove:
+      - MESSAGES_HAVE_COMMENT
+      - SERVICES_HAVE_COMMENT
+      - RPCS_HAVE_COMMENT
+      - FIELDS_HAVE_COMMENT
+      - FILE_HAS_COMMENT
+
+  rules_option:
+    max_line_length:
+      max_chars: 120
+      tab_chars: 4
+
+    indent:
+      style: 4
