@@ -20,7 +20,7 @@ message SchedulerNotifications {
 message UpdateFOTAStatus {
     UpdateState state                 = 1;
     repeated ComponentInfo components = 2;
-    BoardConfigInfo board_config      = 3;
+    UnitConfigInfo unit_config        = 3;
     string error                      = 4;
 }
 
@@ -39,7 +39,7 @@ message ComponentInfo {
     string vendor_version = 3;
 }
 
-message BoardConfigInfo {
+message UnitConfigInfo {
     string vendor_version = 1;
 }
 
