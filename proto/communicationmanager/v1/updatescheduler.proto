@@ -18,24 +18,24 @@ message SchedulerNotifications {
 }
 
 message UpdateFOTAStatus {
-    UpdateState state = 1;
+    UpdateState state                 = 1;
     repeated ComponentInfo components = 2;
-    BoardConfigInfo board_config = 3;
-    string error = 4;
+    BoardConfigInfo board_config      = 3;
+    string error                      = 4;
 }
 
 message UpdateSOTAStatus {
-    UpdateState state = 1;
+    UpdateState state                     = 1;
     repeated ServiceInfo install_services = 2;
-    repeated ServiceInfo remove_services = 3;
-    repeated LayerInfo install_layers = 4;
-    repeated LayerInfo remove_layers = 5;
-    string error = 6;
+    repeated ServiceInfo remove_services  = 3;
+    repeated LayerInfo install_layers     = 4;
+    repeated LayerInfo remove_layers      = 5;
+    string error                          = 6;
 }
 
 message ComponentInfo {
-    string id = 1;
-    uint64 aos_version = 2;
+    string id             = 1;
+    uint64 aos_version    = 2;
     string vendor_version = 3;
 }
 
@@ -44,19 +44,19 @@ message BoardConfigInfo {
 }
 
 message ServiceInfo {
-    string id = 1;
+    string id          = 1;
     uint64 aos_version = 2;
 }
 
 message LayerInfo {
-    string id = 1;
+    string id          = 1;
     uint64 aos_version = 2;
-    string digest = 3;
+    string digest      = 3;
 }
 
 enum UpdateState {
-    NO_UPDATE = 0;
-    DOWNLOADING = 1;
+    NO_UPDATE       = 0;
+    DOWNLOADING     = 1;
     READY_TO_UPDATE = 2;
-    UPDATING = 3;
+    UPDATING        = 3;
 }
