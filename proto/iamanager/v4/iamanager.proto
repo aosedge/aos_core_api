@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package iamanager.v3;
+package iamanager.v4;
 
 import "google/protobuf/empty.proto";
 
