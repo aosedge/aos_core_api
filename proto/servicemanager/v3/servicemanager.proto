@@ -48,22 +48,23 @@ message RunInstances {
 
 message ServiceInfo {
     VesionInfo version_info = 1;
-    string url             = 2;
-    string service_id      = 3;
-    string provider_id     = 4;
-    bytes sha256           = 5;
-    bytes sha512           = 6;
-    uint64 size            = 7;
+    string url              = 2;
+    string service_id       = 3;
+    string provider_id      = 4;
+    uint32 gid              = 5;
+    bytes sha256            = 6;
+    bytes sha512            = 7;
+    uint64 size             = 8;
 }
 
 message LayerInfo {
     VesionInfo version_info = 1;
-    string url             = 2;
-    string layer_id        = 3;
-    string digest          = 4;
-    bytes sha256           = 5;
-    bytes sha512           = 6;
-    uint64 size            = 7;
+    string url              = 2;
+    string layer_id         = 3;
+    string digest           = 4;
+    bytes sha256            = 5;
+    bytes sha512            = 6;
+    uint64 size             = 7;
 }
 
 message VesionInfo {
@@ -75,10 +76,9 @@ message VesionInfo {
 message InstanceInfo {
     InstanceIdent instance = 1;
     uint32 uid             = 2;
-    uint32 gid             = 3;
-    uint64 priority        = 4;
-    string storage_path    = 5;
-    string state_path      = 6;
+    uint64 priority        = 3;
+    string storage_path    = 4;
+    string state_path      = 5;
 }
 
 message InstanceStateAcceptance {
