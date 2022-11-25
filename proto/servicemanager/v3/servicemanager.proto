@@ -18,13 +18,11 @@ message SMIncomingMessages {
         CheckUnitConfig check_unit_config                  = 2;
         SetUnitConfig set_unit_config                      = 3;
         RunInstances run_instances                         = 4;
-        InstanceStateAcceptance instance_state_acceptance  = 5;
-        SetInstanceState set_instance_state                = 6;
-        OverrideEnvVars override_env_vars                  = 7;
-        SystemLogRequest system_log_request                = 8;
-        InstanceLogRequest instance_log_request            = 9;
-        InstanceCrashLogRequest instance_crash_log_request = 10;
-        GetNodeMonitoring get_node_monitoring              = 11;
+        OverrideEnvVars override_env_vars                  = 5;
+        SystemLogRequest system_log_request                = 6;
+        InstanceLogRequest instance_log_request            = 7;
+        InstanceCrashLogRequest instance_crash_log_request = 8;
+        GetNodeMonitoring get_node_monitoring              = 9;
     }
 }
 
@@ -81,17 +79,6 @@ message InstanceInfo {
     string state_path      = 5;
 }
 
-message InstanceStateAcceptance {
-    InstanceIdent instance = 1;
-    string state_checksum  = 2;
-    string result          = 3;
-    string reason          = 4;
-}
-
-message SetInstanceState {
-    InstanceState state = 1;
-}
-
 message OverrideEnvVars {
     repeated OverrideInstanceEnvVar env_vars = 1;
 }
@@ -135,12 +122,10 @@ message SMOutgoingMessages{
         UnitConfigStatus unit_config_status           = 2;
         RunInstancesStatus run_instances_status       = 3;
         UpdateInstancesStatus update_instances_status = 4;
-        InstanceStateRequest instance_state_request   = 5;
-        NewInstanceState new_instance_state           = 6;
-        OverrideEnvVarStatus override_env_var_status  = 7;
-        LogData log                                   = 8;
-        NodeMonitoring node_monitoring                = 9;
-        Alert alert                                   = 10;
+        OverrideEnvVarStatus override_env_var_status  = 5;
+        LogData log                                   = 6;
+        NodeMonitoring node_monitoring                = 7;
+        Alert alert                                   = 8;
     }
 }
 
@@ -175,9 +160,8 @@ message UpdateInstancesStatus {
 message InstanceStatus {
     InstanceIdent instance = 1;
     uint64 aos_version     = 2;
-    string state_checksum  = 3;
-    string run_state       = 4;
-    ErrorInfo error_info   = 5;
+    string run_state       = 3;
+    ErrorInfo error_info   = 4;
 }
 
 message InstanceIdent {
@@ -190,21 +174,6 @@ message ErrorInfo {
     int32 AosCode  = 1;
     int32 ExitCode = 2;
     string message = 3;
-}
-
-message InstanceStateRequest {
-    InstanceIdent instance = 1;
-    bool default           = 2;
-}
-
-message NewInstanceState {
-    InstanceState state   = 1;
-}
-
-message InstanceState {
-    InstanceIdent instance = 1;
-    string state_checksum  = 2;
-    bytes state            = 3;
 }
 
 message OverrideEnvVarStatus {
