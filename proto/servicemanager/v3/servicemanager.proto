@@ -41,7 +41,8 @@ message SetUnitConfig{
 message RunInstances {
     repeated ServiceInfo services   = 1;
     repeated LayerInfo layers       = 2;
-    repeated InstanceInfo instances = 3; 
+    repeated InstanceInfo instances = 3;
+    bool force_restart              = 4;
 }
 
 message ServiceInfo {
