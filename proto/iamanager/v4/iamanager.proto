@@ -6,7 +6,7 @@ import "google/protobuf/empty.proto";
 
 service IAMPublicService {
     rpc GetAPIVersion(google.protobuf.Empty) returns (APIVersion) {}
-    rpc GetNodeID(google.protobuf.Empty) returns (NodeID) {}
+    rpc GetNodeInfo(google.protobuf.Empty) returns (NodeInfo) {}
     rpc GetCert(GetCertRequest) returns (GetCertResponse) {}
 }
 
@@ -43,8 +43,9 @@ message APIVersion {
     uint64 version = 1;
 }
 
-message NodeID {
-    string node_id = 1;
+message NodeInfo {
+    string node_id   = 1;
+    string node_type = 2;
 }
 
 message GetCertRequest {
