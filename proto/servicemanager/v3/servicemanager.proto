@@ -141,9 +141,9 @@ message NodeConfiguration {
 }
 
 message Partition{
-    string name          = 1;
-    repeated string type = 2;
-    uint64 total_size    = 3;
+    string name           = 1;
+    repeated string types = 2;
+    uint64 total_size     = 3;
 }
 
 message UnitConfigStatus {
