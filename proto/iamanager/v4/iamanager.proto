@@ -136,6 +136,7 @@ message ApplyCertResponse {
     string node_id  = 1;
     string type     = 2;
     string cert_url = 3;
+    string serial   = 4;
 }
 
 message Permissions {
