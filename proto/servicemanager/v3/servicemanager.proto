@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
 package servicemanager.v3;
+
+import "google/protobuf/timestamp.proto";
 
 /***********************************************************************************************************************
  * SMService
@@ -183,9 +183,9 @@ message InstanceIdent {
 }
 
 message ErrorInfo {
-    int32 AosCode  = 1;
-    int32 ExitCode = 2;
-    string message = 3;
+    int32 aos_code  = 1;
+    int32 exit_code = 2;
+    string message  = 3;
 }
 
 message OverrideEnvVarStatus {
@@ -213,7 +213,7 @@ message LogData {
 
 message NodeMonitoring {
     google.protobuf.Timestamp timestamp             = 1;
-    MonitoringData monitoringData                   = 2;
+    MonitoringData monitoring_data                  = 2;
     repeated InstanceMonitoring instance_monitoring = 3;
 }
 
@@ -231,8 +231,8 @@ message PartitionUsage {
 }
 
 message InstanceMonitoring {
-    InstanceIdent instance        = 1;
-    MonitoringData monitoringData = 2;
+    InstanceIdent instance         = 1;
+    MonitoringData monitoring_data = 2;
 }
 
 message Alert {
@@ -271,8 +271,8 @@ message ResourceValidateAlert {
 }
 
 message ResourceValidateErrors {
-    string name              = 1;
-    repeated string errorMsg = 2;
+    string name               = 1;
+    repeated string error_msg = 2;
 }
 
 message SystemAlert {
