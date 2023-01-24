@@ -23,6 +23,7 @@ message SMIncomingMessages {
         InstanceLogRequest instance_log_request            = 7;
         InstanceCrashLogRequest instance_crash_log_request = 8;
         GetNodeMonitoring get_node_monitoring              = 9;
+        ConnectionStatus connection_status                 = 10;
     }
 }
 
@@ -116,6 +117,15 @@ message InstanceCrashLogRequest {
 }
 
 message GetNodeMonitoring {}
+
+enum ConnectionEnum {
+    DISCONNECTED = 0;
+    CONNECTED    = 1;
+}
+
+message ConnectionStatus {
+    ConnectionEnum cloud_status = 1;
+}
 
 message SMOutgoingMessages {
     oneof SMOutgoingMessage {
