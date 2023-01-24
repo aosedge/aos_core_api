@@ -9,7 +9,7 @@ package servicemanager.v3;
  **********************************************************************************************************************/
 
 service SMService {
-    rpc RegisterSM(stream SMOutgoingMessages ) returns (stream SMIncomingMessages) {}
+    rpc RegisterSM(stream SMOutgoingMessages) returns (stream SMIncomingMessages) {}
 }
 
 message SMIncomingMessages {
@@ -26,14 +26,14 @@ message SMIncomingMessages {
     }
 }
 
-message GetUnitConfigStatus{}
+message GetUnitConfigStatus {}
 
-message CheckUnitConfig{
+message CheckUnitConfig {
     string unit_config    = 1;
     string vendor_version = 2;
 }
 
-message SetUnitConfig{
+message SetUnitConfig {
     string unit_config    = 1;
     string vendor_version = 2;
 }
@@ -117,7 +117,7 @@ message InstanceCrashLogRequest {
 
 message GetNodeMonitoring {}
 
-message SMOutgoingMessages{
+message SMOutgoingMessages {
     oneof SMOutgoingMessage {
         NodeConfiguration node_configuration          = 1;
         UnitConfigStatus unit_config_status           = 2;
@@ -131,16 +131,16 @@ message SMOutgoingMessages{
 }
 
 message NodeConfiguration {
-   string node_id                  = 1;
-   string node_type                = 2;
-   bool remote_node                = 3;
-   repeated string runner_features = 4;
-   uint64 num_cpus                 = 5;
-   uint64 total_ram                = 6;
-   repeated Partition partitions   = 7;
+    string node_id                  = 1;
+    string node_type                = 2;
+    bool remote_node                = 3;
+    repeated string runner_features = 4;
+    uint64 num_cpus                 = 5;
+    uint64 total_ram                = 6;
+    repeated Partition partitions   = 7;
 }
 
-message Partition{
+message Partition {
     string name           = 1;
     repeated string types = 2;
     uint64 total_size     = 3;
@@ -152,7 +152,7 @@ message UnitConfigStatus {
 }
 
 message RunInstancesStatus {
-    repeated InstanceStatus instances    = 1;
+    repeated InstanceStatus instances = 1;
 }
 
 message UpdateInstancesStatus {
