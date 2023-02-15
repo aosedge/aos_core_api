@@ -24,6 +24,8 @@ message SMIncomingMessages {
         InstanceCrashLogRequest instance_crash_log_request = 8;
         GetNodeMonitoring get_node_monitoring              = 9;
         ConnectionStatus connection_status                 = 10;
+        ImageContentInfo image_content_info                = 11;
+        ImageContent image_content                         = 12;
     }
 }
 
@@ -127,6 +129,26 @@ message ConnectionStatus {
     ConnectionEnum cloud_status = 1;
 }
 
+message ImageContentInfo {
+    uint64 request_id              = 1;
+    repeated ImageFile image_files = 2;
+    string error                   = 3;
+}
+
+message ImageFile {
+    string relative_path = 1;
+    bytes sha256         = 2;
+    uint64 size          = 3;
+}
+
+message ImageContent {
+    uint64 request_id     = 1;
+    string relative_path  = 2;
+    uint64 parts_count    = 3;
+    uint64 part           = 4;
+    bytes data            = 5;
+}
+
 message SMOutgoingMessages {
     oneof SMOutgoingMessage {
         NodeConfiguration node_configuration          = 1;
@@ -137,6 +159,7 @@ message SMOutgoingMessages {
         LogData log                                   = 6;
         NodeMonitoring node_monitoring                = 7;
         Alert alert                                   = 8;
+        ImageContentRequest image_content_request     = 9;
     }
 }
 
@@ -247,6 +270,12 @@ message Alert {
         CoreAlert core_alert                          = 8;
         InstanceAlert instance_alert                  = 9;
     }
+}
+
+message ImageContentRequest {
+    string url          = 1;
+    uint64 request_id   = 2;
+    string content_type = 3;
 }
 
 message SystemQuotaAlert {
