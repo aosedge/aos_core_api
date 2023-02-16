@@ -1,0 +1,114 @@
+// SMIncomingMessages
+servicemanager.v3.CheckUnitConfig.unit_config    max_size:1024
+servicemanager.v3.CheckUnitConfig.vendor_version max_size:20
+
+servicemanager.v3.SetUnitConfig.unit_config    max_size:1024
+servicemanager.v3.SetUnitConfig.vendor_version max_size:20
+
+servicemanager.v3.RunInstances.services  max_count:16
+servicemanager.v3.RunInstances.layers    max_count:16
+servicemanager.v3.RunInstances.instances max_count:16
+
+servicemanager.v3.ServiceInfo.url         max_size:256
+servicemanager.v3.ServiceInfo.service_id  max_size:40
+servicemanager.v3.ServiceInfo.provider_id max_size:40
+servicemanager.v3.ServiceInfo.sha256      max_size:32
+servicemanager.v3.ServiceInfo.sha512      max_size:64
+
+servicemanager.v3.VersionInfo.vendor_version max_size:20
+servicemanager.v3.VersionInfo.description   max_size:200
+
+servicemanager.v3.LayerInfo.url      max_size:256
+servicemanager.v3.LayerInfo.layer_id max_size:40
+servicemanager.v3.LayerInfo.digest   max_size:128
+servicemanager.v3.LayerInfo.sha256   max_size:32
+servicemanager.v3.LayerInfo.sha512   max_size:64
+
+servicemanager.v3.InstanceInfo.storage_path max_size:256
+servicemanager.v3.InstanceInfo.state_path   max_size:256
+
+servicemanager.v3.InstanceIdent.service_id max_size:40
+servicemanager.v3.InstanceIdent.subject_id max_size:40
+
+servicemanager.v3.OverrideEnvVars.env_vars    max_count:16
+servicemanager.v3.OverrideInstanceEnvVar.vars max_count:16
+
+servicemanager.v3.EnvVarInfo.var_id   max_size:40
+servicemanager.v3.EnvVarInfo.variable max_size:40
+
+servicemanager.v3.SystemLogRequest.log_id max_size:40
+
+servicemanager.v3.InstanceLogRequest.log_id max_size:40
+
+servicemanager.v3.InstanceCrashLogRequest.log_id max_size:40
+
+servicemanager.v3.ImageContentInfo.image_files max_count:32
+servicemanager.v3.ImageContentInfo.error       max_size:256
+
+servicemanager.v3.ImageFile.relative_path max_size:256
+servicemanager.v3.ImageFile.sha256        max_size:32
+
+servicemanager.v3.ImageContent.relative_path max_size:256
+servicemanager.v3.ImageContent.data          max_size:4096
+
+// SMOutgoingMessages
+servicemanager.v3.NodeConfiguration.node_id         max_size:16
+servicemanager.v3.NodeConfiguration.node_type       max_size:16
+servicemanager.v3.NodeConfiguration.runner_features max_size:16 max_count:4
+servicemanager.v3.NodeConfiguration.partitions      max_count:8
+
+servicemanager.v3.Partition.name  max_size:16
+servicemanager.v3.Partition.types max_size:16 max_count:10
+
+servicemanager.v3.UnitConfigStatus.vendor_version max_size:20
+servicemanager.v3.UnitConfigStatus.error          max_size:256
+
+servicemanager.v3.RunInstancesStatus.instances max_count:16
+
+servicemanager.v3.UpdateInstancesStatus.instances max_count:16
+
+servicemanager.v3.InstanceStatus.run_state max_size:16
+
+servicemanager.v3.ErrorInfo.message max_size:256
+
+servicemanager.v3.OverrideEnvVarStatus.env_vars_status max_count:16
+servicemanager.v3.OverrideEnvVarStatus.error           max_size:256
+
+servicemanager.v3.EnvVarInstanceStatus.vars_status max_count:8
+
+servicemanager.v3.EnvVarStatus.var_id max_size:40
+servicemanager.v3.EnvVarStatus.error  max_size:256
+
+servicemanager.v3.LogData.log_id max_size:40
+servicemanager.v3.LogData.data   max_size:1024
+servicemanager.v3.LogData.error  max_size:256
+
+servicemanager.v3.NodeMonitoring.instance_monitoring max_count:16
+
+servicemanager.v3.MonitoringData.disk max_count:10
+
+servicemanager.v3.PartitionUsage.name max_size:40
+
+servicemanager.v3.ImageContentRequest.url          max_size:256
+servicemanager.v3.ImageContentRequest.content_type max_size:16
+
+servicemanager.v3.Alert.tag max_size:40
+
+servicemanager.v3.SystemQuotaAlert.parameter max_size:40
+
+servicemanager.v3.InstanceQuotaAlert.parameter max_size:40
+
+servicemanager.v3.DeviceAllocateAlert.device  max_size:40
+servicemanager.v3.DeviceAllocateAlert.message max_size:256
+
+servicemanager.v3.ResourceValidateAlert.errors max_count:1
+
+servicemanager.v3.ResourceValidateErrors.name      max_size:40
+servicemanager.v3.ResourceValidateErrors.error_msg max_size:256 max_count:10
+
+servicemanager.v3.SystemAlert.message max_size:256
+
+servicemanager.v3.CoreAlert.core_component max_size:40
+servicemanager.v3.CoreAlert.message max_size:256
+
+servicemanager.v3.InstanceAlert.message max_size:256
