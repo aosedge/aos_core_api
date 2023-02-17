@@ -75,12 +75,19 @@ message VersionInfo {
     string description    = 3;
 }
 
+message NetworkParameters {
+    string subnet    = 1;
+    string ip        = 2;
+    uint64 vlan_id   = 3;
+}
+
 message InstanceInfo {
-    InstanceIdent instance = 1;
-    uint32 uid             = 2;
-    uint64 priority        = 3;
-    string storage_path    = 4;
-    string state_path      = 5;
+    InstanceIdent instance               = 1;
+    uint32 uid                           = 2;
+    uint64 priority                      = 3;
+    string storage_path                  = 4;
+    string state_path                    = 5;
+    NetworkParameters network_parameters = 6;
 }
 
 message OverrideEnvVars {
