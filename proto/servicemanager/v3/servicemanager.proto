@@ -74,12 +74,11 @@ message VersionInfo {
 }
 
 message InstanceInfo {
-    InstanceIdent instance      = 1;
-    uint32 uid                  = 2;
-    uint64 priority             = 3;
-    string storage_path         = 4;
-    string state_path           = 5;
-    bytes network_configuration = 6;
+    InstanceIdent instance = 1;
+    uint32 uid             = 2;
+    uint64 priority        = 3;
+    string storage_path    = 4;
+    string state_path      = 5;
 }
 
 message OverrideEnvVars {
