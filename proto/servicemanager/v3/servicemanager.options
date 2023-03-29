@@ -53,7 +53,7 @@ servicemanager.v3.ImageContent.data          max_size:4096
 
 // SMOutgoingMessages
 servicemanager.v3.NodeConfiguration.node_id         max_size:16
-servicemanager.v3.NodeConfiguration.node_type       max_size:16
+servicemanager.v3.NodeConfiguration.node_type       max_size:32
 servicemanager.v3.NodeConfiguration.runner_features max_size:16 max_count:4
 servicemanager.v3.NodeConfiguration.partitions      max_count:8
 
