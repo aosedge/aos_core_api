@@ -76,9 +76,10 @@ message VersionInfo {
 }
 
 message NetworkParameters {
-    string subnet    = 1;
-    string ip        = 2;
-    uint64 vlan_id   = 3;
+    string subnet               = 1;
+    string ip                   = 2;
+    uint64 vlan_id              = 3;
+    repeated string dns_servers = 4;
 }
 
 message InstanceInfo {
