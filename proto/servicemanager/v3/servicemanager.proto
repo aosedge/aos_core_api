@@ -26,6 +26,7 @@ message SMIncomingMessages {
         ConnectionStatus connection_status                 = 10;
         ImageContentInfo image_content_info                = 11;
         ImageContent image_content                         = 12;
+        UpdateNetworks update_networks                     = 13;
     }
 }
 
@@ -39,6 +40,10 @@ message CheckUnitConfig {
 message SetUnitConfig {
     string unit_config    = 1;
     string vendor_version = 2;
+}
+
+message UpdateNetworks {
+    repeated NetworkParameters networks = 1;
 }
 
 message RunInstances {
@@ -79,7 +84,8 @@ message NetworkParameters {
     string subnet               = 1;
     string ip                   = 2;
     uint64 vlan_id              = 3;
-    repeated string dns_servers = 4;
+    string network_id           = 4;
+    repeated string dns_servers = 5;
 }
 
 message InstanceInfo {
@@ -150,11 +156,11 @@ message ImageFile {
 }
 
 message ImageContent {
-    uint64 request_id     = 1;
-    string relative_path  = 2;
-    uint64 parts_count    = 3;
-    uint64 part           = 4;
-    bytes data            = 5;
+    uint64 request_id    = 1;
+    string relative_path = 2;
+    uint64 parts_count   = 3;
+    uint64 part          = 4;
+    bytes data           = 5;
 }
 
 message SMOutgoingMessages {
