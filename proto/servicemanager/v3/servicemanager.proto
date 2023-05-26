@@ -80,12 +80,20 @@ message VersionInfo {
     string description    = 3;
 }
 
+message FirewallRule {
+    string dst_ip   = 1;
+    string dst_port = 2;
+    string proto    = 3;
+    string src_ip   = 4;
+}
+
 message NetworkParameters {
-    string subnet               = 1;
-    string ip                   = 2;
-    uint64 vlan_id              = 3;
-    string network_id           = 4;
+    string network_id           = 1;
+    string subnet               = 2;
+    string ip                   = 3;
+    uint64 vlan_id              = 4;
     repeated string dns_servers = 5;
+    repeated FirewallRule rules = 6;
 }
 
 message InstanceInfo {
