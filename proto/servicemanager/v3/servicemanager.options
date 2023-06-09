@@ -30,6 +30,21 @@ servicemanager.v3.InstanceInfo.state_path   max_size:256
 servicemanager.v3.InstanceIdent.service_id max_size:40
 servicemanager.v3.InstanceIdent.subject_id max_size:40
 
+servicemanager.v3.UpdateNetworks.networks max_count:4
+
+servicemanager.v3.NetworkParameters.network_id  max_size:40
+servicemanager.v3.NetworkParameters.subnet      max_size:18
+servicemanager.v3.NetworkParameters.ip          max_size:16
+servicemanager.v3.NetworkParameters.vlan_id     max_size:16
+servicemanager.v3.NetworkParameters.dns_servers max_size:16 max_count:4
+servicemanager.v3.NetworkParameters.rules       max_count:4
+
+servicemanager.v3.FirewallRule.dst_ip   max_size:16
+servicemanager.v3.FirewallRule.dst_port max_size:8
+servicemanager.v3.FirewallRule.proto    max_size:4
+servicemanager.v3.FirewallRule.src_ip   max_size:16
+
+
 servicemanager.v3.OverrideEnvVars.env_vars    max_count:16
 servicemanager.v3.OverrideInstanceEnvVar.vars max_count:16
 
