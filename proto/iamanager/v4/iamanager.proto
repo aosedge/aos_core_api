@@ -61,8 +61,8 @@ message GetCertResponse {
 }
 
 message SystemInfo {
-    string system_id   = 1;
-    string board_model = 2;
+    string system_id  = 1;
+    string unit_model = 2;
 }
 
 message Subjects {
