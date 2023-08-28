@@ -12,14 +12,13 @@
 #include <stdint.h>
 
 /**
- * Header for the aos core messages  over vchan.
+ * Aos core vchan message header.
  */
 
 #pragma pack(push, 1)
-struct VChanMessageHeader
-{
-    uint32_t dataSize;
-    uint8_t sha256[32];
+struct VChanMessageHeader {
+    uint32_t mDataSize;
+    uint8_t  mSha256[32];
 };
 #pragma pack(pop)
 
