@@ -27,6 +27,7 @@ message SMIncomingMessages {
         ImageContentInfo image_content_info                = 11;
         ImageContent image_content                         = 12;
         UpdateNetworks update_networks                     = 13;
+        ClockSync clock_sync                               = 14;
     }
 }
 
@@ -44,6 +45,10 @@ message SetUnitConfig {
 
 message UpdateNetworks {
     repeated NetworkParameters networks = 1;
+}
+
+message ClockSync {
+    google.protobuf.Timestamp current_time = 1;
 }
 
 message RunInstances {
@@ -182,6 +187,7 @@ message SMOutgoingMessages {
         NodeMonitoring node_monitoring                = 7;
         Alert alert                                   = 8;
         ImageContentRequest image_content_request     = 9;
+        ClockSyncRequest clock_sync_request           = 10;
     }
 }
 
@@ -299,6 +305,8 @@ message ImageContentRequest {
     uint64 request_id   = 2;
     string content_type = 3;
 }
+
+message ClockSyncRequest {}
 
 message SystemQuotaAlert {
     string parameter = 1;
