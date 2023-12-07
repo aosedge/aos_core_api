@@ -24,6 +24,8 @@ enum AosVChanSource {
 struct VChanMessageHeader {
     uint32_t mSource;
     uint32_t mDataSize;
+    uint64_t mRequestID;
+    char     mMethodName[256];
     uint8_t  mSha256[32];
 };
 #pragma pack(pop)
