@@ -25,6 +25,8 @@ struct VChanMessageHeader {
     uint32_t mSource;
     uint32_t mDataSize;
     uint64_t mRequestID;
+    int32_t  mErrno;
+    int32_t  mAosError;
     char     mMethodName[256];
     uint8_t  mSha256[32];
 };
