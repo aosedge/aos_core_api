@@ -1,4 +1,5 @@
 #include <aos/common/types.hpp>
+#include <aos/common/monitoring.hpp>
 
 // SMIncomingMessages
 
@@ -72,16 +73,16 @@ servicemanager.v3.ImageContent.data          max_size:4096
 
 // SMOutgoingMessages
 
-servicemanager.v3.NodeConfiguration.node_id         max_length:16
-servicemanager.v3.NodeConfiguration.node_type       max_length:32
+servicemanager.v3.NodeConfiguration.node_id         max_length:${aos::cNodeIDLen}
+servicemanager.v3.NodeConfiguration.node_type       max_length:${aos::cNodeTypeLen}
 servicemanager.v3.NodeConfiguration.runner_features max_length:16 max_count:4
-servicemanager.v3.NodeConfiguration.partitions      max_count:8
+servicemanager.v3.NodeConfiguration.partitions      max_count:${aos::monitoring::cMaxNumPartitions}
 
-servicemanager.v3.Partition.name  max_length:16
-servicemanager.v3.Partition.types max_length:16 max_count:10
+servicemanager.v3.Partition.name  max_length:${aos::monitoring::cPartitionNameLen}
+servicemanager.v3.Partition.types max_length:${aos::monitoring::cPartitionTypeLen} max_count:${aos::monitoring::cMaxNumPartitionTypes}
 
 servicemanager.v3.UnitConfigStatus.vendor_version max_length:${aos::cVendorVersionLen}
-servicemanager.v3.UnitConfigStatus.error          max_length:256
+servicemanager.v3.UnitConfigStatus.error          max_length:${aos::cErrorMessageLen}
 
 servicemanager.v3.RunInstancesStatus.instances max_count:${aos::cMaxNumInstances}
 
@@ -92,7 +93,7 @@ servicemanager.v3.InstanceStatus.run_state max_length:16
 servicemanager.v3.ErrorInfo.message max_length:256
 
 servicemanager.v3.OverrideEnvVarStatus.env_vars_status max_count:16
-servicemanager.v3.OverrideEnvVarStatus.error           max_length:256
+servicemanager.v3.OverrideEnvVarStatus.error           max_length:${aos::cErrorMessageLen}
 
 servicemanager.v3.EnvVarInstanceStatus.vars_status max_count:8
 
