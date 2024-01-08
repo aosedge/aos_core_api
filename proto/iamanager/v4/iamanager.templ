@@ -1,0 +1,61 @@
+#include <aos/common/types.hpp>
+#include <aos/iam/certhandler.hpp>
+#include <aos/iam/modules/hsm.hpp>
+
+// NodeInfo
+iamanager.v4.NodeInfo.node_id    max_length:16
+iamanager.v4.NodeInfo.node_type  max_length:32
+
+// GetCertRequest
+iamanager.v4.GetCertRequest.type   max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v4.GetCertRequest.issuer max_size:${aos::crypto::cCertIssuerSize}
+iamanager.v4.GetCertRequest.serial max_length:${aos::crypto::cSerialNumStrLen}
+
+// GetCertResponse
+iamanager.v4.GetCertResponse.type     max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v4.GetCertResponse.cert_url max_length:${aos::cURLLen}
+iamanager.v4.GetCertResponse.key_url  max_length:${aos::cURLLen}
+
+// NodesID
+iamanager.v4.NodesID.ids max_length:${aos::cNodeIDLen} max_count:8
+
+// GetCertTypesRequest
+iamanager.v4.GetCertTypesRequest.node_id max_length:${aos::cNodeIDLen}
+
+// CertTypes
+iamanager.v4.CertTypes.types max_length:${aos::iam::certhandler::cCertTypeLen} max_count:${aos::iam::certhandler::cIAMCertModulesMaxCount}
+
+// SetOwnerRequest
+iamanager.v4.SetOwnerRequest.node_id  max_length:${aos::cNodeIDLen}
+iamanager.v4.SetOwnerRequest.type     max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v4.SetOwnerRequest.password max_length:${aos::iam::certhandler::cPasswordLen}
+
+// ClearRequest
+iamanager.v4.ClearRequest.node_id max_length:${aos::cNodeIDLen}
+iamanager.v4.ClearRequest.type    max_length:${aos::iam::certhandler::cCertTypeLen}
+
+// EncryptDiskRequest
+iamanager.v4.EncryptDiskRequest.node_id  max_length:${aos::cNodeIDLen}
+iamanager.v4.EncryptDiskRequest.password max_length:${aos::iam::certhandler::cPasswordLen}
+
+// CreateKeyRequest
+iamanager.v4.CreateKeyRequest.node_id  max_length:${aos::cNodeIDLen}
+iamanager.v4.CreateKeyRequest.subject  max_length:${aos::crypto::cSubjectCommonNameLen}
+iamanager.v4.CreateKeyRequest.type     max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v4.CreateKeyRequest.password max_length:${aos::iam::certhandler::cPasswordLen}
+
+// CreateKeyResponse
+iamanager.v4.CreateKeyResponse.node_id max_length:${aos::cNodeIDLen}
+iamanager.v4.CreateKeyResponse.type    max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v4.CreateKeyResponse.csr     max_length:${aos::crypto::cCSRPEMSize}
+
+// ApplyCertRequest
+iamanager.v4.ApplyCertRequest.node_id max_length:${aos::cNodeIDLen}
+iamanager.v4.ApplyCertRequest.type    max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v4.ApplyCertRequest.cert    max_length:${aos::crypto::cCertPEMSize}
+
+// ApplyCertResponse
+iamanager.v4.ApplyCertResponse.node_id  max_length:${aos::cNodeIDLen}
+iamanager.v4.ApplyCertResponse.type     max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v4.ApplyCertResponse.cert_url max_length:${aos::cURLLen}
+iamanager.v4.ApplyCertResponse.serial   max_length:${aos::crypto::cSerialNumStrLen}
