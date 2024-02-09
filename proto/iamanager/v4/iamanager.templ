@@ -47,12 +47,12 @@ iamanager.v4.CreateKeyRequest.password max_length:${aos::iam::certhandler::cPass
 // CreateKeyResponse
 iamanager.v4.CreateKeyResponse.node_id max_length:${aos::cNodeIDLen}
 iamanager.v4.CreateKeyResponse.type    max_length:${aos::iam::certhandler::cCertTypeLen}
-iamanager.v4.CreateKeyResponse.csr     max_length:${aos::crypto::cCSRPEMSize}
+iamanager.v4.CreateKeyResponse.csr     max_length:${aos::crypto::cCSRPEMLen}
 
 // ApplyCertRequest
 iamanager.v4.ApplyCertRequest.node_id max_length:${aos::cNodeIDLen}
 iamanager.v4.ApplyCertRequest.type    max_length:${aos::iam::certhandler::cCertTypeLen}
-iamanager.v4.ApplyCertRequest.cert    max_length:${aos::crypto::cCertPEMSize}
+iamanager.v4.ApplyCertRequest.cert    max_length:${aos::crypto::cCertPEMLen}
 
 // ApplyCertResponse
 iamanager.v4.ApplyCertResponse.node_id  max_length:${aos::cNodeIDLen}
