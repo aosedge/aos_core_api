@@ -178,27 +178,16 @@ message ImageContent {
 
 message SMOutgoingMessages {
     oneof SMOutgoingMessage {
-        NodeConfiguration node_configuration          = 1;
-        UnitConfigStatus unit_config_status           = 2;
-        RunInstancesStatus run_instances_status       = 3;
-        UpdateInstancesStatus update_instances_status = 4;
-        OverrideEnvVarStatus override_env_var_status  = 5;
-        LogData log                                   = 6;
-        NodeMonitoring node_monitoring                = 7;
-        Alert alert                                   = 8;
-        ImageContentRequest image_content_request     = 9;
-        ClockSyncRequest clock_sync_request           = 10;
+        UnitConfigStatus unit_config_status           = 1;
+        RunInstancesStatus run_instances_status       = 2;
+        UpdateInstancesStatus update_instances_status = 3;
+        OverrideEnvVarStatus override_env_var_status  = 4;
+        LogData log                                   = 5;
+        NodeMonitoring node_monitoring                = 6;
+        Alert alert                                   = 7;
+        ImageContentRequest image_content_request     = 8;
+        ClockSyncRequest clock_sync_request           = 9;
     }
-}
-
-message NodeConfiguration {
-    string node_id                  = 1;
-    string node_type                = 2;
-    bool remote_node                = 3;
-    repeated string runner_features = 4;
-    uint64 num_cpus                 = 5;
-    uint64 total_ram                = 6;
-    repeated Partition partitions   = 7;
 }
 
 message Partition {

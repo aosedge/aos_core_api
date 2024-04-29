@@ -73,11 +73,6 @@ servicemanager.v3.ImageContent.data          max_size:4096
 
 // SMOutgoingMessages
 
-servicemanager.v3.NodeConfiguration.node_id         max_length:${aos::cNodeIDLen}
-servicemanager.v3.NodeConfiguration.node_type       max_length:${aos::cNodeTypeLen}
-servicemanager.v3.NodeConfiguration.runner_features max_length:16 max_count:4
-servicemanager.v3.NodeConfiguration.partitions      max_count:${aos::monitoring::cMaxNumPartitions}
-
 servicemanager.v3.Partition.name  max_length:${aos::monitoring::cPartitionNameLen}
 servicemanager.v3.Partition.types max_length:${aos::monitoring::cPartitionTypeLen} max_count:${aos::monitoring::cMaxNumPartitionTypes}
 
