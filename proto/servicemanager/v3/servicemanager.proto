@@ -178,7 +178,6 @@ message ImageContent {
 
 message SMOutgoingMessages {
     oneof SMOutgoingMessage {
-        NodeConfiguration node_configuration          = 1;
         UnitConfigStatus unit_config_status           = 2;
         RunInstancesStatus run_instances_status       = 3;
         UpdateInstancesStatus update_instances_status = 4;
@@ -189,16 +188,6 @@ message SMOutgoingMessages {
         ImageContentRequest image_content_request     = 9;
         ClockSyncRequest clock_sync_request           = 10;
     }
-}
-
-message NodeConfiguration {
-    string node_id                  = 1;
-    string node_type                = 2;
-    bool remote_node                = 3;
-    repeated string runner_features = 4;
-    uint64 num_cpus                 = 5;
-    uint64 total_ram                = 6;
-    repeated Partition partitions   = 7;
 }
 
 message Partition {
