@@ -1,0 +1,202 @@
+syntax = "proto3";
+
+package iamanager.v5;
+
+import "google/protobuf/empty.proto";
+
+service IAMPublicNodesService
+{
+    rpc GetAllNodeIDs(google.protobuf.Empty) returns (NodesID)
+    {
+    }
+    rpc GetNodeInfo(GetNodeInfoRequest) returns (NodeInfo)
+    {
+    }
+    rpc SubscribeNodeChanged(google.protobuf.Empty) returns (stream NodeInfo)
+    {
+    }
+    rpc RegisterNode(stream IAMOutgoingMessages) returns (stream IAMIncomingMessages)
+    {
+    }
+}
+
+service IAMNodesService
+{
+    rpc PauseNode(PauseNodeRequest) returns (google.protobuf.Empty)
+    {
+    }
+    rpc ResumeNode(ResumeNodeRequest) returns (google.protobuf.Empty)
+    {
+    }
+}
+
+service IAMProvisioningService
+{
+    rpc GetCertTypes(GetCertTypesRequest) returns (CertTypes)
+    {
+    }
+    rpc StartProvisioning(StartProvisioningRequest) returns (StartProvisioningResponse)
+    {
+    }
+    rpc FinishProvisioning(FinishProvisioningRequest) returns (FinishProvisioningResponse)
+    {
+    }
+    rpc Deprovision(DeprovisionRequest) returns (DeprovisionResponse)
+    {
+    }
+}
+
+message ErrorInfo {
+    int32  aos_code  = 1;
+    int32  exit_code = 2;
+    string message   = 3;
+}
+
+message InstanceIdent {
+    string service_id = 1;
+    string subject_id = 2;
+    uint64 instance   = 3;
+}
+
+
+message Permissions {
+    map<string, string> permissions = 1;
+}
+
+message PermissionsResponse {
+    InstanceIdent instance    = 1;
+    Permissions   permissions = 2;
+    ErrorInfo     error_info  = 3;
+}
+
+message NodesID {
+    repeated string ids = 1;
+}
+
+message GetCertTypesRequest {
+    string node_id = 1;
+}
+
+message GetNodeInfoRequest {
+    string node_id = 1;
+}
+
+message PauseNodeRequest {
+    string node_id = 1;
+}
+ 
+message ResumeNodeRequest {
+    string node_id = 1;
+}
+
+message CertTypes {
+    repeated string types = 1;
+}
+ 
+message PartitionInfo {
+    string          name       = 1;
+    repeated string types      = 2;
+    uint64          total_size = 3;
+}
+ 
+message CPUInfo {
+    string model_name  = 1;
+    uint64 num_cores   = 2;
+    uint64 num_threads = 3;
+    string arch        = 4;
+    string arch_family = 5;
+}
+ 
+message NodeAttribute {
+    string name  = 1;
+    string value = 2;
+} 
+ 
+message NodeInfo {
+    string                 id         = 1;
+    string                 type       = 2;
+    string                 name       = 3;
+    string                 status     = 4;
+    string                 os_type    = 5;
+    repeated CPUInfo       cpus       = 6;
+    float                  max_dmips  = 7;
+    uint64                 total_ram  = 8;
+    repeated PartitionInfo partitions = 9;
+    repeated NodeAttribute attrs      = 10;
+}
+ 
+message StartProvisioningRequest {
+    string node_id  = 1;
+    string password = 2;
+}
+ 
+message StartProvisioningResponse {
+    ErrorInfo eror_info = 1;
+}
+ 
+message FinishProvisioningRequest {
+    string node_id  = 1;
+    string password = 2;
+}
+ 
+message FinishProvisioningResponse {
+    ErrorInfo eror_info = 1;
+}
+ 
+message DeprovisionRequest {
+    string node_id  = 1;
+    string password = 2;
+}
+ 
+message DeprovisionResponse {
+    ErrorInfo eror_info = 1;
+}
+ 
+message CreateKeyResponse {
+    string    node_id    = 1;
+    string    type       = 2;
+    string    csr        = 3;
+    ErrorInfo error_info = 4;
+}
+ 
+message ApplyCertResponse {
+    string    node_id    = 1;
+    string    type       = 2;
+    string    cert_url   = 3;
+    string    serial     = 4;
+    ErrorInfo error_info = 5;
+}
+
+message CreateKeyRequest {
+    string node_id  = 1;
+    string subject  = 2;
+    string type     = 3;
+    string password = 4;
+}
+
+message ApplyCertRequest {
+    string node_id = 1;
+    string type    = 2;
+    string cert    = 3;
+}
+
+message IAMIncomingMessages {
+    oneof IAMIncomingMessage {
+        StartProvisioningRequest  start_provisioning_request  = 1;
+        FinishProvisioningRequest finish_provisioning_request = 2;
+        DeprovisionRequest        deprovisiong_request        = 3;
+        CreateKeyRequest          create_key_request          = 4;
+        ApplyCertRequest          apply_cert_request          = 5;
+    }
+}
+ 
+message IAMOutgoingMessages {
+    oneof IAMOutgoingMessage {
+        NodeInfo                   node_info                   = 1;
+        StartProvisioningResponse  start_provisioning_response = 2;
+        FinishProvisioningResponse finish_provisionig_response = 3;
+        DeprovisionResponse        deprovision_response        = 4;
+        CreateKeyResponse          create_key_response         = 5;
+        ApplyCertResponse          apply_cert_response         = 6;
+    }
+}

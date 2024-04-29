@@ -1,0 +1,82 @@
+#include <aos/common/types.hpp>
+#include <aos/iam/certhandler.hpp>
+#include <aos/iam/certmodules/hsm.hpp>
+
+// ErrorInfo
+iamanager.v5.ErrorInfo.message   max_length:256
+
+// InstanceIdent
+iamanager.v5.InstanceIdent.service_id max_length:${aos::cServiceIDLen}
+iamanager.v5.InstanceIdent.subject_id max_length:${aos::cSubjectIDLen}
+
+// NodesID
+iamanager.v5.NodesID.ids max_length:${aos::cNodeIDLen} max_count:8
+
+// GetCertTypesRequest
+iamanager.v5.GetCertTypesRequest.node_id max_length:${aos::cNodeIDLen}
+
+// GetNodeInfoRequest
+iamanager.v5.GetNodeInfoRequest.node_id max_length:${aos::cNodeIDLen}
+
+// PauseNodeRequest
+iamanager.v5.PauseNodeRequest.node_id max_length:${aos::cNodeIDLen}
+
+// ResumeNodeRequest
+iamanager.v5.ResumeNodeRequest.node_id max_length:${aos::cNodeIDLen}
+
+// CertTypes
+iamanager.v5.CertTypes.types max_length:${aos::iam::certhandler::cCertTypeLen} max_count:${aos::iam::certhandler::cIAMCertModulesMaxCount}
+
+// PartitionInfo
+iamanager.v5.PartitionInfo.name  max_length:16
+iamanager.v5.PartitionInfo.types max_length:16 max_count:8
+
+// CPUInfo
+iamanager.v5.CPUInfo.model_name  max_length:64
+iamanager.v5.CPUInfo.arch        max_length:16
+iamanager.v5.CPUInfo.arch_family max_length:16
+
+// NodeAttribute
+iamanager.v5.NodeAttribute.name  max_length:32
+iamanager.v5.NodeAttribute.value max_length:32
+
+// NodeInfo
+iamanager.v5.NodeInfo.id      max_length:16
+iamanager.v5.NodeInfo.type    max_length:32
+iamanager.v5.NodeInfo.name    max_length:32
+iamanager.v5.NodeInfo.status  max_length:32
+iamanager.v5.NodeInfo.os_type max_length:32
+
+// StartProvisioningRequest
+iamanager.v5.StartProvisioningRequest.node_id  max_length:${aos::cNodeIDLen}
+iamanager.v5.StartProvisioningRequest.password max_length:${aos::iam::certhandler::cPasswordLen}
+
+// FinishProvisioningRequest
+iamanager.v5.FinishProvisioningRequest.node_id  max_length:${aos::cNodeIDLen}
+iamanager.v5.FinishProvisioningRequest.password max_length:${aos::iam::certhandler::cPasswordLen}
+
+// DeprovisionRequest
+iamanager.v5.DeprovisionRequest.node_id  max_length:${aos::cNodeIDLen}
+iamanager.v5.DeprovisionRequest.password max_length:${aos::iam::certhandler::cPasswordLen}
+
+// CreateKeyResponse
+iamanager.v5.CreateKeyResponse.node_id max_length:${aos::cNodeIDLen}
+iamanager.v5.CreateKeyResponse.type    max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v5.CreateKeyResponse.csr     max_length:${aos::crypto::cCSRPEMLen}
+
+// ApplyCertResponse
+iamanager.v5.ApplyCertResponse.node_id  max_length:${aos::cNodeIDLen}
+iamanager.v5.ApplyCertResponse.type     max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v5.ApplyCertResponse.cert_url max_length:${aos::cURLLen}
+iamanager.v5.ApplyCertResponse.serial   max_length:${aos::crypto::cSerialNumStrLen}
+
+// CreateKeyRequest
+iamanager.v5.CreateKeyRequest.node_id  max_length:${aos::cNodeIDLen}
+iamanager.v5.CreateKeyRequest.subject  max_length:${aos::crypto::cSubjectCommonNameLen}
+iamanager.v5.CreateKeyRequest.type     max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v5.CreateKeyRequest.password max_length:${aos::iam::certhandler::cPasswordLen}
+
+// ApplyCertRequest
+iamanager.v5.ApplyCertRequest.node_id max_length:${aos::cNodeIDLen}
+iamanager.v5.ApplyCertRequest.type    max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v5.ApplyCertRequest.cert    max_length:${aos::crypto::cCertPEMLen}
