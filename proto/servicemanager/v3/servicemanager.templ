@@ -4,10 +4,10 @@
 // SMIncomingMessages
 
 servicemanager.v3.CheckUnitConfig.unit_config    max_length:1024
-servicemanager.v3.CheckUnitConfig.vendor_version max_length:${aos::cVendorVersionLen}
+servicemanager.v3.CheckUnitConfig.vendor_version max_length:${aos::cVersionLen}
 
 servicemanager.v3.SetUnitConfig.unit_config    max_length:1024
-servicemanager.v3.SetUnitConfig.vendor_version max_length:${aos::cVendorVersionLen}
+servicemanager.v3.SetUnitConfig.vendor_version max_length:${aos::cVersionLen}
 
 servicemanager.v3.RunInstances.services  max_count:${aos::cMaxNumServices}
 servicemanager.v3.RunInstances.layers    max_count:${aos::cMaxNumLayers}
@@ -19,7 +19,7 @@ servicemanager.v3.ServiceInfo.provider_id max_length:${aos::cProviderIDLen}
 servicemanager.v3.ServiceInfo.sha256      max_size:${aos::cSHA256Size}
 servicemanager.v3.ServiceInfo.sha512      max_size:${aos::cSHA512Size}
 
-servicemanager.v3.VersionInfo.vendor_version max_length:${aos::cVendorVersionLen}
+servicemanager.v3.VersionInfo.vendor_version max_length:${aos::cVersionLen}
 servicemanager.v3.VersionInfo.description   max_length:${aos::cDescriptionLen}
 
 servicemanager.v3.LayerInfo.url      max_length:${aos::cURLLen}
@@ -81,7 +81,7 @@ servicemanager.v3.NodeConfiguration.partitions      max_count:${aos::monitoring:
 servicemanager.v3.Partition.name  max_length:${aos::monitoring::cPartitionNameLen}
 servicemanager.v3.Partition.types max_length:${aos::monitoring::cPartitionTypeLen} max_count:${aos::monitoring::cMaxNumPartitionTypes}
 
-servicemanager.v3.UnitConfigStatus.vendor_version max_length:${aos::cVendorVersionLen}
+servicemanager.v3.UnitConfigStatus.vendor_version max_length:${aos::cVersionLen}
 servicemanager.v3.UnitConfigStatus.error          max_length:${aos::cErrorMessageLen}
 
 servicemanager.v3.RunInstancesStatus.instances max_count:${aos::cMaxNumInstances}
