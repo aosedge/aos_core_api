@@ -236,7 +236,7 @@ message IAMIncomingMessages {
     oneof IAMIncomingMessage {
         StartProvisioningRequest start_provisioning_request   = 1;
         FinishProvisioningRequest finish_provisioning_request = 2;
-        DeprovisionRequest deprovisiong_request               = 3;
+        DeprovisionRequest deprovision_request                = 3;
         PauseNodeRequest pause_node_request                   = 4;
         ResumeNodeRequest resume_node_request                 = 5;
         CreateKeyRequest create_key_request                   = 6;
@@ -246,13 +246,13 @@ message IAMIncomingMessages {
 
 message IAMOutgoingMessages {
     oneof IAMOutgoingMessage {
-        NodeInfo node_info                                     = 1;
-        StartProvisioningResponse start_provisioning_response  = 2;
-        FinishProvisioningResponse finish_provisionig_response = 3;
-        DeprovisionResponse deprovision_response               = 4;
-        PauseNodeResponse pause_node_response                  = 5;
-        ResumeNodeResponse resume_node_response                = 6;
-        CreateKeyResponse create_key_response                  = 7;
-        ApplyCertResponse apply_cert_response                  = 8;
+        NodeInfo node_info                                      = 1;
+        StartProvisioningResponse start_provisioning_response   = 2;
+        FinishProvisioningResponse finish_provisioning_response = 3;
+        DeprovisionResponse deprovision_response                = 4;
+        PauseNodeResponse pause_node_response                   = 5;
+        ResumeNodeResponse resume_node_response                 = 6;
+        CreateKeyResponse create_key_response                   = 7;
+        ApplyCertResponse apply_cert_response                   = 8;
     }
 }
