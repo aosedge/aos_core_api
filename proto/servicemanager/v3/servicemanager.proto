@@ -3,6 +3,7 @@ syntax = "proto3";
 package servicemanager.v3;
 
 import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
 
 /***********************************************************************************************************************
  * SMService
@@ -159,7 +160,7 @@ message ConnectionStatus {
 message ImageContentInfo {
     uint64 request_id              = 1;
     repeated ImageFile image_files = 2;
-    string error                   = 3;
+    common.v1.ErrorInfo error      = 3;
 }
 
 message ImageFile {
@@ -197,8 +198,8 @@ message Partition {
 }
 
 message UnitConfigStatus {
-    string vendor_version = 1;
-    string error          = 2;
+    string vendor_version     = 1;
+    common.v1.ErrorInfo error = 2;
 }
 
 message RunInstancesStatus {
@@ -210,10 +211,10 @@ message UpdateInstancesStatus {
 }
 
 message InstanceStatus {
-    InstanceIdent instance = 1;
-    uint64 aos_version     = 2;
-    string run_state       = 3;
-    ErrorInfo error_info   = 4;
+    InstanceIdent instance         = 1;
+    uint64 aos_version             = 2;
+    string run_state               = 3;
+    common.v1.ErrorInfo error_info = 4;
 }
 
 message InstanceIdent {
@@ -222,15 +223,9 @@ message InstanceIdent {
     int64 instance    = 3;
 }
 
-message ErrorInfo {
-    int32 aos_code  = 1;
-    int32 exit_code = 2;
-    string message  = 3;
-}
-
 message OverrideEnvVarStatus {
     repeated EnvVarInstanceStatus env_vars_status = 1;
-    string error                                  = 2;
+    common.v1.ErrorInfo error                     = 2;
 }
 
 message EnvVarInstanceStatus {
@@ -239,16 +234,16 @@ message EnvVarInstanceStatus {
 }
 
 message EnvVarStatus {
-    string var_id = 1;
-    string error  = 2;
+    string var_id             = 1;
+    common.v1.ErrorInfo error = 2;
 }
 
 message LogData {
-    string log_id     = 1;
-    uint64 part_count = 2;
-    uint64 part       = 3;
-    bytes data        = 4;
-    string error      = 5;
+    string log_id             = 1;
+    uint64 part_count         = 2;
+    uint64 part               = 3;
+    bytes data                = 4;
+    common.v1.ErrorInfo error = 5;
 }
 
 message NodeMonitoring {
@@ -319,8 +314,8 @@ message ResourceValidateAlert {
 }
 
 message ResourceValidateErrors {
-    string name               = 1;
-    repeated string error_msg = 2;
+    string name                            = 1;
+    repeated common.v1.ErrorInfo error_msg = 2;
 }
 
 message SystemAlert {

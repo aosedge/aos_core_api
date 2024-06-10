@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
+import "common/v1/common.proto";
 
 package communicationmanager.v2;
 
@@ -21,7 +22,7 @@ message UpdateFOTAStatus {
     UpdateState state                 = 1;
     repeated ComponentInfo components = 2;
     UnitConfigInfo unit_config        = 3;
-    string error                      = 4;
+    common.v1.ErrorInfo error         = 4;
 }
 
 message UpdateSOTAStatus {
@@ -30,7 +31,7 @@ message UpdateSOTAStatus {
     repeated ServiceInfo remove_services  = 3;
     repeated LayerInfo install_layers     = 4;
     repeated LayerInfo remove_layers      = 5;
-    string error                          = 6;
+    common.v1.ErrorInfo error             = 6;
 }
 
 message ComponentInfo {

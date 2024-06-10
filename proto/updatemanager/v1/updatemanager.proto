@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "common/v1/common.proto";
+
 package updatemanager.v1;
 
 service UMService {
@@ -54,16 +56,16 @@ enum ComponentStatus {
 }
 
 message SystemComponent {
-    string id              = 1;
-    string vendor_version  = 2;
-    uint64 aos_version     = 3;
-    ComponentStatus status = 4;
-    string error           = 5;
+    string id                 = 1;
+    string vendor_version     = 2;
+    uint64 aos_version        = 3;
+    ComponentStatus status    = 4;
+    common.v1.ErrorInfo error = 5;
 }
 
 message UpdateStatus {
     string um_id                        = 1;
     UmState um_state                    = 2;
-    string error                        = 3;
+    common.v1.ErrorInfo error           = 3;
     repeated SystemComponent components = 4;
 }

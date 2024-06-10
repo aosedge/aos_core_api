@@ -3,6 +3,7 @@ syntax = "proto3";
 package iamanager.v5;
 
 import "google/protobuf/empty.proto";
+import "common/v1/common.proto";
 
 service IAMPublicService {
     rpc GetAPIVersion(google.protobuf.Empty) returns (APIVersion) {}
@@ -49,12 +50,6 @@ service IAMPermissionsService {
     rpc UnregisterInstance(UnregisterInstanceRequest) returns (google.protobuf.Empty) {}
 }
 
-message ErrorInfo {
-    int32 aos_code  = 1;
-    int32 exit_code = 2;
-    string message  = 3;
-}
-
 message APIVersion {
     uint64 version = 1;
 }
@@ -89,6 +84,7 @@ message NodeInfo {
     uint64 total_ram                  = 8;
     repeated PartitionInfo partitions = 9;
     repeated NodeAttribute attrs      = 10;
+    common.v1.ErrorInfo    error      = 11;
 }
 
 message GetCertRequest {
@@ -148,10 +144,10 @@ message CreateKeyRequest {
 }
 
 message CreateKeyResponse {
-    string node_id       = 1;
-    string type          = 2;
-    string csr           = 3;
-    ErrorInfo error_info = 4;
+    string node_id                 = 1;
+    string type                    = 2;
+    string csr                     = 3;
+    common.v1.ErrorInfo error_info = 4;
 }
 
 message ApplyCertRequest {
@@ -161,11 +157,11 @@ message ApplyCertRequest {
 }
 
 message ApplyCertResponse {
-    string node_id       = 1;
-    string type          = 2;
-    string cert_url      = 3;
-    string serial        = 4;
-    ErrorInfo error_info = 5;
+    string node_id                 = 1;
+    string type                    = 2;
+    string cert_url                = 3;
+    string serial                  = 4;
+    common.v1.ErrorInfo error_info = 5;
 }
 
 message Permissions {
@@ -194,7 +190,7 @@ message PauseNodeRequest {
 }
 
 message PauseNodeResponse {
-    ErrorInfo error_info = 1;
+    common.v1.ErrorInfo error = 1;
 }
 
 message ResumeNodeRequest {
@@ -202,7 +198,7 @@ message ResumeNodeRequest {
 }
 
 message ResumeNodeResponse {
-    ErrorInfo error_info = 1;
+    common.v1.ErrorInfo error = 1;
 }
 
 message StartProvisioningRequest {
@@ -211,7 +207,7 @@ message StartProvisioningRequest {
 }
 
 message StartProvisioningResponse {
-    ErrorInfo error_info = 1;
+    common.v1.ErrorInfo error = 1;
 }
 
 message FinishProvisioningRequest {
@@ -220,7 +216,7 @@ message FinishProvisioningRequest {
 }
 
 message FinishProvisioningResponse {
-    ErrorInfo error_info = 1;
+    common.v1.ErrorInfo error = 1;
 }
 
 message DeprovisionRequest {
@@ -229,7 +225,7 @@ message DeprovisionRequest {
 }
 
 message DeprovisionResponse {
-    ErrorInfo error_info = 1;
+    common.v1.ErrorInfo error = 1;
 }
 
 message IAMIncomingMessages {

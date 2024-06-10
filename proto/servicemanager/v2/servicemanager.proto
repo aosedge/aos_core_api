@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
 
 package servicemanager.v2;
 
@@ -76,11 +77,11 @@ message InstallServiceRequest {
 }
 
 message RestoreServiceRequest {
-    string service_id     = 1;
+    string service_id = 1;
 }
 
 message RemoveServiceRequest {
-    string service_id     = 1;
+    string service_id = 1;
 }
 
 message RunInstanceRequest {
@@ -118,7 +119,7 @@ message InstanceState {
 }
 
 message NewInstanceState {
-    InstanceState state   = 1;
+    InstanceState state = 1;
 }
 
 message OverrideEnvVarsRequest {
@@ -177,11 +178,11 @@ message InstallLayerRequest {
 }
 
 message RemoveLayerRequest {
-    string digest         = 1;
+    string digest = 1;
 }
 
 message RestoreLayerRequest {
-    string digest         = 1;
+    string digest = 1;
 }
 
 // Notifications
@@ -274,12 +275,6 @@ message InstanceAlert {
     InstanceIdent instance = 1;
     uint64 aos_version     = 2;
     string message         = 3;
-}
-
-message ErrorInfo {
-    int32 AosCode  = 1;
-    int32 ExitCode = 2;
-    string message = 3;
 }
 
 message ServiceError {
