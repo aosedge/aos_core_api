@@ -19,14 +19,14 @@
 struct AosProtocolHeader {
     uint32_t mPort;
     uint32_t mDataSize;
-    uint8_t mCheckSum[32];
+    uint8_t  mCheckSum[32];
 };
 
 /**
  * Aos protobuf header.
  */
 struct AosProtobufHeader {
-    char mMethodName[256];
+    char     mMethodName[256];
     uint32_t mDataSize;
 };
 

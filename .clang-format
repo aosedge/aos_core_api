@@ -1,6 +1,6 @@
 BasedOnStyle: Google
 AlignConsecutiveAssignments: true
-AlignConsecutiveDeclarations: false
+AlignConsecutiveDeclarations: true
 AllowShortFunctionsOnASingleLine: Empty
 ColumnLimit: 120
 IndentWidth: 4

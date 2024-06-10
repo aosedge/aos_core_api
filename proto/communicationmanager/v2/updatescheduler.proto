@@ -19,19 +19,19 @@ message SchedulerNotifications {
 }
 
 message UpdateFOTAStatus {
-    UpdateState state                 = 1;
-    repeated ComponentInfo components = 2;
-    UnitConfigInfo unit_config        = 3;
-    common.v1.ErrorInfo error         = 4;
+    UpdateState            state       = 1;
+    repeated ComponentInfo components  = 2;
+    UnitConfigInfo         unit_config = 3;
+    common.v1.ErrorInfo    error       = 4;
 }
 
 message UpdateSOTAStatus {
-    UpdateState state                     = 1;
+    UpdateState          state            = 1;
     repeated ServiceInfo install_services = 2;
     repeated ServiceInfo remove_services  = 3;
-    repeated LayerInfo install_layers     = 4;
-    repeated LayerInfo remove_layers      = 5;
-    common.v1.ErrorInfo error             = 6;
+    repeated LayerInfo   install_layers   = 4;
+    repeated LayerInfo   remove_layers    = 5;
+    common.v1.ErrorInfo  error            = 6;
 }
 
 message ComponentInfo {

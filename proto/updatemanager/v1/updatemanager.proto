@@ -11,9 +11,9 @@ service UMService {
 message CMMessages {
     oneof CMMessage {
         PrepareUpdate prepare_update = 1;
-        StartUpdate start_update     = 2;
-        ApplyUpdate apply_update     = 3;
-        RevertUpdate revert_update   = 4;
+        StartUpdate   start_update   = 2;
+        ApplyUpdate   apply_update   = 3;
+        RevertUpdate  revert_update  = 4;
     }
 }
 
@@ -25,8 +25,8 @@ message PrepareComponentInfo {
     uint64 aos_version    = 3;
     string annotations    = 4;
     string url            = 5;
-    bytes sha256          = 6;
-    bytes sha512          = 7;
+    bytes  sha256         = 6;
+    bytes  sha512         = 7;
     uint64 size           = 8;
 }
 
@@ -56,16 +56,16 @@ enum ComponentStatus {
 }
 
 message SystemComponent {
-    string id                 = 1;
-    string vendor_version     = 2;
-    uint64 aos_version        = 3;
-    ComponentStatus status    = 4;
-    common.v1.ErrorInfo error = 5;
+    string              id             = 1;
+    string              vendor_version = 2;
+    uint64              aos_version    = 3;
+    ComponentStatus     status         = 4;
+    common.v1.ErrorInfo error          = 5;
 }
 
 message UpdateStatus {
-    string um_id                        = 1;
-    UmState um_state                    = 2;
-    common.v1.ErrorInfo error           = 3;
+    string                   um_id      = 1;
+    UmState                  um_state   = 2;
+    common.v1.ErrorInfo      error      = 3;
     repeated SystemComponent components = 4;
 }

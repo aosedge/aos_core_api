@@ -55,9 +55,9 @@ message APIVersion {
 }
 
 message PartitionInfo {
-    string name           = 1;
-    repeated string types = 2;
-    uint64 total_size     = 3;
+    string          name       = 1;
+    repeated string types      = 2;
+    uint64          total_size = 3;
 }
 
 message CPUInfo {
@@ -74,14 +74,14 @@ message NodeAttribute {
 }
 
 message NodeInfo {
-    string id                         = 1;
-    string type                       = 2;
-    string name                       = 3;
-    string status                     = 4;
-    string os_type                    = 5;
-    repeated CPUInfo cpus             = 6;
-    float max_dmips                   = 7;
-    uint64 total_ram                  = 8;
+    string                 id         = 1;
+    string                 type       = 2;
+    string                 name       = 3;
+    string                 status     = 4;
+    string                 os_type    = 5;
+    repeated CPUInfo       cpus       = 6;
+    float                  max_dmips  = 7;
+    uint64                 total_ram  = 8;
     repeated PartitionInfo partitions = 9;
     repeated NodeAttribute attrs      = 10;
     common.v1.ErrorInfo    error      = 11;
@@ -89,7 +89,7 @@ message NodeInfo {
 
 message GetCertRequest {
     string type   = 1;
-    bytes issuer  = 2;
+    bytes  issuer = 2;
     string serial = 3;
 }
 
@@ -114,8 +114,8 @@ message PermissionsRequest {
 }
 
 message PermissionsResponse {
-    InstanceIdent instance  = 1;
-    Permissions permissions = 2;
+    InstanceIdent instance    = 1;
+    Permissions   permissions = 2;
 }
 
 message InstanceIdent {
@@ -144,9 +144,9 @@ message CreateKeyRequest {
 }
 
 message CreateKeyResponse {
-    string node_id                 = 1;
-    string type                    = 2;
-    string csr                     = 3;
+    string              node_id    = 1;
+    string              type       = 2;
+    string              csr        = 3;
     common.v1.ErrorInfo error_info = 4;
 }
 
@@ -157,10 +157,10 @@ message ApplyCertRequest {
 }
 
 message ApplyCertResponse {
-    string node_id                 = 1;
-    string type                    = 2;
-    string cert_url                = 3;
-    string serial                  = 4;
+    string              node_id    = 1;
+    string              type       = 2;
+    string              cert_url   = 3;
+    string              serial     = 4;
     common.v1.ErrorInfo error_info = 5;
 }
 
@@ -169,7 +169,7 @@ message Permissions {
 }
 
 message RegisterInstanceRequest {
-    InstanceIdent instance               = 1;
+    InstanceIdent            instance    = 1;
     map<string, Permissions> permissions = 2;
 }
 
@@ -230,27 +230,27 @@ message DeprovisionResponse {
 
 message IAMIncomingMessages {
     oneof IAMIncomingMessage {
-        StartProvisioningRequest start_provisioning_request   = 1;
-        GetCertTypesRequest get_cert_types_request            = 2;
+        StartProvisioningRequest  start_provisioning_request  = 1;
+        GetCertTypesRequest       get_cert_types_request      = 2;
         FinishProvisioningRequest finish_provisioning_request = 3;
-        DeprovisionRequest deprovision_request                = 4;
-        PauseNodeRequest pause_node_request                   = 5;
-        ResumeNodeRequest resume_node_request                 = 6;
-        CreateKeyRequest create_key_request                   = 7;
-        ApplyCertRequest apply_cert_request                   = 8;
+        DeprovisionRequest        deprovision_request         = 4;
+        PauseNodeRequest          pause_node_request          = 5;
+        ResumeNodeRequest         resume_node_request         = 6;
+        CreateKeyRequest          create_key_request          = 7;
+        ApplyCertRequest          apply_cert_request          = 8;
     }
 }
 
 message IAMOutgoingMessages {
     oneof IAMOutgoingMessage {
-        NodeInfo node_info                                      = 1;
-        StartProvisioningResponse start_provisioning_response   = 2;
-        CertTypes cert_types_response                           = 3;
+        NodeInfo                   node_info                    = 1;
+        StartProvisioningResponse  start_provisioning_response  = 2;
+        CertTypes                  cert_types_response          = 3;
         FinishProvisioningResponse finish_provisioning_response = 4;
-        DeprovisionResponse deprovision_response                = 5;
-        PauseNodeResponse pause_node_response                   = 6;
-        ResumeNodeResponse resume_node_response                 = 7;
-        CreateKeyResponse create_key_response                   = 8;
-        ApplyCertResponse apply_cert_response                   = 9;
+        DeprovisionResponse        deprovision_response         = 5;
+        PauseNodeResponse          pause_node_response          = 6;
+        ResumeNodeResponse         resume_node_response         = 7;
+        CreateKeyResponse          create_key_response          = 8;
+        ApplyCertResponse          apply_cert_response          = 9;
     }
 }

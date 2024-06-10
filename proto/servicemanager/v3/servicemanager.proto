@@ -15,20 +15,20 @@ service SMService {
 
 message SMIncomingMessages {
     oneof SMIncomingMessage {
-        GetUnitConfigStatus get_unit_config_status         = 1;
-        CheckUnitConfig check_unit_config                  = 2;
-        SetUnitConfig set_unit_config                      = 3;
-        RunInstances run_instances                         = 4;
-        OverrideEnvVars override_env_vars                  = 5;
-        SystemLogRequest system_log_request                = 6;
-        InstanceLogRequest instance_log_request            = 7;
+        GetUnitConfigStatus     get_unit_config_status     = 1;
+        CheckUnitConfig         check_unit_config          = 2;
+        SetUnitConfig           set_unit_config            = 3;
+        RunInstances            run_instances              = 4;
+        OverrideEnvVars         override_env_vars          = 5;
+        SystemLogRequest        system_log_request         = 6;
+        InstanceLogRequest      instance_log_request       = 7;
         InstanceCrashLogRequest instance_crash_log_request = 8;
-        GetNodeMonitoring get_node_monitoring              = 9;
-        ConnectionStatus connection_status                 = 10;
-        ImageContentInfo image_content_info                = 11;
-        ImageContent image_content                         = 12;
-        UpdateNetworks update_networks                     = 13;
-        ClockSync clock_sync                               = 14;
+        GetNodeMonitoring       get_node_monitoring        = 9;
+        ConnectionStatus        connection_status          = 10;
+        ImageContentInfo        image_content_info         = 11;
+        ImageContent            image_content              = 12;
+        UpdateNetworks          update_networks            = 13;
+        ClockSync               clock_sync                 = 14;
     }
 }
 
@@ -53,31 +53,31 @@ message ClockSync {
 }
 
 message RunInstances {
-    repeated ServiceInfo services   = 1;
-    repeated LayerInfo layers       = 2;
-    repeated InstanceInfo instances = 3;
-    bool force_restart              = 4;
+    repeated ServiceInfo  services      = 1;
+    repeated LayerInfo    layers        = 2;
+    repeated InstanceInfo instances     = 3;
+    bool                  force_restart = 4;
 }
 
 message ServiceInfo {
     VersionInfo version_info = 1;
-    string url               = 2;
-    string service_id        = 3;
-    string provider_id       = 4;
-    uint32 gid               = 5;
-    bytes sha256             = 6;
-    bytes sha512             = 7;
-    uint64 size              = 8;
+    string      url          = 2;
+    string      service_id   = 3;
+    string      provider_id  = 4;
+    uint32      gid          = 5;
+    bytes       sha256       = 6;
+    bytes       sha512       = 7;
+    uint64      size         = 8;
 }
 
 message LayerInfo {
     VersionInfo version_info = 1;
-    string url               = 2;
-    string layer_id          = 3;
-    string digest            = 4;
-    bytes sha256             = 5;
-    bytes sha512             = 6;
-    uint64 size              = 7;
+    string      url          = 2;
+    string      layer_id     = 3;
+    string      digest       = 4;
+    bytes       sha256       = 5;
+    bytes       sha512       = 6;
+    uint64      size         = 7;
 }
 
 message VersionInfo {
@@ -94,20 +94,20 @@ message FirewallRule {
 }
 
 message NetworkParameters {
-    string network_id           = 1;
-    string subnet               = 2;
-    string ip                   = 3;
-    uint64 vlan_id              = 4;
-    repeated string dns_servers = 5;
-    repeated FirewallRule rules = 6;
+    string                network_id  = 1;
+    string                subnet      = 2;
+    string                ip          = 3;
+    uint64                vlan_id     = 4;
+    repeated string       dns_servers = 5;
+    repeated FirewallRule rules       = 6;
 }
 
 message InstanceInfo {
-    InstanceIdent instance               = 1;
-    uint32 uid                           = 2;
-    uint64 priority                      = 3;
-    string storage_path                  = 4;
-    string state_path                    = 5;
+    InstanceIdent     instance           = 1;
+    uint32            uid                = 2;
+    uint64            priority           = 3;
+    string            storage_path       = 4;
+    string            state_path         = 5;
     NetworkParameters network_parameters = 6;
 }
 
@@ -116,34 +116,34 @@ message OverrideEnvVars {
 }
 
 message OverrideInstanceEnvVar {
-    InstanceIdent instance   = 1;
-    repeated EnvVarInfo vars = 2;
+    InstanceIdent       instance = 1;
+    repeated EnvVarInfo vars     = 2;
 }
 
 message EnvVarInfo {
-    string var_id                 = 1;
-    string variable               = 2;
-    google.protobuf.Timestamp ttl = 3;
+    string                    var_id   = 1;
+    string                    variable = 2;
+    google.protobuf.Timestamp ttl      = 3;
 }
 
 message SystemLogRequest {
-    string log_id                  = 1;
-    google.protobuf.Timestamp from = 2;
-    google.protobuf.Timestamp till = 3;
+    string                    log_id = 1;
+    google.protobuf.Timestamp from   = 2;
+    google.protobuf.Timestamp till   = 3;
 }
 
 message InstanceLogRequest {
-    string log_id                  = 1;
-    InstanceIdent instance         = 2;
-    google.protobuf.Timestamp from = 3;
-    google.protobuf.Timestamp till = 4;
+    string                    log_id   = 1;
+    InstanceIdent             instance = 2;
+    google.protobuf.Timestamp from     = 3;
+    google.protobuf.Timestamp till     = 4;
 }
 
 message InstanceCrashLogRequest {
-    string log_id                  = 1;
-    InstanceIdent instance         = 2;
-    google.protobuf.Timestamp from = 3;
-    google.protobuf.Timestamp till = 4;
+    string                    log_id   = 1;
+    InstanceIdent             instance = 2;
+    google.protobuf.Timestamp from     = 3;
+    google.protobuf.Timestamp till     = 4;
 }
 
 message GetNodeMonitoring {}
@@ -158,14 +158,14 @@ message ConnectionStatus {
 }
 
 message ImageContentInfo {
-    uint64 request_id              = 1;
-    repeated ImageFile image_files = 2;
-    common.v1.ErrorInfo error      = 3;
+    uint64              request_id  = 1;
+    repeated ImageFile  image_files = 2;
+    common.v1.ErrorInfo error       = 3;
 }
 
 message ImageFile {
     string relative_path = 1;
-    bytes sha256         = 2;
+    bytes  sha256        = 2;
     uint64 size          = 3;
 }
 
@@ -174,32 +174,32 @@ message ImageContent {
     string relative_path = 2;
     uint64 parts_count   = 3;
     uint64 part          = 4;
-    bytes data           = 5;
+    bytes  data          = 5;
 }
 
 message SMOutgoingMessages {
     oneof SMOutgoingMessage {
-        UnitConfigStatus unit_config_status           = 1;
-        RunInstancesStatus run_instances_status       = 2;
+        UnitConfigStatus      unit_config_status      = 1;
+        RunInstancesStatus    run_instances_status    = 2;
         UpdateInstancesStatus update_instances_status = 3;
-        OverrideEnvVarStatus override_env_var_status  = 4;
-        LogData log                                   = 5;
-        NodeMonitoring node_monitoring                = 6;
-        Alert alert                                   = 7;
-        ImageContentRequest image_content_request     = 8;
-        ClockSyncRequest clock_sync_request           = 9;
+        OverrideEnvVarStatus  override_env_var_status = 4;
+        LogData               log                     = 5;
+        NodeMonitoring        node_monitoring         = 6;
+        Alert                 alert                   = 7;
+        ImageContentRequest   image_content_request   = 8;
+        ClockSyncRequest      clock_sync_request      = 9;
     }
 }
 
 message Partition {
-    string name           = 1;
-    repeated string types = 2;
-    uint64 total_size     = 3;
+    string          name       = 1;
+    repeated string types      = 2;
+    uint64          total_size = 3;
 }
 
 message UnitConfigStatus {
-    string vendor_version     = 1;
-    common.v1.ErrorInfo error = 2;
+    string              vendor_version = 1;
+    common.v1.ErrorInfo error          = 2;
 }
 
 message RunInstancesStatus {
@@ -211,53 +211,53 @@ message UpdateInstancesStatus {
 }
 
 message InstanceStatus {
-    InstanceIdent instance         = 1;
-    uint64 aos_version             = 2;
-    string run_state               = 3;
-    common.v1.ErrorInfo error_info = 4;
+    InstanceIdent       instance    = 1;
+    uint64              aos_version = 2;
+    string              run_state   = 3;
+    common.v1.ErrorInfo error_info  = 4;
 }
 
 message InstanceIdent {
     string service_id = 1;
     string subject_id = 2;
-    int64 instance    = 3;
+    int64  instance   = 3;
 }
 
 message OverrideEnvVarStatus {
     repeated EnvVarInstanceStatus env_vars_status = 1;
-    common.v1.ErrorInfo error                     = 2;
+    common.v1.ErrorInfo           error           = 2;
 }
 
 message EnvVarInstanceStatus {
-    InstanceIdent instance            = 1;
+    InstanceIdent         instance    = 1;
     repeated EnvVarStatus vars_status = 2;
 }
 
 message EnvVarStatus {
-    string var_id             = 1;
-    common.v1.ErrorInfo error = 2;
+    string              var_id = 1;
+    common.v1.ErrorInfo error  = 2;
 }
 
 message LogData {
-    string log_id             = 1;
-    uint64 part_count         = 2;
-    uint64 part               = 3;
-    bytes data                = 4;
-    common.v1.ErrorInfo error = 5;
+    string              log_id     = 1;
+    uint64              part_count = 2;
+    uint64              part       = 3;
+    bytes               data       = 4;
+    common.v1.ErrorInfo error      = 5;
 }
 
 message NodeMonitoring {
-    google.protobuf.Timestamp timestamp             = 1;
-    MonitoringData monitoring_data                  = 2;
+    google.protobuf.Timestamp   timestamp           = 1;
+    MonitoringData              monitoring_data     = 2;
     repeated InstanceMonitoring instance_monitoring = 3;
 }
 
 message MonitoringData {
-    uint64 ram                   = 1;
-    uint64 cpu                   = 2;
-    repeated PartitionUsage disk = 3;
-    uint64 in_traffic            = 4;
-    uint64 out_traffic           = 5;
+    uint64                  ram         = 1;
+    uint64                  cpu         = 2;
+    repeated PartitionUsage disk        = 3;
+    uint64                  in_traffic  = 4;
+    uint64                  out_traffic = 5;
 }
 
 message PartitionUsage {
@@ -266,21 +266,21 @@ message PartitionUsage {
 }
 
 message InstanceMonitoring {
-    InstanceIdent instance         = 1;
+    InstanceIdent  instance        = 1;
     MonitoringData monitoring_data = 2;
 }
 
 message Alert {
     google.protobuf.Timestamp timestamp = 1;
-    string tag                          = 2;
-    oneof Payload {
-        SystemQuotaAlert system_quota_alert           = 3;
-        InstanceQuotaAlert instance_quota_alert       = 4;
+    string                    tag       = 2;
+    oneof                     Payload {
+        SystemQuotaAlert      system_quota_alert      = 3;
+        InstanceQuotaAlert    instance_quota_alert    = 4;
         ResourceValidateAlert resource_validate_alert = 5;
-        DeviceAllocateAlert device_allocate_alert     = 6;
-        SystemAlert system_alert                      = 7;
-        CoreAlert core_alert                          = 8;
-        InstanceAlert instance_alert                  = 9;
+        DeviceAllocateAlert   device_allocate_alert   = 6;
+        SystemAlert           system_alert            = 7;
+        CoreAlert             core_alert              = 8;
+        InstanceAlert         instance_alert          = 9;
     }
 }
 
@@ -298,15 +298,15 @@ message SystemQuotaAlert {
 }
 
 message InstanceQuotaAlert {
-    InstanceIdent instance = 1;
-    string parameter       = 2;
-    uint64 value           = 3;
+    InstanceIdent instance  = 1;
+    string        parameter = 2;
+    uint64        value     = 3;
 }
 
 message DeviceAllocateAlert {
     InstanceIdent instance = 1;
-    string device          = 2;
-    string message         = 3;
+    string        device   = 2;
+    string        message  = 3;
 }
 
 message ResourceValidateAlert {
@@ -314,7 +314,7 @@ message ResourceValidateAlert {
 }
 
 message ResourceValidateErrors {
-    string name                            = 1;
+    string   name                          = 1;
     repeated common.v1.ErrorInfo error_msg = 2;
 }
 
@@ -328,7 +328,7 @@ message CoreAlert {
 }
 
 message InstanceAlert {
-    InstanceIdent instance = 1;
-    uint64 aos_version     = 2;
-    string message         = 3;
+    InstanceIdent instance    = 1;
+    uint64        aos_version = 2;
+    string        message     = 3;
 }
