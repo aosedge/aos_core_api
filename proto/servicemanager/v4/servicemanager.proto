@@ -35,13 +35,13 @@ message SMIncomingMessages {
 message GetUnitConfigStatus {}
 
 message CheckUnitConfig {
-    string unit_config    = 1;
-    string vendor_version = 2;
+    string unit_config = 1;
+    string version     = 2;
 }
 
 message SetUnitConfig {
-    string unit_config    = 1;
-    string vendor_version = 2;
+    string unit_config = 1;
+    string version     = 2;
 }
 
 message UpdateNetworks {
@@ -60,30 +60,22 @@ message RunInstances {
 }
 
 message ServiceInfo {
-    VersionInfo version_info = 1;
-    string      url          = 2;
-    string      service_id   = 3;
-    string      provider_id  = 4;
-    uint32      gid          = 5;
-    bytes       sha256       = 6;
-    bytes       sha512       = 7;
-    uint64      size         = 8;
+    string service_id  = 1;
+    string provider_id = 2;
+    string version     = 3;
+    uint32 gid         = 4;
+    string url         = 5;
+    bytes  sha256      = 6;
+    uint64 size        = 7;
 }
 
 message LayerInfo {
-    VersionInfo version_info = 1;
-    string      url          = 2;
-    string      layer_id     = 3;
-    string      digest       = 4;
-    bytes       sha256       = 5;
-    bytes       sha512       = 6;
-    uint64      size         = 7;
-}
-
-message VersionInfo {
-    uint64 aos_version    = 1;
-    string vendor_version = 2;
-    string description    = 3;
+    string layer_id = 1;
+    string digest   = 2;
+    string version  = 3;
+    string url      = 4;
+    bytes  sha256   = 5;
+    uint64 size     = 6;
 }
 
 message FirewallRule {
@@ -199,8 +191,8 @@ message Partition {
 }
 
 message UnitConfigStatus {
-    string              vendor_version = 1;
-    common.v1.ErrorInfo error          = 2;
+    string              version = 1;
+    common.v1.ErrorInfo error   = 2;
 }
 
 message RunInstancesStatus {
@@ -212,10 +204,10 @@ message UpdateInstancesStatus {
 }
 
 message InstanceStatus {
-    InstanceIdent       instance    = 1;
-    uint64              aos_version = 2;
-    string              run_state   = 3;
-    common.v1.ErrorInfo error_info  = 4;
+    InstanceIdent       instance        = 1;
+    string              service_version = 2;
+    string              run_state       = 3;
+    common.v1.ErrorInfo error_info      = 4;
 }
 
 message InstanceIdent {
@@ -337,7 +329,7 @@ message CoreAlert {
 }
 
 message InstanceAlert {
-    InstanceIdent instance    = 1;
-    uint64        aos_version = 2;
-    string        message     = 3;
+    InstanceIdent instance        = 1;
+    string        service_version = 2;
+    string        message         = 3;
 }

@@ -228,14 +228,14 @@ message OverrideEnvVarStatus {
     common.v1.ErrorInfo           error           = 2;
 }
 
-message EnvVarInstanceStatus {
-    InstanceIdent         instance    = 1;
-    repeated EnvVarStatus vars_status = 2;
-}
-
 message EnvVarStatus {
     string              var_id = 1;
     common.v1.ErrorInfo error  = 2;
+}
+
+message EnvVarInstanceStatus {
+    InstanceIdent         instance    = 1;
+    repeated EnvVarStatus vars_status = 2;
 }
 
 message LogData {
