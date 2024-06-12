@@ -20,14 +20,13 @@ message CMMessages {
 // CM messages
 
 message PrepareComponentInfo {
-    string id             = 1;
-    string vendor_version = 2;
-    uint64 aos_version    = 3;
+    string component_id   = 1;
+    string component_type = 2;
+    string version        = 3;
     string annotations    = 4;
     string url            = 5;
     bytes  sha256         = 6;
-    bytes  sha512         = 7;
-    uint64 size           = 8;
+    uint64 size           = 7;
 }
 
 message PrepareUpdate {
@@ -42,30 +41,29 @@ message RevertUpdate {}
 
 // UM messages
 
-enum UmState {
+enum UpdateState {
     IDLE     = 0;
     PREPARED = 1;
     UPDATED  = 2;
     FAILED   = 3;
 }
 
-enum ComponentStatus {
+enum ComponentState {
     INSTALLED  = 0;
     INSTALLING = 1;
     ERROR      = 2;
 }
 
-message SystemComponent {
-    string              id             = 1;
-    string              vendor_version = 2;
-    uint64              aos_version    = 3;
-    ComponentStatus     status         = 4;
+message ComponentStatus {
+    string              component_id   = 1;
+    string              component_type = 2;
+    string              version        = 3;
+    ComponentState      state          = 4;
     common.v1.ErrorInfo error          = 5;
 }
 
 message UpdateStatus {
-    string                   um_id      = 1;
-    UmState                  um_state   = 2;
-    common.v1.ErrorInfo      error      = 3;
-    repeated SystemComponent components = 4;
+    UpdateState              update_state = 1;
+    repeated SystemComponent components   = 2;
+    common.v1.ErrorInfo      error        = 3;
 }
