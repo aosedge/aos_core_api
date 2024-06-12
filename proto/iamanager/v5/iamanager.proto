@@ -235,12 +235,13 @@ message DeprovisionResponse {
 message IAMIncomingMessages {
     oneof IAMIncomingMessage {
         StartProvisioningRequest start_provisioning_request   = 1;
-        FinishProvisioningRequest finish_provisioning_request = 2;
-        DeprovisionRequest deprovision_request                = 3;
-        PauseNodeRequest pause_node_request                   = 4;
-        ResumeNodeRequest resume_node_request                 = 5;
-        CreateKeyRequest create_key_request                   = 6;
-        ApplyCertRequest apply_cert_request                   = 7;
+        GetCertTypesRequest get_cert_types_request            = 2;
+        FinishProvisioningRequest finish_provisioning_request = 3;
+        DeprovisionRequest deprovision_request                = 4;
+        PauseNodeRequest pause_node_request                   = 5;
+        ResumeNodeRequest resume_node_request                 = 6;
+        CreateKeyRequest create_key_request                   = 7;
+        ApplyCertRequest apply_cert_request                   = 8;
     }
 }
 
@@ -248,11 +249,12 @@ message IAMOutgoingMessages {
     oneof IAMOutgoingMessage {
         NodeInfo node_info                                      = 1;
         StartProvisioningResponse start_provisioning_response   = 2;
-        FinishProvisioningResponse finish_provisioning_response = 3;
-        DeprovisionResponse deprovision_response                = 4;
-        PauseNodeResponse pause_node_response                   = 5;
-        ResumeNodeResponse resume_node_response                 = 6;
-        CreateKeyResponse create_key_response                   = 7;
-        ApplyCertResponse apply_cert_response                   = 8;
+        CertTypes cert_types_response                           = 3;
+        FinishProvisioningResponse finish_provisioning_response = 4;
+        DeprovisionResponse deprovision_response                = 5;
+        PauseNodeResponse pause_node_response                   = 6;
+        ResumeNodeResponse resume_node_response                 = 7;
+        CreateKeyResponse create_key_response                   = 8;
+        ApplyCertResponse apply_cert_response                   = 9;
     }
 }
