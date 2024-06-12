@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "common/v1/common.proto";
+
+package communicationmanager.v2;
+
+service UpdateSchedulerService {
+    rpc StartFOTAUpdate(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc StartSOTAUpdate(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc SubscribeNotifications(google.protobuf.Empty) returns (stream SchedulerNotifications) {}
+}
+
+message SchedulerNotifications {
+    oneof SchedulerNotification {
+        UpdateSOTAStatus sota_status = 1;
+        UpdateFOTAStatus fota_status = 2;
+    }
+}
+
+message UpdateFOTAStatus {
+    UpdateState            state       = 1;
+    repeated ComponentInfo components  = 2;
+    UnitConfigInfo         unit_config = 3;
+    common.v1.ErrorInfo    error       = 4;
+}
+
+message UpdateSOTAStatus {
+    UpdateState          state            = 1;
+    repeated ServiceInfo install_services = 2;
+    repeated ServiceInfo remove_services  = 3;
+    repeated LayerInfo   install_layers   = 4;
+    repeated LayerInfo   remove_layers    = 5;
+    common.v1.ErrorInfo  error            = 6;
+}
+
+message ComponentInfo {
+    string id             = 1;
+    uint64 aos_version    = 2;
+    string vendor_version = 3;
+}
+
+message UnitConfigInfo {
+    string vendor_version = 1;
+}
+
+message ServiceInfo {
+    string id          = 1;
+    uint64 aos_version = 2;
+}
+
+message LayerInfo {
+    string id          = 1;
+    uint64 aos_version = 2;
+    string digest      = 3;
+}
+
+enum UpdateState {
+    NO_UPDATE       = 0;
+    DOWNLOADING     = 1;
+    READY_TO_UPDATE = 2;
+    UPDATING        = 3;
+}
