@@ -302,12 +302,14 @@ message ClockSyncRequest {}
 message SystemQuotaAlert {
     string parameter = 1;
     uint64 value     = 2;
+    string status    = 3;
 }
 
 message InstanceQuotaAlert {
     InstanceIdent instance  = 1;
     string        parameter = 2;
     uint64        value     = 3;
+    string        status    = 4;
 }
 
 message DeviceAllocateAlert {
