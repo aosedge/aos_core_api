@@ -315,8 +315,8 @@ message ResourceValidateAlert {
 }
 
 message ResourceValidateErrors {
-    string   name                          = 1;
-    repeated common.v1.ErrorInfo error_msg = 2;
+    string   name                       = 1;
+    repeated common.v1.ErrorInfo errors = 2;
 }
 
 message SystemAlert {
