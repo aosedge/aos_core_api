@@ -169,18 +169,23 @@ message ImageContent {
     bytes  data          = 5;
 }
 
+message RegisterSM {
+    string node_id = 1;
+}
+
 message SMOutgoingMessages {
     oneof SMOutgoingMessage {
-        UnitConfigStatus      unit_config_status      = 1;
-        RunInstancesStatus    run_instances_status    = 2;
-        UpdateInstancesStatus update_instances_status = 3;
-        OverrideEnvVarStatus  override_env_var_status = 4;
-        LogData               log                     = 5;
-        InstantMonitoring     instant_monitoring      = 6;
-        AverageMonitoring     average_monitoring      = 7;
-        Alert                 alert                   = 8;
-        ImageContentRequest   image_content_request   = 9;
-        ClockSyncRequest      clock_sync_request      = 10;
+        RegisterSM            register_sm             = 1;
+        UnitConfigStatus      unit_config_status      = 2;
+        RunInstancesStatus    run_instances_status    = 3;
+        UpdateInstancesStatus update_instances_status = 4;
+        OverrideEnvVarStatus  override_env_var_status = 5;
+        LogData               log                     = 6;
+        InstantMonitoring     instant_monitoring      = 7;
+        AverageMonitoring     average_monitoring      = 8;
+        Alert                 alert                   = 9;
+        ImageContentRequest   image_content_request   = 10;
+        ClockSyncRequest      clock_sync_request      = 11;
     }
 }
 
