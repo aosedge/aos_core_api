@@ -55,9 +55,10 @@ message APIVersion {
 }
 
 message PartitionInfo {
-    string          name       = 1;
-    repeated string types      = 2;
-    uint64          total_size = 3;
+    string          name        = 1;
+    repeated string types       = 2;
+    uint64          total_size  = 3;
+    string          mount_point = 4;
 }
 
 message CPUInfo {
