@@ -63,7 +63,8 @@ message ComponentStatus {
 }
 
 message UpdateStatus {
-    UpdateState              update_state = 1;
-    repeated SystemComponent components   = 2;
-    common.v1.ErrorInfo      error        = 3;
+    string                   node_id      = 1;
+    UpdateState              update_state = 2;
+    repeated ComponentStatus components   = 3;
+    common.v1.ErrorInfo      error        = 4;
 }
