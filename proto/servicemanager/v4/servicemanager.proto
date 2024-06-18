@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package servicemanager.v3;
+package servicemanager.v4;
 
 import "google/protobuf/timestamp.proto";
 import "common/v1/common.proto";
