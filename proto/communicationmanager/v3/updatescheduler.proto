@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 import "common/v1/common.proto";
 
-package communicationmanager.v2;
+package communicationmanager.v3;
 
 service UpdateSchedulerService {
     rpc StartFOTAUpdate(google.protobuf.Empty) returns (google.protobuf.Empty) {}
