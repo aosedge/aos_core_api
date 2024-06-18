@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "common/v1/common.proto";
 
-package updatemanager.v1;
+package updatemanager.v2;
 
 service UMService {
     rpc RegisterUM(stream UpdateStatus) returns (stream CMMessages) {}
