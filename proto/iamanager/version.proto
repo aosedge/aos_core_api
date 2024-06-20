@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package iamanager;
+
+import "google/protobuf/empty.proto";
+
+service IAMVersionService {
+    rpc GetAPIVersion(google.protobuf.Empty) returns (APIVersion) {}
+}
+
+message APIVersion {
+    uint64 version = 1;
+}

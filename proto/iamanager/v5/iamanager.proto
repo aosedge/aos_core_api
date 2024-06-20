@@ -6,7 +6,6 @@ import "google/protobuf/empty.proto";
 import "common/v1/common.proto";
 
 service IAMPublicService {
-    rpc GetAPIVersion(google.protobuf.Empty) returns (APIVersion) {}
     rpc GetNodeInfo(google.protobuf.Empty) returns (NodeInfo) {}
     rpc GetCert(GetCertRequest) returns (GetCertResponse) {}
 }
@@ -48,10 +47,6 @@ service IAMCertificateService {
 service IAMPermissionsService {
     rpc RegisterInstance(RegisterInstanceRequest) returns (RegisterInstanceResponse) {}
     rpc UnregisterInstance(UnregisterInstanceRequest) returns (google.protobuf.Empty) {}
-}
-
-message APIVersion {
-    uint64 version = 1;
 }
 
 message PartitionInfo {
