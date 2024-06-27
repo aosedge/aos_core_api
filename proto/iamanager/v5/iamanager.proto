@@ -50,10 +50,10 @@ service IAMPermissionsService {
 }
 
 message PartitionInfo {
-    string          name        = 1;
-    repeated string types       = 2;
-    uint64          total_size  = 3;
-    string          mount_point = 4;
+    string          name       = 1;
+    repeated string types      = 2;
+    uint64          total_size = 3;
+    string          path       = 4;
 }
 
 message CPUInfo {
