@@ -70,8 +70,8 @@ message NodeAttribute {
 }
 
 message NodeInfo {
-    string                 id         = 1;
-    string                 type       = 2;
+    string                 node_id    = 1;
+    string                 node_type  = 2;
     string                 name       = 3;
     string                 status     = 4;
     string                 os_type    = 5;
