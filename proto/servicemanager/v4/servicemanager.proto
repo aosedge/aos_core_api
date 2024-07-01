@@ -108,8 +108,8 @@ message OverrideEnvVars {
 }
 
 message OverrideInstanceEnvVar {
-    common.v1.InstanceIdent instance = 1;
-    repeated EnvVarInfo     vars     = 2;
+    InstanceFilter      instance_filter = 1;
+    repeated EnvVarInfo vars            = 2;
 }
 
 message EnvVarInfo {
@@ -124,18 +124,24 @@ message SystemLogRequest {
     google.protobuf.Timestamp till   = 3;
 }
 
+message InstanceFilter {
+    string service_id = 1;
+    string subject_id = 2;
+    int64  instance   = 3;
+}
+
 message InstanceLogRequest {
-    string                    log_id   = 1;
-    common.v1.InstanceIdent   instance = 2;
-    google.protobuf.Timestamp from     = 3;
-    google.protobuf.Timestamp till     = 4;
+    string                    log_id          = 1;
+    InstanceFilter            instance_filter = 2;
+    google.protobuf.Timestamp from            = 3;
+    google.protobuf.Timestamp till            = 4;
 }
 
 message InstanceCrashLogRequest {
-    string                    log_id   = 1;
-    common.v1.InstanceIdent   instance = 2;
-    google.protobuf.Timestamp from     = 3;
-    google.protobuf.Timestamp till     = 4;
+    string                    log_id          = 1;
+    InstanceFilter            instance_filter = 2;
+    google.protobuf.Timestamp from            = 3;
+    google.protobuf.Timestamp till            = 4;
 }
 
 message GetAverageMonitoring {}
@@ -221,8 +227,8 @@ message OverrideEnvVarStatus {
 }
 
 message EnvVarInstanceStatus {
-    common.v1.InstanceIdent instance    = 1;
-    repeated EnvVarStatus   vars_status = 2;
+    InstanceFilter        instance_filter = 1;
+    repeated EnvVarStatus vars_status     = 2;
 }
 
 message EnvVarStatus {
