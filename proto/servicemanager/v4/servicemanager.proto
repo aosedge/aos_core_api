@@ -95,12 +95,12 @@ message NetworkParameters {
 }
 
 message InstanceInfo {
-    InstanceIdent     instance           = 1;
-    uint32            uid                = 2;
-    uint64            priority           = 3;
-    string            storage_path       = 4;
-    string            state_path         = 5;
-    NetworkParameters network_parameters = 6;
+    common.v1.InstanceIdent instance           = 1;
+    uint32                  uid                = 2;
+    uint64                  priority           = 3;
+    string                  storage_path       = 4;
+    string                  state_path         = 5;
+    NetworkParameters       network_parameters = 6;
 }
 
 message OverrideEnvVars {
@@ -108,8 +108,8 @@ message OverrideEnvVars {
 }
 
 message OverrideInstanceEnvVar {
-    InstanceIdent       instance = 1;
-    repeated EnvVarInfo vars     = 2;
+    common.v1.InstanceIdent instance = 1;
+    repeated EnvVarInfo     vars     = 2;
 }
 
 message EnvVarInfo {
@@ -126,14 +126,14 @@ message SystemLogRequest {
 
 message InstanceLogRequest {
     string                    log_id   = 1;
-    InstanceIdent             instance = 2;
+    common.v1.InstanceIdent   instance = 2;
     google.protobuf.Timestamp from     = 3;
     google.protobuf.Timestamp till     = 4;
 }
 
 message InstanceCrashLogRequest {
     string                    log_id   = 1;
-    InstanceIdent             instance = 2;
+    common.v1.InstanceIdent   instance = 2;
     google.protobuf.Timestamp from     = 3;
     google.protobuf.Timestamp till     = 4;
 }
@@ -209,16 +209,10 @@ message UpdateInstancesStatus {
 }
 
 message InstanceStatus {
-    InstanceIdent       instance        = 1;
-    string              service_version = 2;
-    string              run_state       = 3;
-    common.v1.ErrorInfo error_info      = 4;
-}
-
-message InstanceIdent {
-    string service_id = 1;
-    string subject_id = 2;
-    int64  instance   = 3;
+    common.v1.InstanceIdent instance        = 1;
+    string                  service_version = 2;
+    string                  run_state       = 3;
+    common.v1.ErrorInfo     error_info      = 4;
 }
 
 message OverrideEnvVarStatus {
@@ -227,8 +221,8 @@ message OverrideEnvVarStatus {
 }
 
 message EnvVarInstanceStatus {
-    InstanceIdent         instance    = 1;
-    repeated EnvVarStatus vars_status = 2;
+    common.v1.InstanceIdent instance    = 1;
+    repeated EnvVarStatus   vars_status = 2;
 }
 
 message EnvVarStatus {
@@ -270,8 +264,8 @@ message PartitionUsage {
 }
 
 message InstanceMonitoring {
-    InstanceIdent  instance        = 1;
-    MonitoringData monitoring_data = 2;
+    common.v1.InstanceIdent instance        = 1;
+    MonitoringData          monitoring_data = 2;
 }
 
 message Alert {
@@ -303,16 +297,16 @@ message SystemQuotaAlert {
 }
 
 message InstanceQuotaAlert {
-    InstanceIdent instance  = 1;
-    string        parameter = 2;
-    uint64        value     = 3;
-    string        status    = 4;
+    common.v1.InstanceIdent instance  = 1;
+    string                  parameter = 2;
+    uint64                  value     = 3;
+    string                  status    = 4;
 }
 
 message DeviceAllocateAlert {
-    InstanceIdent instance = 1;
-    string        device   = 2;
-    string        message  = 3;
+    common.v1.InstanceIdent instance = 1;
+    string                  device   = 2;
+    string                  message  = 3;
 }
 
 message ResourceValidateAlert {
@@ -334,7 +328,7 @@ message CoreAlert {
 }
 
 message InstanceAlert {
-    InstanceIdent instance        = 1;
-    string        service_version = 2;
-    string        message         = 3;
+    common.v1.InstanceIdent instance        = 1;
+    string                  service_version = 2;
+    string                  message         = 3;
 }

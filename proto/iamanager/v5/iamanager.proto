@@ -111,14 +111,8 @@ message PermissionsRequest {
 }
 
 message PermissionsResponse {
-    InstanceIdent instance    = 1;
-    Permissions   permissions = 2;
-}
-
-message InstanceIdent {
-    string service_id = 1;
-    string subject_id = 2;
-    uint64 instance   = 3;
+    common.v1.InstanceIdent instance    = 1;
+    Permissions             permissions = 2;
 }
 
 message NodesID {
@@ -166,7 +160,7 @@ message Permissions {
 }
 
 message RegisterInstanceRequest {
-    InstanceIdent            instance    = 1;
+    common.v1.InstanceIdent  instance    = 1;
     map<string, Permissions> permissions = 2;
 }
 
@@ -175,7 +169,7 @@ message RegisterInstanceResponse {
 }
 
 message UnregisterInstanceRequest {
-    InstanceIdent instance = 1;
+    common.v1.InstanceIdent instance = 1;
 }
 
 message GetNodeInfoRequest {
