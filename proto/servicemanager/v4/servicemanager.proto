@@ -316,10 +316,6 @@ message DeviceAllocateAlert {
 }
 
 message ResourceValidateAlert {
-    repeated ResourceValidateErrors errors = 1;
-}
-
-message ResourceValidateErrors {
     string   name                       = 1;
     repeated common.v1.ErrorInfo errors = 2;
 }
