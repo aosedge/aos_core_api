@@ -241,7 +241,8 @@ message LogData {
     uint64              part_count = 2;
     uint64              part       = 3;
     bytes               data       = 4;
-    common.v1.ErrorInfo error      = 5;
+    string              status     = 5;
+    common.v1.ErrorInfo error      = 6;
 }
 
 message InstantMonitoring {
