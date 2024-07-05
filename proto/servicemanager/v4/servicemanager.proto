@@ -246,22 +246,22 @@ message LogData {
 }
 
 message InstantMonitoring {
-    google.protobuf.Timestamp   timestamp           = 1;
-    MonitoringData              node_monitoring     = 2;
-    repeated InstanceMonitoring instance_monitoring = 3;
+    MonitoringData              node_monitoring      = 1;
+    repeated InstanceMonitoring instances_monitoring = 2;
 }
 
 message AverageMonitoring {
-    MonitoringData              node_monitoring     = 1;
-    repeated InstanceMonitoring instance_monitoring = 2;
+    MonitoringData              node_monitoring      = 1;
+    repeated InstanceMonitoring instances_monitoring = 2;
 }
 
 message MonitoringData {
-    uint64                  ram         = 1;
-    uint64                  cpu         = 2;
-    repeated PartitionUsage disk        = 3;
-    uint64                  in_traffic  = 4;
-    uint64                  out_traffic = 5;
+    uint64                    ram         = 1;
+    uint64                    cpu         = 2;
+    repeated PartitionUsage   disk        = 3;
+    uint64                    in_traffic  = 4;
+    uint64                    out_traffic = 5;
+    google.protobuf.Timestamp timestamp   = 6;
 }
 
 message PartitionUsage {
