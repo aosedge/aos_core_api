@@ -109,13 +109,13 @@ message OverrideEnvVars {
 
 message OverrideInstanceEnvVar {
     InstanceFilter      instance_filter = 1;
-    repeated EnvVarInfo vars            = 2;
+    repeated EnvVarInfo variables       = 2;
 }
 
 message EnvVarInfo {
-    string                    var_id   = 1;
-    string                    variable = 2;
-    google.protobuf.Timestamp ttl      = 3;
+    string                    name  = 1;
+    string                    value = 2;
+    google.protobuf.Timestamp ttl   = 3;
 }
 
 message SystemLogRequest {
@@ -228,12 +228,12 @@ message OverrideEnvVarStatus {
 
 message EnvVarInstanceStatus {
     InstanceFilter        instance_filter = 1;
-    repeated EnvVarStatus vars_status     = 2;
+    repeated EnvVarStatus statuses        = 2;
 }
 
 message EnvVarStatus {
-    string              var_id = 1;
-    common.v1.ErrorInfo error  = 2;
+    string              name  = 1;
+    common.v1.ErrorInfo error = 2;
 }
 
 message LogData {
