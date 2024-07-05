@@ -252,9 +252,8 @@ message InstantMonitoring {
 }
 
 message AverageMonitoring {
-    google.protobuf.Timestamp   timestamp           = 1;
-    MonitoringData              node_monitoring     = 2;
-    repeated InstanceMonitoring instance_monitoring = 3;
+    MonitoringData              node_monitoring     = 1;
+    repeated InstanceMonitoring instance_monitoring = 2;
 }
 
 message MonitoringData {
