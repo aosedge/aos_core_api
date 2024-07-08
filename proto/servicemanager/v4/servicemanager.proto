@@ -15,9 +15,9 @@ service SMService {
 
 message SMIncomingMessages {
     oneof SMIncomingMessage {
-        GetUnitConfigStatus     get_unit_config_status     = 1;
-        CheckUnitConfig         check_unit_config          = 2;
-        SetUnitConfig           set_unit_config            = 3;
+        GetNodeConfigStatus     get_node_config_status     = 1;
+        CheckNodeConfig         check_node_config          = 2;
+        SetNodeConfig           set_node_config            = 3;
         RunInstances            run_instances              = 4;
         OverrideEnvVars         override_env_vars          = 5;
         SystemLogRequest        system_log_request         = 6;
@@ -32,15 +32,15 @@ message SMIncomingMessages {
     }
 }
 
-message GetUnitConfigStatus {}
+message GetNodeConfigStatus {}
 
-message CheckUnitConfig {
-    string unit_config = 1;
+message CheckNodeConfig {
+    string node_config = 1;
     string version     = 2;
 }
 
-message SetUnitConfig {
-    string unit_config = 1;
+message SetNodeConfig {
+    string node_config = 1;
     string version     = 2;
 }
 
@@ -183,7 +183,7 @@ message RegisterSM {
 message SMOutgoingMessages {
     oneof SMOutgoingMessage {
         RegisterSM            register_sm             = 1;
-        UnitConfigStatus      unit_config_status      = 2;
+        NodeConfigStatus      node_config_status      = 2;
         RunInstancesStatus    run_instances_status    = 3;
         UpdateInstancesStatus update_instances_status = 4;
         OverrideEnvVarStatus  override_env_var_status = 5;
@@ -202,7 +202,7 @@ message Partition {
     uint64          total_size = 3;
 }
 
-message UnitConfigStatus {
+message NodeConfigStatus {
     string              version = 1;
     common.v1.ErrorInfo error   = 2;
 }
