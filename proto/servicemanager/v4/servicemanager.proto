@@ -176,7 +176,8 @@ message ImageContent {
 }
 
 message RegisterSM {
-    string node_id = 1;
+    string node_id   = 1;
+    string node_type = 2;
 }
 
 message SMOutgoingMessages {
