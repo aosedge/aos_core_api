@@ -175,14 +175,8 @@ message ImageContent {
     bytes  data          = 5;
 }
 
-message RegisterSM {
-    string node_id   = 1;
-    string node_type = 2;
-}
-
 message SMOutgoingMessages {
     oneof SMOutgoingMessage {
-        RegisterSM            register_sm             = 1;
         NodeConfigStatus      node_config_status      = 2;
         RunInstancesStatus    run_instances_status    = 3;
         UpdateInstancesStatus update_instances_status = 4;
@@ -203,8 +197,10 @@ message Partition {
 }
 
 message NodeConfigStatus {
-    string              version = 1;
-    common.v1.ErrorInfo error   = 2;
+    string              node_id   = 1;
+    string              node_type = 2;
+    string              version   = 3;
+    common.v1.ErrorInfo error     = 4;
 }
 
 message RunInstancesStatus {
