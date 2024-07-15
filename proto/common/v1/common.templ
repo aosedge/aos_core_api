@@ -1,0 +1,8 @@
+#include <aos/common/types.hpp>
+
+// ErrorInfo
+common.v1.ErrorInfo.message max_length:${aos::cMaxErrorStrLen}
+
+// InstanceIdent
+common.v1.InstanceIdent.service_id max_length:${aos::cServiceIDLen}
+common.v1.InstanceIdent.subject_id max_length:${aos::cSubjectIDLen}
