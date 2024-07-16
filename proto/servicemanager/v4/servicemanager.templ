@@ -1,0 +1,165 @@
+#include <aos/common/types.hpp>
+#include <aos/common/ocispec.hpp>
+
+// SMIncomingMessages
+
+// CheckNodeConfig
+servicemanager.v4.CheckUnitConfig.node_config max_length:1024
+servicemanager.v4.CheckUnitConfig.version     max_length:${aos::oci::cVersionLen}
+
+// SetUnitConfig
+servicemanager.v4.SetUnitConfig.node_config max_length:1024
+servicemanager.v4.SetUnitConfig.version     max_length:${aos::oci::cVersionLen}
+
+// UpdateNetworks
+servicemanager.v4.UpdateNetworks.networks max_count:4
+
+// RunInstances
+servicemanager.v4.RunInstances.services  max_count:${aos::cMaxNumServices}
+servicemanager.v4.RunInstances.layers    max_count:${aos::cMaxNumLayers}
+servicemanager.v4.RunInstances.instances max_count:${aos::cMaxNumInstances}
+
+// ServiceInfo
+servicemanager.v4.ServiceInfo.service_id  max_length:${aos::cServiceIDLen}
+servicemanager.v4.ServiceInfo.provider_id max_length:${aos::cProviderIDLen}
+servicemanager.v4.SetUnitConfig.version   max_length:${aos::oci::cVersionLen}
+servicemanager.v4.ServiceInfo.url         max_length:${aos::cURLLen}
+servicemanager.v4.ServiceInfo.sha256      max_size:${aos::cSHA256Size}
+
+// LayerInfo
+servicemanager.v4.LayerInfo.layer_id max_length:${aos::cLayerIDLen}
+servicemanager.v4.LayerInfo.digest   max_length:${aos::cLayerDigestLen}
+servicemanager.v4.LayerInfo.url      max_length:${aos::cURLLen}
+servicemanager.v4.LayerInfo.sha256   max_size:${aos::cSHA256Size}
+
+// FirewallRule
+servicemanager.v4.FirewallRule.dst_ip   max_length:16
+servicemanager.v4.FirewallRule.dst_port max_length:8
+servicemanager.v4.FirewallRule.proto    max_length:4
+servicemanager.v4.FirewallRule.src_ip   max_length:16
+
+// NetworkParameters
+servicemanager.v4.NetworkParameters.network_id  max_length:40
+servicemanager.v4.NetworkParameters.subnet      max_length:18
+servicemanager.v4.NetworkParameters.ip          max_length:16
+servicemanager.v4.NetworkParameters.dns_servers max_size:16 max_count:4
+servicemanager.v4.NetworkParameters.rules       max_count:4
+
+// InstanceInfo
+servicemanager.v4.InstanceInfo.storage_path max_length:${aos::cFilePathLen}
+servicemanager.v4.InstanceInfo.state_path   max_length:${aos::cFilePathLen}
+
+// OverrideEnvVars
+servicemanager.v4.OverrideEnvVars.env_vars    max_count:16
+
+// OverrideInstanceEnvVar
+servicemanager.v4.OverrideInstanceEnvVar.vars max_count:16
+
+// EnvVarInfo
+servicemanager.v4.EnvVarInfo.name  max_length:40
+servicemanager.v4.EnvVarInfo.value max_length:40
+
+// SystemLogRequest
+servicemanager.v4.SystemLogRequest.log_id max_length:40
+
+// InstanceFilter
+servicemanager.v4.InstanceFilter.service_id max_length:${aos::cServiceIDLen}
+servicemanager.v4.InstanceFilter.subject_id max_length:${aos::cSubjectIDLen}
+
+// InstanceLogRequest
+servicemanager.v4.InstanceLogRequest.log_id max_length:40
+
+// InstanceCrashLogRequest
+servicemanager.v4.InstanceCrashLogRequest.log_id max_length:40
+
+// ImageContentInfo
+servicemanager.v4.ImageContentInfo.image_files max_count:32
+
+// ImageFile
+servicemanager.v4.ImageFile.relative_path max_length:${aos::cFilePathLen}
+servicemanager.v4.ImageFile.sha256        max_size:${aos::cSHA256Size}
+
+// ImageContent
+servicemanager.v4.ImageContent.relative_path max_size:${aos::cFilePathLen}
+servicemanager.v4.ImageContent.data          max_size:4096
+
+// SMOutgoingMessages
+
+// Partition
+servicemanager.v4.Partition.name  max_length:${aos::cPartitionNameLen}
+servicemanager.v4.Partition.types max_length:${aos::cPartitionTypeLen} max_count:${aos::cMaxNumPartitionTypes}
+
+// NodeConfigStatus
+servicemanager.v4.NodeConfigStatus.node_id   max_length:${aos::cNodeIDLen}
+servicemanager.v4.NodeConfigStatus.node_type max_length:${aos::cNodeTypeLen}
+servicemanager.v4.NodeConfigStatus.version   max_length:${aos::oci::cVersionLen}
+
+// RunInstancesStatus
+servicemanager.v4.RunInstancesStatus.instances max_count:${aos::cMaxNumInstances}
+
+// UpdateInstancesStatus
+servicemanager.v4.UpdateInstancesStatus.instances max_count:${aos::cMaxNumInstances}
+
+// InstanceStatus
+servicemanager.v4.InstanceStatus.service_version max_length:${aos::oci::cVersionLen}
+servicemanager.v4.InstanceStatus.run_state       max_length:16
+
+// OverrideEnvVarStatus
+servicemanager.v4.OverrideEnvVarStatus.env_vars_status max_count:16
+
+// EnvVarInstanceStatus
+servicemanager.v4.EnvVarInstanceStatus.statuses max_count:8
+
+// EnvVarStatus
+servicemanager.v4.EnvVarStatus.name max_length:40
+
+// LogData
+servicemanager.v4.LogData.log_id max_length:40
+servicemanager.v4.LogData.data   max_size:1024
+servicemanager.v4.LogData.status max_length:40
+
+// InstantMonitoring
+servicemanager.v4.InstantMonitoring.instances_monitoring max_count:${aos::cMaxNumInstances}
+
+// AverageMonitoring
+servicemanager.v4.AverageMonitoring.instances_monitoring max_count:${aos::cMaxNumInstances}
+
+// MonitoringData
+servicemanager.v4.MonitoringData.disk max_count:10
+
+// PartitionUsage
+servicemanager.v4.PartitionUsage.name max_length:${aos::cPartitionNameLen}
+
+// Alert
+servicemanager.v4.Alert.tag max_length:40
+
+// ImageContentRequest
+servicemanager.v4.ImageContentRequest.url          max_length:${aos::cFilePathLen}
+servicemanager.v4.ImageContentRequest.content_type max_length:16
+
+// SystemQuotaAlert
+servicemanager.v4.SystemQuotaAlert.parameter max_length:40
+servicemanager.v4.SystemQuotaAlert.status    max_length:40
+
+// InstanceQuotaAlert
+servicemanager.v4.InstanceQuotaAlert.parameter max_length:40
+servicemanager.v4.InstanceQuotaAlert.status    max_length:40
+
+// DeviceAllocateAlert
+servicemanager.v4.DeviceAllocateAlert.device  max_length:40
+servicemanager.v4.DeviceAllocateAlert.message max_length:256
+
+// ResourceValidateAlert
+servicemanager.v4.ResourceValidateAlert.name   max_length:40
+servicemanager.v4.ResourceValidateAlert.errors max_count:1
+
+// SystemAlert
+servicemanager.v4.SystemAlert.message max_length:256
+
+// CoreAlert
+servicemanager.v4.CoreAlert.core_component max_length:40
+servicemanager.v4.CoreAlert.message        max_length:256
+
+// InstanceAlert
+servicemanager.v4.InstanceAlert.service_version max_length:${aos::oci::cVersionLen}
+servicemanager.v4.InstanceAlert.message         max_length:256
