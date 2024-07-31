@@ -1,15 +1,14 @@
 #include <aos/common/types.hpp>
-#include <aos/common/ocispec.hpp>
 
 // SMIncomingMessages
 
 // CheckNodeConfig
 servicemanager.v4.CheckUnitConfig.node_config max_length:1024
-servicemanager.v4.CheckUnitConfig.version     max_length:${aos::oci::cVersionLen}
+servicemanager.v4.CheckUnitConfig.version     max_length:${aos::cVersionLen}
 
 // SetUnitConfig
 servicemanager.v4.SetUnitConfig.node_config max_length:1024
-servicemanager.v4.SetUnitConfig.version     max_length:${aos::oci::cVersionLen}
+servicemanager.v4.SetUnitConfig.version     max_length:${aos::cVersionLen}
 
 // UpdateNetworks
 servicemanager.v4.UpdateNetworks.networks max_count:4
@@ -22,7 +21,7 @@ servicemanager.v4.RunInstances.instances max_count:${aos::cMaxNumInstances}
 // ServiceInfo
 servicemanager.v4.ServiceInfo.service_id  max_length:${aos::cServiceIDLen}
 servicemanager.v4.ServiceInfo.provider_id max_length:${aos::cProviderIDLen}
-servicemanager.v4.SetUnitConfig.version   max_length:${aos::oci::cVersionLen}
+servicemanager.v4.SetUnitConfig.version   max_length:${aos::cVersionLen}
 servicemanager.v4.ServiceInfo.url         max_length:${aos::cURLLen}
 servicemanager.v4.ServiceInfo.sha256      max_size:${aos::cSHA256Size}
 
@@ -92,7 +91,7 @@ servicemanager.v4.Partition.types max_length:${aos::cPartitionTypeLen} max_count
 // NodeConfigStatus
 servicemanager.v4.NodeConfigStatus.node_id   max_length:${aos::cNodeIDLen}
 servicemanager.v4.NodeConfigStatus.node_type max_length:${aos::cNodeTypeLen}
-servicemanager.v4.NodeConfigStatus.version   max_length:${aos::oci::cVersionLen}
+servicemanager.v4.NodeConfigStatus.version   max_length:${aos::cVersionLen}
 
 // RunInstancesStatus
 servicemanager.v4.RunInstancesStatus.instances max_count:${aos::cMaxNumInstances}
@@ -101,7 +100,7 @@ servicemanager.v4.RunInstancesStatus.instances max_count:${aos::cMaxNumInstances
 servicemanager.v4.UpdateInstancesStatus.instances max_count:${aos::cMaxNumInstances}
 
 // InstanceStatus
-servicemanager.v4.InstanceStatus.service_version max_length:${aos::oci::cVersionLen}
+servicemanager.v4.InstanceStatus.service_version max_length:${aos::cVersionLen}
 servicemanager.v4.InstanceStatus.run_state       max_length:16
 
 // OverrideEnvVarStatus
@@ -161,5 +160,5 @@ servicemanager.v4.CoreAlert.core_component max_length:40
 servicemanager.v4.CoreAlert.message        max_length:256
 
 // InstanceAlert
-servicemanager.v4.InstanceAlert.service_version max_length:${aos::oci::cVersionLen}
+servicemanager.v4.InstanceAlert.service_version max_length:${aos::cVersionLen}
 servicemanager.v4.InstanceAlert.message         max_length:256
