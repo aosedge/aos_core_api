@@ -274,7 +274,7 @@ message InstanceMonitoring {
 message Alert {
     google.protobuf.Timestamp timestamp = 1;
     string                    tag       = 2;
-    oneof                     Payload {
+    oneof                     AlertItem {
         SystemQuotaAlert      system_quota_alert      = 3;
         InstanceQuotaAlert    instance_quota_alert    = 4;
         ResourceValidateAlert resource_validate_alert = 5;
