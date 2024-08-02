@@ -175,6 +175,20 @@ message ImageContent {
     bytes  data          = 5;
 }
 
+message Alert {
+    google.protobuf.Timestamp timestamp = 1;
+    string                    tag       = 2;
+    oneof                     AlertItem {
+        SystemQuotaAlert      system_quota_alert      = 3;
+        InstanceQuotaAlert    instance_quota_alert    = 4;
+        ResourceValidateAlert resource_validate_alert = 5;
+        DeviceAllocateAlert   device_allocate_alert   = 6;
+        SystemAlert           system_alert            = 7;
+        CoreAlert             core_alert              = 8;
+        InstanceAlert         instance_alert          = 9;
+    }
+}
+
 message SMOutgoingMessages {
     oneof SMOutgoingMessage {
         NodeConfigStatus      node_config_status      = 2;
@@ -269,20 +283,6 @@ message PartitionUsage {
 message InstanceMonitoring {
     common.v1.InstanceIdent instance        = 1;
     MonitoringData          monitoring_data = 2;
-}
-
-message Alert {
-    google.protobuf.Timestamp timestamp = 1;
-    string                    tag       = 2;
-    oneof                     AlertItem {
-        SystemQuotaAlert      system_quota_alert      = 3;
-        InstanceQuotaAlert    instance_quota_alert    = 4;
-        ResourceValidateAlert resource_validate_alert = 5;
-        DeviceAllocateAlert   device_allocate_alert   = 6;
-        SystemAlert           system_alert            = 7;
-        CoreAlert             core_alert              = 8;
-        InstanceAlert         instance_alert          = 9;
-    }
 }
 
 message ImageContentRequest {
