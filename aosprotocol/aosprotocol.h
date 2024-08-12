@@ -26,7 +26,6 @@ struct AosProtocolHeader {
  * Aos protobuf header.
  */
 struct AosProtobufHeader {
-    char     mMethodName[256];
     uint32_t mDataSize;
 };
 
