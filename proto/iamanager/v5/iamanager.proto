@@ -33,7 +33,7 @@ service IAMNodesService {
 }
 
 service IAMProvisioningService {
-    rpc GetCertTypes(GetCertTypesRequest) returns (CertTypes) {}
+    rpc GetCertTypes(GetCertTypesRequest) returns (GetCertTypesResponse) {}
     rpc StartProvisioning(StartProvisioningRequest) returns (StartProvisioningResponse) {}
     rpc FinishProvisioning(FinishProvisioningRequest) returns (FinishProvisioningResponse) {}
     rpc Deprovision(DeprovisionRequest) returns (DeprovisionResponse) {}
@@ -123,14 +123,15 @@ message GetCertTypesRequest {
     string node_id = 1;
 }
 
-message CertTypes {
-    repeated string types = 1;
+message GetCertTypesResponse {
+    repeated string     cert_types = 1;
+    common.v1.ErrorInfo error      = 2;
 }
 
 message CreateKeyRequest {
     string node_id  = 1;
-    string subject  = 2;
     string type     = 3;
+    string subject  = 2;
     string password = 4;
 }
 
@@ -236,7 +237,7 @@ message IAMOutgoingMessages {
     oneof IAMOutgoingMessage {
         NodeInfo                   node_info                    = 1;
         StartProvisioningResponse  start_provisioning_response  = 2;
-        CertTypes                  cert_types_response          = 3;
+        GetCertTypesResponse       get_cert_types_response      = 3;
         FinishProvisioningResponse finish_provisioning_response = 4;
         DeprovisionResponse        deprovision_response         = 5;
         PauseNodeResponse          pause_node_response          = 6;
