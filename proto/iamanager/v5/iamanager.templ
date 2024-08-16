@@ -23,9 +23,9 @@ iamanager.v5.NodeInfo.node_type  max_length:${aos::cNodeTypeLen}
 iamanager.v5.NodeInfo.name       max_length:${aos::cNodeNameLen}
 iamanager.v5.NodeInfo.status     max_length:16
 iamanager.v5.NodeInfo.os_type    max_length:${aos::cOSTypeLen}
-iamanager.v5.NodeInfo.cpus       max_size:${aos::cMaxNumCPUs}
-iamanager.v5.NodeInfo.partitions max_size:${aos::cMaxNumPartitions}
-iamanager.v5.NodeInfo.attrs      max_size:${aos::cMaxNumNodeAttributes}
+iamanager.v5.NodeInfo.cpus       max_count:${aos::cMaxNumCPUs}
+iamanager.v5.NodeInfo.partitions max_count:${aos::cMaxNumPartitions}
+iamanager.v5.NodeInfo.attrs      max_count:${aos::cMaxNumNodeAttributes}
 
 // GetCertRequest
 iamanager.v5.GetCertRequest.type   max_length:${aos::iam::certhandler::cCertTypeLen}
@@ -43,6 +43,11 @@ iamanager.v5.SystemInfo.unit_model max_length:${aos::cUnitModelLen}
 
 // Subjects
 iamanager.v5.Subjects.subjects max_length:${aos::cSubjectIDLen} max_count:${aos::cMaxSubjectIDSize}
+
+// Permissions
+iamanager.v5.Permissions.permissions            max_count:${aos::iam::permhandler::cServicePermissionMaxCount}
+iamanager.v5.Permissions.PermissionsEntry.key   max_length:${aos::iam::permhandler::cPermissionKeyLen}
+iamanager.v5.Permissions.PermissionsEntry.value max_length:${aos::iam::permhandler::cPermissionValueLen} 
 
 // PermissionsRequest
 iamanager.v5.PermissionsRequest.secret               max_length:${aos::iam::permhandler::cSecretLen}
@@ -78,6 +83,10 @@ iamanager.v5.ApplyCertResponse.node_id  max_length:${aos::cNodeIDLen}
 iamanager.v5.ApplyCertResponse.type     max_length:${aos::iam::certhandler::cCertTypeLen}
 iamanager.v5.ApplyCertResponse.cert_url max_length:${aos::cURLLen}
 iamanager.v5.ApplyCertResponse.serial   max_length:${aos::crypto::cSerialNumStrLen}
+
+// RegisterInstanceRequest
+iamanager.v5.RegisterInstanceRequest.permissions          max_count:${aos::iam::permhandler::cFuncServiceMaxCount}
+iamanager.v5.RegisterInstanceRequest.PermissionsEntry.key max_length:${aos::iam::permhandler::cFunctionalServiceNameLen}
 
 // RegisterInstanceResponse
 iamanager.v5.RegisterInstanceResponse.secret max_length:${aos::iam::permhandler::cSecretLen}
