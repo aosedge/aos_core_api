@@ -1,13 +1,14 @@
 #include <aos/common/types.hpp>
+#include <aos/sm/resourcemanager.hpp>
 
 // SMIncomingMessages
 
 // CheckNodeConfig
-servicemanager.v4.CheckNodeConfig.node_config max_length:1024
+servicemanager.v4.CheckNodeConfig.node_config max_length:${aos::sm::resourcemanager::cNodeConfigJSONLen}
 servicemanager.v4.CheckNodeConfig.version     max_length:${aos::cVersionLen}
 
 // SetUnitConfig
-servicemanager.v4.SetNodeConfig.node_config max_length:1024
+servicemanager.v4.SetNodeConfig.node_config max_length:${aos::sm::resourcemanager::cNodeConfigJSONLen}
 servicemanager.v4.SetNodeConfig.version     max_length:${aos::cVersionLen}
 
 // UpdateNetworks
