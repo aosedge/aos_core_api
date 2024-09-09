@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package common.v1;
+
+message ErrorInfo {
+    int32  aos_code  = 1;
+    int32  exit_code = 2;
+    string message   = 3;
+}
+
+message InstanceIdent {
+    string service_id = 1;
+    string subject_id = 2;
+    uint64 instance   = 3;
+}

@@ -1,9 +1,7 @@
-BasedOnStyle: WebKit
-ColumnLimit: 120
-FixNamespaceComments: true
-NamespaceIndentation: None
-Cpp11BracedListStyle: true
-AllowShortFunctionsOnASingleLine: InlineOnly
-AlwaysBreakTemplateDeclarations: Yes
-AlignConsecutiveMacros: true
+BasedOnStyle: Google
+AlignConsecutiveAssignments: true
 AlignConsecutiveDeclarations: true
+AllowShortFunctionsOnASingleLine: Empty
+ColumnLimit: 120
+IndentWidth: 4
+UseTab: Never

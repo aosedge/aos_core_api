@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 import "common/v1/common.proto";
 
-package communicationmanager.v2;
+package communicationmanager.v3;
 
 service UpdateSchedulerService {
     rpc StartFOTAUpdate(google.protobuf.Empty) returns (google.protobuf.Empty) {}
@@ -19,40 +19,41 @@ message SchedulerNotifications {
 }
 
 message UpdateFOTAStatus {
-    UpdateState            state       = 1;
-    repeated ComponentInfo components  = 2;
-    UnitConfigInfo         unit_config = 3;
-    common.v1.ErrorInfo    error       = 4;
+    UpdateState            state      = 1;
+    repeated ComponentInfo components = 2;
+    common.v1.ErrorInfo    error      = 3;
 }
 
 message UpdateSOTAStatus {
-    UpdateState          state            = 1;
-    repeated ServiceInfo install_services = 2;
-    repeated ServiceInfo remove_services  = 3;
-    repeated LayerInfo   install_layers   = 4;
-    repeated LayerInfo   remove_layers    = 5;
-    common.v1.ErrorInfo  error            = 6;
+    UpdateState          state             = 1;
+    UnitConfigInfo       unit_config       = 2;
+    repeated ServiceInfo install_services  = 3;
+    repeated ServiceInfo remove_services   = 4;
+    repeated LayerInfo   install_layers    = 5;
+    repeated LayerInfo   remove_layers     = 6;
+    bool                 rebalance_request = 7;
+    common.v1.ErrorInfo  error             = 8;
 }
 
 message ComponentInfo {
-    string id             = 1;
-    uint64 aos_version    = 2;
-    string vendor_version = 3;
+    string component_id   = 1;
+    string component_type = 2;
+    string version        = 3;
 }
 
 message UnitConfigInfo {
-    string vendor_version = 1;
+    string version = 1;
 }
 
 message ServiceInfo {
-    string id          = 1;
-    uint64 aos_version = 2;
+    string service_id = 1;
+    string version    = 2;
 }
 
 message LayerInfo {
-    string id          = 1;
-    uint64 aos_version = 2;
-    string digest      = 3;
+    string layer_id = 1;
+    string digest   = 2;
+    string version  = 3;
 }
 
 enum UpdateState {
