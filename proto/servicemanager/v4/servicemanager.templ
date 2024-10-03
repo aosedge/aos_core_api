@@ -55,13 +55,13 @@ servicemanager.v4.InstanceInfo.storage_path max_length:${aos::cFilePathLen}
 servicemanager.v4.InstanceInfo.state_path   max_length:${aos::cFilePathLen}
 
 // OverrideEnvVars
-servicemanager.v4.OverrideEnvVars.env_vars    max_count:16
+servicemanager.v4.OverrideEnvVars.env_vars    max_count:${aos::cMaxNumInstances}
 
 // OverrideInstanceEnvVar
-servicemanager.v4.OverrideInstanceEnvVar.variables max_count:16
+servicemanager.v4.OverrideInstanceEnvVar.variables max_count:${aos::cMaxNumEnvVariables}
 
 // EnvVarInfo
-servicemanager.v4.EnvVarInfo.name  max_length:40
+servicemanager.v4.EnvVarInfo.name  max_length:${aos::cEnvVarNameLen}
 servicemanager.v4.EnvVarInfo.value max_length:40
 
 // SystemLogRequest
@@ -110,13 +110,13 @@ servicemanager.v4.InstanceStatus.service_version max_length:${aos::cVersionLen}
 servicemanager.v4.InstanceStatus.run_state       max_length:16
 
 // OverrideEnvVarStatus
-servicemanager.v4.OverrideEnvVarStatus.env_vars_status max_count:16
+servicemanager.v4.OverrideEnvVarStatus.env_vars_status max_count:${aos::cMaxNumInstances}
 
 // EnvVarInstanceStatus
-servicemanager.v4.EnvVarInstanceStatus.statuses max_count:8
+servicemanager.v4.EnvVarInstanceStatus.statuses max_count:${aos::cMaxNumEnvVariables}
 
 // EnvVarStatus
-servicemanager.v4.EnvVarStatus.name max_length:40
+servicemanager.v4.EnvVarStatus.name max_length:${aos::cEnvVarNameLen}
 
 // LogData
 servicemanager.v4.LogData.log_id max_length:40
@@ -130,7 +130,7 @@ servicemanager.v4.InstantMonitoring.instances_monitoring max_count:${aos::cMaxNu
 servicemanager.v4.AverageMonitoring.instances_monitoring max_count:${aos::cMaxNumInstances}
 
 // MonitoringData
-servicemanager.v4.MonitoringData.partitions max_count:10
+servicemanager.v4.MonitoringData.partitions max_count:${aos::cMaxNumPartitions}
 
 // PartitionUsage
 servicemanager.v4.PartitionUsage.name max_length:${aos::cPartitionNameLen}
@@ -151,11 +151,11 @@ servicemanager.v4.InstanceQuotaAlert.parameter max_length:40
 servicemanager.v4.InstanceQuotaAlert.status    max_length:40
 
 // DeviceAllocateAlert
-servicemanager.v4.DeviceAllocateAlert.device  max_length:40
+servicemanager.v4.DeviceAllocateAlert.device  max_length:${aos::cDeviceNameLen}
 servicemanager.v4.DeviceAllocateAlert.message max_length:256
 
 // ResourceValidateAlert
-servicemanager.v4.ResourceValidateAlert.name   max_length:40
+servicemanager.v4.ResourceValidateAlert.name   max_length:${aos::cResourceNameLen}
 servicemanager.v4.ResourceValidateAlert.errors max_count:1
 
 // SystemAlert
