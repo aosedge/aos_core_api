@@ -32,10 +32,13 @@ iamanager.v5.GetCertRequest.type   max_length:${aos::iam::certhandler::cCertType
 iamanager.v5.GetCertRequest.issuer max_size:${aos::crypto::cCertIssuerSize}
 iamanager.v5.GetCertRequest.serial max_length:${aos::crypto::cSerialNumStrLen}
 
-// GetCertResponse
-iamanager.v5.GetCertResponse.type     max_length:${aos::iam::certhandler::cCertTypeLen}
-iamanager.v5.GetCertResponse.cert_url max_length:${aos::cURLLen}
-iamanager.v5.GetCertResponse.key_url  max_length:${aos::cURLLen}
+// SubscribeCertChangedRequest
+iamanager.v5.SubscribeCertChangedRequest.type max_length:${aos::iam::certhandler::cCertTypeLen}
+
+// CertInfo
+iamanager.v5.CertInfo.type     max_length:${aos::iam::certhandler::cCertTypeLen}
+iamanager.v5.CertInfo.cert_url max_length:${aos::cURLLen}
+iamanager.v5.CertInfo.key_url  max_length:${aos::cURLLen}
 
 // SystemInfo
 iamanager.v5.SystemInfo.system_id  max_length:${aos::cSystemIDLen}
