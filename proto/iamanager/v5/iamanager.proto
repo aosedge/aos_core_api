@@ -7,7 +7,8 @@ import "common/v1/common.proto";
 
 service IAMPublicService {
     rpc GetNodeInfo(google.protobuf.Empty) returns (NodeInfo) {}
-    rpc GetCert(GetCertRequest) returns (GetCertResponse) {}
+    rpc GetCert(GetCertRequest) returns (CertInfo) {}
+    rpc SubscribeCertChanged(SubscribeCertChangedRequest) returns (stream CertInfo) {}
 }
 
 service IAMPublicIdentityService {
@@ -90,7 +91,11 @@ message GetCertRequest {
     string serial = 3;
 }
 
-message GetCertResponse {
+message SubscribeCertChangedRequest {
+    string type   = 1;
+}
+
+message CertInfo {
     string type     = 1;
     string cert_url = 2;
     string key_url  = 3;
