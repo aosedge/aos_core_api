@@ -229,7 +229,7 @@ message InstanceStatus {
     common.v1.InstanceIdent instance        = 1;
     string                  service_version = 2;
     string                  run_state       = 3;
-    common.v1.ErrorInfo     error_info      = 4;
+    common.v1.ErrorInfo     error           = 4;
 }
 
 message OverrideEnvVarStatus {
