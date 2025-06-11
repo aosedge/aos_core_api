@@ -57,5 +57,8 @@ endif()
 # Targets
 # ######################################################################################################################
 
-add_subdirectory(aosprotocol)
+if(WITH_AOS_PROTOCOL)
+    add_subdirectory(aosprotocol)
+endif()
+
 add_subdirectory(proto)
