@@ -12,15 +12,18 @@
 function(create_core_api_lib TARGET_NAME PROTO_FILES)
     message(STATUS "Generating ${TARGET_NAME} target")
 
-    add_library(${TARGET_NAME} OBJECT ${PROTO_FILES})
-    target_link_libraries(${TARGET_NAME} PUBLIC protobuf::libprotobuf gRPC::grpc++)
-    target_include_directories(${TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${PROTO_DST_DIR}>")
+    set(TARGET "${TARGET_PREFIX}_${TARGET_NAME}")
 
-    protobuf_generate(TARGET ${TARGET_NAME} IMPORT_DIRS ${PROTO_SRC_DIR} PROTOC_OUT_DIR "${PROTO_DST_DIR}")
+    add_library(${TARGET} OBJECT ${PROTO_FILES})
+    add_library("${TARGET_NAMESPACE}::${TARGET_NAME}" ALIAS ${TARGET})
+    target_link_libraries(${TARGET} PUBLIC protobuf::libprotobuf gRPC::grpc++)
+    target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${PROTO_DST_DIR}>")
+
+    protobuf_generate(TARGET ${TARGET} IMPORT_DIRS ${PROTO_SRC_DIR} PROTOC_OUT_DIR "${PROTO_DST_DIR}")
 
     protobuf_generate(
         TARGET
-        ${TARGET_NAME}
+        ${TARGET}
         LANGUAGE
         grpc
         GENERATE_EXTENSIONS
@@ -43,7 +46,7 @@ if(WITH_IAM_API)
                         "${PROTO_SRC_DIR}/iamanager/version.proto"
     )
 
-    create_core_api_lib(aoscoreapi-gen-iam "${IAM_PROTO_FILES}")
+    create_core_api_lib(iam "${IAM_PROTO_FILES}")
 endif()
 
 if(WITH_SM_API)
@@ -51,5 +54,5 @@ if(WITH_SM_API)
                        "${PROTO_SRC_DIR}/servicemanager/v4/servicemanager.proto"
     )
 
-    create_core_api_lib(aoscoreapi-gen-sm "${SM_PROTO_FILES}")
+    create_core_api_lib(sm "${SM_PROTO_FILES}")
 endif()

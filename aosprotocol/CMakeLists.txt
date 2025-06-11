@@ -5,9 +5,12 @@
 #
 
 # ######################################################################################################################
-# Targets
+# Target
 # ######################################################################################################################
 
-add_library(aosprotocol INTERFACE)
+set(TARGET ${TARGET_PREFIX}_protocol)
 
-target_include_directories(aosprotocol INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+add_library(${TARGET} INTERFACE)
+add_library("${TARGET_NAMESPACE}::protocol" ALIAS ${TARGET})
+
+target_include_directories(${TARGET} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
