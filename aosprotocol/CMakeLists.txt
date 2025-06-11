@@ -8,8 +8,6 @@
 # Targets
 # ######################################################################################################################
 
-if(WITH_AOS_PROTOCOL)
-    add_library(aosprotocol INTERFACE)
+add_library(aosprotocol INTERFACE)
 
-    target_include_directories(aosprotocol INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
-endif()
+target_include_directories(aosprotocol INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
