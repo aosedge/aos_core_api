@@ -38,6 +38,14 @@ endfunction()
 # Targets
 # ######################################################################################################################
 
+if(WITH_CM_API)
+    set(CM_PROTO_FILES "${PROTO_SRC_DIR}/common/v1/common.proto"
+                       "${PROTO_SRC_DIR}/communicationmanager/v3/updatescheduler.proto"
+    )
+
+    create_core_api_lib(aoscoreapi-gen-cm "${CM_PROTO_FILES}")
+endif()
+
 if(WITH_IAM_API)
     set(IAM_PROTO_FILES "${PROTO_SRC_DIR}/common/v1/common.proto" "${PROTO_SRC_DIR}/iamanager/v5/iamanager.proto"
                         "${PROTO_SRC_DIR}/iamanager/version.proto"
