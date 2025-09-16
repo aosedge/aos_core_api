@@ -9,7 +9,7 @@ message ErrorInfo {
 }
 
 message InstanceIdent {
-    string service_id = 1;
+    string item_id    = 1;
     string subject_id = 2;
     uint64 instance   = 3;
 }
