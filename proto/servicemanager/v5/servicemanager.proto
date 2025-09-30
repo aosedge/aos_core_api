@@ -254,7 +254,8 @@ message MonitoringData {
 
 message InstanceMonitoring {
     common.v2.InstanceIdent instance        = 1;
-    MonitoringData          monitoring_data = 2;
+    string                  runtime_id      = 2;
+    MonitoringData          monitoring_data = 3;
 }
 
 message InstantMonitoring {
