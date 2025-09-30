@@ -64,10 +64,11 @@ message InstanceInfo {
     common.v2.InstanceIdent instance           = 1;
     string                  runtime_id         = 2;
     uint32                  uid                = 3;
-    uint64                  priority           = 4;
-    string                  storage_path       = 5;
-    string                  state_path         = 6;
-    NetworkParameters       network_parameters = 7;
+    uint32                  gid                = 4;
+    uint64                  priority           = 5;
+    string                  storage_path       = 6;
+    string                  state_path         = 7;
+    NetworkParameters       network_parameters = 8;
 }
 
 message UpdateInstances {
