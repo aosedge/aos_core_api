@@ -11,6 +11,8 @@ import "common/v2/common.proto";
 
 service SMService {
     rpc RegisterSM(stream SMOutgoingMessages) returns (stream SMIncomingMessages) {}
+    rpc GetItemImageInfo(ItemImageInfoRequest) returns (ItemImageInfo) {}
+    rpc GetLayerImageInfo(LayerImageInfoRequest) returns (ItemImageInfo) {}
 }
 
 message SMIncomingMessages {
@@ -46,6 +48,22 @@ message SMOutgoingMessages {
         ImageContentRequest   image_content_request   = 10;
         ClockSyncRequest      clock_sync_request      = 11;
     }
+}
+
+message ItemImageInfoRequest {
+    string image_id = 1;
+}
+
+message LayerImageInfoRequest {
+    string digest = 1;
+}
+
+message ItemImageInfo {
+    string image_id = 1;
+    string version  = 2;
+    string url      = 3;
+    bytes  sha256   = 4;
+    uint64 size     = 5;
 }
 
 message GetNodeConfigStatus {}
