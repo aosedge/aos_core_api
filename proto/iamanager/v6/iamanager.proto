@@ -5,16 +5,20 @@ package iamanager.v6;
 import "google/protobuf/empty.proto";
 import "common/v1/common.proto";
 
-service IAMPublicService {
-    rpc GetNodeInfo(google.protobuf.Empty) returns (NodeInfo) {}
-    rpc GetCert(GetCertRequest) returns (CertInfo) {}
-    rpc SubscribeCertChanged(SubscribeCertChangedRequest) returns (stream CertInfo) {}
-}
-
 service IAMPublicIdentityService {
     rpc GetSystemInfo(google.protobuf.Empty) returns (SystemInfo) {}
     rpc GetSubjects(google.protobuf.Empty) returns (Subjects) {}
     rpc SubscribeSubjectsChanged(google.protobuf.Empty) returns (stream Subjects) {}
+}
+
+service IAMPublicCurrentNodeService {
+    rpc GetCurrentNodeInfo(google.protobuf.Empty) returns (NodeInfo) {}
+    rpc SubscribeCurrentNodeChanged(google.protobuf.Empty) returns (stream NodeInfo) {}
+}
+
+service IAMPublicCertService {
+    rpc GetCert(GetCertRequest) returns (CertInfo) {}
+    rpc SubscribeCertChanged(SubscribeCertChangedRequest) returns (stream CertInfo) {}
 }
 
 service IAMPublicPermissionsService {
@@ -92,7 +96,7 @@ message GetCertRequest {
 }
 
 message SubscribeCertChangedRequest {
-    string type   = 1;
+    string type = 1;
 }
 
 message CertInfo {
