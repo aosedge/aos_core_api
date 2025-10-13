@@ -115,6 +115,8 @@ message CertInfo {
     string type     = 1;
     string cert_url = 2;
     string key_url  = 3;
+    bytes  serial   = 4;
+    bytes  issuer   = 5;
 }
 
 message SystemInfo {
@@ -169,10 +171,8 @@ message ApplyCertRequest {
 }
 
 message ApplyCertResponse {
-    string              node_id  = 1;
-    string              type     = 2;
-    string              cert_url = 3;
-    string              serial   = 4;
+    string              node_id   = 1;
+    CertInfo            cert_info = 2;
     common.v2.ErrorInfo error     = 3;
 }
 
