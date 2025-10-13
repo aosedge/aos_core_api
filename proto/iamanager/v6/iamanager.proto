@@ -3,7 +3,7 @@ syntax = "proto3";
 package iamanager.v6;
 
 import "google/protobuf/empty.proto";
-import "common/v1/common.proto";
+import "common/v2/common.proto";
 
 service IAMPublicIdentityService {
     rpc GetSystemInfo(google.protobuf.Empty) returns (SystemInfo) {}
@@ -98,7 +98,7 @@ message NodeInfo {
     repeated NodeAttribute attrs        = 10;
     bool                   provisioned  = 11;
     string                 state        = 12;
-    common.v1.ErrorInfo    error        = 13;
+    common.v2.ErrorInfo    error        = 13;
 }
 
 message GetCertRequest {
@@ -132,7 +132,7 @@ message PermissionsRequest {
 }
 
 message PermissionsResponse {
-    common.v1.InstanceIdent instance    = 1;
+    common.v2.InstanceIdent instance    = 1;
     Permissions             permissions = 2;
 }
 
@@ -159,7 +159,7 @@ message CreateKeyResponse {
     string              node_id = 1;
     string              type    = 2;
     string              csr     = 3;
-    common.v1.ErrorInfo error   = 4;
+    common.v2.ErrorInfo error   = 4;
 }
 
 message ApplyCertRequest {
@@ -173,7 +173,7 @@ message ApplyCertResponse {
     string              type     = 2;
     string              cert_url = 3;
     string              serial   = 4;
-    common.v1.ErrorInfo error    = 5;
+    common.v2.ErrorInfo error     = 3;
 }
 
 message Permissions {
@@ -181,7 +181,7 @@ message Permissions {
 }
 
 message RegisterInstanceRequest {
-    common.v1.InstanceIdent  instance    = 1;
+    common.v2.InstanceIdent  instance    = 1;
     map<string, Permissions> permissions = 2;
 }
 
@@ -190,7 +190,7 @@ message RegisterInstanceResponse {
 }
 
 message UnregisterInstanceRequest {
-    common.v1.InstanceIdent instance = 1;
+    common.v2.InstanceIdent instance = 1;
 }
 
 message GetNodeInfoRequest {
@@ -202,7 +202,7 @@ message PauseNodeRequest {
 }
 
 message PauseNodeResponse {
-    common.v1.ErrorInfo error = 1;
+    common.v2.ErrorInfo error = 1;
 }
 
 message ResumeNodeRequest {
@@ -210,7 +210,7 @@ message ResumeNodeRequest {
 }
 
 message ResumeNodeResponse {
-    common.v1.ErrorInfo error = 1;
+    common.v2.ErrorInfo error = 1;
 }
 
 message StartProvisioningRequest {
@@ -219,7 +219,7 @@ message StartProvisioningRequest {
 }
 
 message StartProvisioningResponse {
-    common.v1.ErrorInfo error = 1;
+    common.v2.ErrorInfo error = 1;
 }
 
 message FinishProvisioningRequest {
@@ -228,7 +228,7 @@ message FinishProvisioningRequest {
 }
 
 message FinishProvisioningResponse {
-    common.v1.ErrorInfo error = 1;
+    common.v2.ErrorInfo error = 1;
 }
 
 message DeprovisionRequest {
@@ -237,7 +237,7 @@ message DeprovisionRequest {
 }
 
 message DeprovisionResponse {
-    common.v1.ErrorInfo error = 1;
+    common.v2.ErrorInfo error = 1;
 }
 
 message IAMIncomingMessages {
