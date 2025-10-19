@@ -15,6 +15,10 @@ service SMService {
     rpc GetLayerImageInfo(LayerImageInfoRequest) returns (ItemImageInfo) {}
 }
 
+service ProxyService {
+    rpc RegisterSM(stream ProxyOutgoingMessages) returns (stream ProxyIncomingMessages) {}
+}
+
 message SMIncomingMessages {
     oneof SMIncomingMessage {
         GetNodeConfigStatus     get_node_config_status     = 1;
@@ -27,10 +31,15 @@ message SMIncomingMessages {
         InstanceCrashLogRequest instance_crash_log_request = 8;
         GetAverageMonitoring    get_average_monitoring     = 9;
         ConnectionStatus        connection_status          = 10;
-        ImageContentInfo        image_content_info         = 11;
-        ImageContent            image_content              = 12;
-        UpdateNetworks          update_networks            = 13;
-        ClockSync               clock_sync                 = 14;
+        UpdateNetworks          update_networks            = 11;
+    }
+}
+
+message ProxyIncomingMessages {
+    oneof ProxyIncomingMessage {
+        ImageContentInfo image_content_info = 1;
+        ImageContent     image_content      = 2;
+        ClockSync        clock_sync         = 3;
     }
 }
 
@@ -45,8 +54,14 @@ message SMOutgoingMessages {
         InstantMonitoring     instant_monitoring      = 7;
         AverageMonitoring     average_monitoring      = 8;
         Alert                 alert                   = 9;
-        ImageContentRequest   image_content_request   = 10;
-        ClockSyncRequest      clock_sync_request      = 11;
+    }
+}
+
+message ProxyOutgoingMessages {
+    oneof ProxyOutgoingMessage {
+        string              node_id               = 1;
+        ImageContentRequest image_content_request = 2;
+        ClockSyncRequest    clock_sync_request    = 3;
     }
 }
 
