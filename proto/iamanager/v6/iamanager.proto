@@ -122,6 +122,7 @@ message CertInfo {
 message SystemInfo {
     string system_id  = 1;
     string unit_model = 2;
+    string version    = 3;
 }
 
 message Subjects {
