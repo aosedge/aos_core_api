@@ -1,6 +1,3 @@
-# aos_core_api
-
-Contains AoS core API:
+# AosCore API
 
 * [proto](proto) - gRPC protobufs
-
