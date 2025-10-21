@@ -66,7 +66,7 @@ message ArchInfo {
     string variant      = 2;
 }
 
-message OSInto {
+message OSInfo {
     string          os       = 1;
     string          version  = 2;
     repeated string features = 3;
@@ -92,7 +92,7 @@ message NodeInfo {
     uint64                 max_dmips    = 4;
     uint64                 total_ram    = 5;
     uint64                 physical_ram = 6;
-    OSInto                 os_info      = 7;
+    OSInfo                 os_info      = 7;
     repeated CPUInfo       cpus         = 8;
     repeated PartitionInfo partitions   = 9;
     repeated NodeAttribute attrs        = 10;
