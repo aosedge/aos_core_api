@@ -42,7 +42,7 @@ endfunction()
 # ######################################################################################################################
 
 if(WITH_IAM_API)
-    set(IAM_PROTO_FILES "${PROTO_SRC_DIR}/common/v1/common.proto" "${PROTO_SRC_DIR}/iamanager/v5/iamanager.proto"
+    set(IAM_PROTO_FILES "${PROTO_SRC_DIR}/common/v2/common.proto" "${PROTO_SRC_DIR}/iamanager/v6/iamanager.proto"
                         "${PROTO_SRC_DIR}/iamanager/version.proto"
     )
 
@@ -50,8 +50,8 @@ if(WITH_IAM_API)
 endif()
 
 if(WITH_SM_API)
-    set(SM_PROTO_FILES "${PROTO_SRC_DIR}/common/v1/common.proto"
-                       "${PROTO_SRC_DIR}/servicemanager/v4/servicemanager.proto"
+    set(SM_PROTO_FILES "${PROTO_SRC_DIR}/common/v2/common.proto"
+                       "${PROTO_SRC_DIR}/servicemanager/v5/servicemanager.proto"
     )
 
     create_core_api_lib(sm "${SM_PROTO_FILES}")
