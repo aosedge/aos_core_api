@@ -254,8 +254,8 @@ message EnvVarStatus {
 }
 
 message EnvVarInstanceStatus {
-    InstanceIdent         instance = 1;
-    repeated EnvVarStatus statuses = 2;
+    common.v2.InstanceIdent instance = 1;
+    repeated EnvVarStatus   statuses = 2;
 }
 
 message OverrideEnvVarStatus {
