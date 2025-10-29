@@ -236,8 +236,9 @@ message InstanceStatus {
     common.v2.InstanceIdent instance   = 1;
     string                  version    = 2;
     string                  runtime_id = 3;
-    string                  state      = 4;
-    common.v2.ErrorInfo     error      = 5;
+    string                  image_id   = 4;
+    string                  state      = 5;
+    common.v2.ErrorInfo     error      = 6;
 }
 
 message UpdateInstancesStatus {
