@@ -321,11 +321,6 @@ message ResourceAllocateAlert {
     string                  message  = 3;
 }
 
-message ResourceValidateAlert {
-    string   name                       = 1;
-    repeated common.v2.ErrorInfo errors = 2;
-}
-
 message SystemAlert {
     string message = 1;
 }
@@ -346,11 +341,10 @@ message Alert {
     oneof                     AlertItem {
         SystemQuotaAlert      system_quota_alert      = 2;
         InstanceQuotaAlert    instance_quota_alert    = 3;
-        ResourceValidateAlert resource_validate_alert = 4;
-        ResourceAllocateAlert resource_allocate_alert = 5;
-        SystemAlert           system_alert            = 6;
-        CoreAlert             core_alert              = 7;
-        InstanceAlert         instance_alert          = 8;
+        ResourceAllocateAlert resource_allocate_alert = 4;
+        SystemAlert           system_alert            = 5;
+        CoreAlert             core_alert              = 6;
+        InstanceAlert         instance_alert          = 7;
     }
 }
 
