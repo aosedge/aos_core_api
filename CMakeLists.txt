@@ -18,12 +18,14 @@ project(aos_core_api)
 # ######################################################################################################################
 
 option(WITH_AOS_PROTOCOL "build aos protocol lib" OFF)
+option(WITH_CM_API "build core api cm lib" ON)
 option(WITH_IAM_API "build core api iam lib" ON)
 option(WITH_SM_API "build core api sm lib" OFF)
 
 message(STATUS)
 message(STATUS "${CMAKE_PROJECT_NAME} configuration:")
 message(STATUS "WITH_AOS_PROTOCOL       = ${WITH_AOS_PROTOCOL}")
+message(STATUS "WITH_CM_API             = ${WITH_CM_API}")
 message(STATUS "WITH_IAM_API            = ${WITH_IAM_API}")
 message(STATUS "WITH_SM_API             = ${WITH_SM_API}")
 
