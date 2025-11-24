@@ -3,6 +3,7 @@ syntax = "proto3";
 package servicemanager.v5;
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 import "common/v2/common.proto";
 
 /***********************************************************************************************************************
@@ -11,8 +12,7 @@ import "common/v2/common.proto";
 
 service SMService {
     rpc RegisterSM(stream SMOutgoingMessages) returns (stream SMIncomingMessages) {}
-    rpc GetItemImageInfo(ItemImageInfoRequest) returns (ItemImageInfo) {}
-    rpc GetLayerImageInfo(LayerImageInfoRequest) returns (ItemImageInfo) {}
+    rpc GetBlobInfo(BlobInfoRequest) returns (BlobInfo) {}
 }
 
 service ProxyService {
@@ -65,21 +65,12 @@ message ProxyOutgoingMessages {
     }
 }
 
-message ItemImageInfoRequest {
-    string item_id  = 1;
-    string image_id = 2;
-}
-
-message LayerImageInfoRequest {
+message BlobInfoRequest {
     string digest = 1;
 }
 
-message ItemImageInfo {
-    string image_id = 1;
-    string version  = 2;
-    string url      = 3;
-    bytes  sha256   = 4;
-    uint64 size     = 5;
+message BlobInfo {
+    string url = 1;
 }
 
 message GetNodeConfigStatus {}
@@ -95,14 +86,16 @@ message SetNodeConfig {
 }
 
 message InstanceInfo {
-    common.v2.InstanceIdent instance           = 1;
-    string                  runtime_id         = 2;
-    uint32                  uid                = 3;
-    uint32                  gid                = 4;
-    uint64                  priority           = 5;
-    string                  storage_path       = 6;
-    string                  state_path         = 7;
-    NetworkParameters       network_parameters = 8;
+    common.v2.InstanceIdent instance              = 1;
+    string                  manifest_digest       = 2;
+    string                  runtime_id            = 3;
+    uint32                  uid                   = 4;
+    uint32                  gid                   = 5;
+    uint64                  priority              = 6;
+    string                  storage_path          = 7;
+    string                  state_path            = 8;
+    NetworkParameters       network_parameters    = 9;
+    MonitoringParameters    monitoring_parameters = 10;
 }
 
 message UpdateInstances {
@@ -143,6 +136,37 @@ message InstanceCrashLogRequest {
     common.v2.InstanceFilter  filter = 2;
     google.protobuf.Timestamp from   = 3;
     google.protobuf.Timestamp till   = 4;
+}
+
+message AlertRulePercents {
+    google.protobuf.Duration duration      = 1;
+    double                   min_threshold = 2;
+    double                   max_threshold = 3;
+}
+
+message AlertRulePoints {
+    google.protobuf.Duration duration      = 1;
+    uint64                   min_threshold = 2;
+    uint64                   max_threshold = 3;
+}
+
+message PartitionAlertRule {
+    string                   name          = 1;
+    google.protobuf.Duration duration      = 2;
+    double                   min_threshold = 3;
+    double                   max_threshold = 4;
+}
+
+message AlertRules {
+    AlertRulePercents           ram        = 1;
+    AlertRulePercents           cpu        = 2;
+    repeated PartitionAlertRule partitions = 3;
+    AlertRulePoints             download   = 4;
+    AlertRulePoints             upload     = 5;
+}
+
+message MonitoringParameters {
+    AlertRules alert_rules = 1;
 }
 
 message GetAverageMonitoring {}
@@ -234,12 +258,12 @@ message NodeConfigStatus {
 }
 
 message InstanceStatus {
-    common.v2.InstanceIdent instance   = 1;
-    string                  version    = 2;
-    string                  runtime_id = 3;
-    string                  image_id   = 4;
-    string                  state      = 5;
-    common.v2.ErrorInfo     error      = 6;
+    common.v2.InstanceIdent instance        = 1;
+    string                  version         = 2;
+    string                  runtime_id      = 3;
+    string                  manifest_digest = 4;
+    string                  state           = 5;
+    common.v2.ErrorInfo     error           = 6;
 }
 
 message UpdateInstancesStatus {
