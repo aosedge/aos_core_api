@@ -12,7 +12,7 @@ import "common/v2/common.proto";
 
 service SMService {
     rpc RegisterSM(stream SMOutgoingMessages) returns (stream SMIncomingMessages) {}
-    rpc GetBlobInfo(BlobInfoRequest) returns (BlobInfo) {}
+    rpc GetBlobsInfos(BlobsInfosRequest) returns (BlobsInfos) {}
 }
 
 service ProxyService {
@@ -65,12 +65,12 @@ message ProxyOutgoingMessages {
     }
 }
 
-message BlobInfoRequest {
-    string digest = 1;
+message BlobsInfosRequest {
+    repeated string digests = 1;
 }
 
-message BlobInfo {
-    string url = 1;
+message BlobsInfos {
+    repeated string urls = 1;
 }
 
 message GetNodeConfigStatus {}
