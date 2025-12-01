@@ -25,13 +25,12 @@ message SMIncomingMessages {
         CheckNodeConfig         check_node_config          = 2;
         SetNodeConfig           set_node_config            = 3;
         UpdateInstances         update_instances           = 4;
-        OverrideEnvVars         override_env_vars          = 5;
-        SystemLogRequest        system_log_request         = 6;
-        InstanceLogRequest      instance_log_request       = 7;
-        InstanceCrashLogRequest instance_crash_log_request = 8;
-        GetAverageMonitoring    get_average_monitoring     = 9;
-        ConnectionStatus        connection_status          = 10;
-        UpdateNetworks          update_networks            = 11;
+        SystemLogRequest        system_log_request         = 5;
+        InstanceLogRequest      instance_log_request       = 6;
+        InstanceCrashLogRequest instance_crash_log_request = 7;
+        GetAverageMonitoring    get_average_monitoring     = 8;
+        ConnectionStatus        connection_status          = 9;
+        UpdateNetworks          update_networks            = 10;
     }
 }
 
@@ -49,11 +48,10 @@ message SMOutgoingMessages {
         NodeConfigStatus      node_config_status      = 2;
         UpdateInstancesStatus update_instances_status = 3;
         NodeInstancesStatus   node_instances_status   = 4;
-        OverrideEnvVarStatus  override_env_var_status = 5;
-        LogData               log                     = 6;
-        InstantMonitoring     instant_monitoring      = 7;
-        AverageMonitoring     average_monitoring      = 8;
-        Alert                 alert                   = 9;
+        LogData               log                     = 5;
+        InstantMonitoring     instant_monitoring      = 6;
+        AverageMonitoring     average_monitoring      = 7;
+        Alert                 alert                   = 8;
     }
 }
 
@@ -85,6 +83,11 @@ message SetNodeConfig {
     string version     = 2;
 }
 
+message EnvVarInfo {
+    string name  = 1;
+    string value = 2;
+}
+
 message InstanceInfo {
     common.v2.InstanceIdent instance              = 1;
     string                  manifest_digest       = 2;
@@ -94,28 +97,14 @@ message InstanceInfo {
     uint64                  priority              = 6;
     string                  storage_path          = 7;
     string                  state_path            = 8;
-    NetworkParameters       network_parameters    = 9;
-    MonitoringParameters    monitoring_parameters = 10;
+    repeated EnvVarInfo     env_vars              = 9;
+    NetworkParameters       network_parameters    = 10;
+    MonitoringParameters    monitoring_parameters = 11;
 }
 
 message UpdateInstances {
     repeated InstanceInfo start_instances           = 1;
     repeated common.v2.InstanceIdent stop_instances = 2;
-}
-
-message EnvVarInfo {
-    string                    name  = 1;
-    string                    value = 2;
-    google.protobuf.Timestamp ttl   = 3;
-}
-
-message OverrideInstanceEnvVar {
-    common.v2.InstanceFilter instance_filter = 1;
-    repeated EnvVarInfo      variables       = 2;
-}
-
-message OverrideEnvVars {
-    repeated OverrideInstanceEnvVar env_vars = 1;
 }
 
 message SystemLogRequest {
@@ -211,8 +200,8 @@ message NetworkParameters {
     string                network_id  = 1;
     string                subnet      = 2;
     string                ip          = 3;
-    repeated string       dns_servers = 5;
-    repeated FirewallRule rules       = 6;
+    repeated string       dns_servers = 4;
+    repeated FirewallRule rules       = 5;
 }
 
 message UpdateNetworkParameters {
@@ -257,13 +246,19 @@ message NodeConfigStatus {
     common.v2.ErrorInfo error   = 3;
 }
 
+message EnvVarStatus {
+    string              name  = 1;
+    common.v2.ErrorInfo error = 2;
+}
+
 message InstanceStatus {
     common.v2.InstanceIdent instance        = 1;
     string                  version         = 2;
     string                  runtime_id      = 3;
     string                  manifest_digest = 4;
-    string                  state           = 5;
-    common.v2.ErrorInfo     error           = 6;
+    repeated EnvVarStatus   env_vars        = 5;
+    string                  state           = 6;
+    common.v2.ErrorInfo     error           = 7;
 }
 
 message UpdateInstancesStatus {
@@ -272,20 +267,6 @@ message UpdateInstancesStatus {
 
 message NodeInstancesStatus {
     repeated InstanceStatus instances = 1;
-}
-
-message EnvVarStatus {
-    string              name  = 1;
-    common.v2.ErrorInfo error = 2;
-}
-
-message EnvVarInstanceStatus {
-    common.v2.InstanceIdent instance = 1;
-    repeated EnvVarStatus   statuses = 2;
-}
-
-message OverrideEnvVarStatus {
-    repeated EnvVarInstanceStatus instances = 1;
 }
 
 message LogData {
