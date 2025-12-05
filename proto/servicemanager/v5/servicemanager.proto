@@ -108,23 +108,23 @@ message UpdateInstances {
 }
 
 message SystemLogRequest {
-    string                    log_id = 1;
-    google.protobuf.Timestamp from   = 2;
-    google.protobuf.Timestamp till   = 3;
+    string                    correlation_id = 1;
+    google.protobuf.Timestamp from           = 2;
+    google.protobuf.Timestamp till           = 3;
 }
 
 message InstanceLogRequest {
-    string                    log_id = 1;
-    common.v2.InstanceFilter  filter = 2;
-    google.protobuf.Timestamp from   = 3;
-    google.protobuf.Timestamp till   = 4;
+    string                    correlation_id = 1;
+    common.v2.InstanceFilter  filter         = 2;
+    google.protobuf.Timestamp from           = 3;
+    google.protobuf.Timestamp till           = 4;
 }
 
 message InstanceCrashLogRequest {
-    string                    log_id = 1;
-    common.v2.InstanceFilter  filter = 2;
-    google.protobuf.Timestamp from   = 3;
-    google.protobuf.Timestamp till   = 4;
+    string                    correlation_id = 1;
+    common.v2.InstanceFilter  filter         = 2;
+    google.protobuf.Timestamp from           = 3;
+    google.protobuf.Timestamp till           = 4;
 }
 
 message AlertRulePercents {
@@ -271,12 +271,12 @@ message NodeInstancesStatus {
 }
 
 message LogData {
-    string              log_id     = 1;
-    uint64              part_count = 2;
-    uint64              part       = 3;
-    bytes               data       = 4;
-    string              status     = 5;
-    common.v2.ErrorInfo error      = 6;
+    string              correlation_id = 1;
+    uint64              part_count     = 2;
+    uint64              part           = 3;
+    bytes               data           = 4;
+    string              status         = 5;
+    common.v2.ErrorInfo error          = 6;
 }
 
 message PartitionUsage {
