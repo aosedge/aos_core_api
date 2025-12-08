@@ -96,9 +96,8 @@ message NodeInfo {
     repeated CPUInfo       cpus         = 8;
     repeated PartitionInfo partitions   = 9;
     repeated NodeAttribute attrs        = 10;
-    bool                   provisioned  = 11;
-    string                 state        = 12;
-    common.v2.ErrorInfo    error        = 13;
+    string                 state        = 11;
+    common.v2.ErrorInfo    error        = 12;
 }
 
 message GetCertRequest {
