@@ -25,3 +25,14 @@ message InstanceFilter {
     string subject_id = 2;
     int64  instance   = 3;
 }
+
+message ArchInfo {
+    string architecture = 1;
+    string variant      = 2;
+}
+
+message OSInfo {
+    string          os       = 1;
+    string          version  = 2;
+    repeated string features = 3;
+}

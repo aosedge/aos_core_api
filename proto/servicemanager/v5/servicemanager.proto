@@ -225,13 +225,15 @@ message ResourceInfo {
 }
 
 message RuntimeInfo {
-    string runtime_id    = 1;
-    string type          = 2;
-    uint64 max_dmips     = 3;
-    uint64 allowed_dmips = 4;
-    uint64 total_ram     = 5;
-    uint64 allowed_ram   = 6;
-    uint64 max_instances = 7;
+    string             runtime_id    = 1;
+    string             type          = 2;
+    uint64             max_dmips     = 3;
+    uint64             allowed_dmips = 4;
+    uint64             total_ram     = 5;
+    uint64             allowed_ram   = 6;
+    uint64             max_instances = 7;
+    common.v2.OSInfo   os_info       = 8;
+    common.v2.ArchInfo arch_info     = 9;
 }
 
 message SMInfo {
