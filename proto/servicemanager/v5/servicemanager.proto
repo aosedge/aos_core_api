@@ -91,15 +91,16 @@ message EnvVarInfo {
 message InstanceInfo {
     common.v2.InstanceIdent instance              = 1;
     string                  manifest_digest       = 2;
-    string                  runtime_id            = 3;
-    uint32                  uid                   = 4;
-    uint32                  gid                   = 5;
-    uint64                  priority              = 6;
-    string                  storage_path          = 7;
-    string                  state_path            = 8;
-    repeated EnvVarInfo     env_vars              = 9;
-    NetworkParameters       network_parameters    = 10;
-    MonitoringParameters    monitoring_parameters = 11;
+    string                  owner_id              = 3;
+    string                  runtime_id            = 4;
+    uint32                  uid                   = 5;
+    uint32                  gid                   = 6;
+    uint64                  priority              = 7;
+    string                  storage_path          = 8;
+    string                  state_path            = 9;
+    repeated EnvVarInfo     env_vars              = 10;
+    NetworkParameters       network_parameters    = 11;
+    MonitoringParameters    monitoring_parameters = 12;
 }
 
 message UpdateInstances {
