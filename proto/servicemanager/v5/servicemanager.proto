@@ -258,12 +258,11 @@ message EnvVarStatus {
 message InstanceStatus {
     common.v2.InstanceIdent instance        = 1;
     string                  version         = 2;
-    bool                    preinstalled    = 3;
-    string                  runtime_id      = 4;
-    string                  manifest_digest = 5;
-    repeated EnvVarStatus   env_vars        = 6;
-    string                  state           = 7;
-    common.v2.ErrorInfo     error           = 8;
+    string                  runtime_id      = 3;
+    string                  manifest_digest = 4;
+    repeated EnvVarStatus   env_vars        = 5;
+    string                  state           = 6;
+    common.v2.ErrorInfo     error           = 7;
 }
 
 message UpdateInstancesStatus {
