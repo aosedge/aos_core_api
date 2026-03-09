@@ -20,7 +20,7 @@ message SMIncomingMessages {
         GetNodeConfigStatus     get_node_config_status     = 1;
         CheckNodeConfig         check_node_config          = 2;
         SetNodeConfig           set_node_config            = 3;
-        UpdateInstances         update_instances           = 4;
+        RunInstances            run_instances              = 4;
         SystemLogRequest        system_log_request         = 5;
         InstanceLogRequest      instance_log_request       = 6;
         InstanceCrashLogRequest instance_crash_log_request = 7;
@@ -82,9 +82,8 @@ message InstanceInfo {
     MonitoringParameters    monitoring_parameters = 12;
 }
 
-message UpdateInstances {
-    repeated InstanceInfo start_instances           = 1;
-    repeated common.v2.InstanceIdent stop_instances = 2;
+message RunInstances {
+    repeated InstanceInfo instances = 1;
 }
 
 message SystemLogRequest {
