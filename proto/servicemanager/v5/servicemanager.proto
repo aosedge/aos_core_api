@@ -26,19 +26,20 @@ message SMIncomingMessages {
         InstanceCrashLogRequest instance_crash_log_request = 7;
         GetAverageMonitoring    get_average_monitoring     = 8;
         ConnectionStatus        connection_status          = 9;
+        InstanceStatus          instance_status            = 10;
     }
 }
 
 message SMOutgoingMessages {
     oneof SMOutgoingMessage {
-        SMInfo                sm_info                 = 1;
-        NodeConfigStatus      node_config_status      = 2;
-        UpdateInstancesStatus update_instances_status = 3;
-        NodeInstancesStatus   node_instances_status   = 4;
-        LogData               log                     = 5;
-        InstantMonitoring     instant_monitoring      = 6;
-        AverageMonitoring     average_monitoring      = 7;
-        Alert                 alert                   = 8;
+        SMInfo              sm_info               = 1;
+        NodeConfigStatus    node_config_status    = 2;
+        InstanceStatus      instance_status       = 3;
+        NodeInstancesStatus node_instances_status = 4;
+        LogData             log                   = 5;
+        InstantMonitoring   instant_monitoring    = 6;
+        AverageMonitoring   average_monitoring    = 7;
+        Alert               alert                 = 8;
     }
 }
 
@@ -190,10 +191,6 @@ message InstanceStatus {
     repeated EnvVarStatus   env_vars        = 5;
     string                  state           = 6;
     common.v2.ErrorInfo     error           = 7;
-}
-
-message UpdateInstancesStatus {
-    repeated InstanceStatus instances = 1;
 }
 
 message NodeInstancesStatus {
