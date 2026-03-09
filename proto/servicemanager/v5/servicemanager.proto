@@ -27,6 +27,7 @@ message SMIncomingMessages {
         GetAverageMonitoring    get_average_monitoring     = 8;
         ConnectionStatus        connection_status          = 9;
         InstanceStatus          instance_status            = 10;
+        AllInstancesStatus      all_instances_status       = 11;
     }
 }
 
@@ -280,4 +281,8 @@ message Alert {
         CoreAlert             core_alert              = 6;
         InstanceAlert         instance_alert          = 7;
     }
+}
+
+message AllInstancesStatus {
+    repeated InstanceStatus instances = 1;
 }
