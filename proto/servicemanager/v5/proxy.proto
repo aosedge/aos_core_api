@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package servicemanager.v5;
+
+import "common/v2/common.proto";
+import "google/protobuf/timestamp.proto";
+
+/***********************************************************************************************************************
+ * ProxyService
+ **********************************************************************************************************************/
+
+service ProxyService {
+    rpc RegisterSM(stream ProxyOutgoingMessages) returns (stream ProxyIncomingMessages) {}
+}
+
+message ProxyIncomingMessages {
+    oneof ProxyIncomingMessage {
+        DownloadContent download_content = 1;
+        ClockSync       clock_sync       = 2;
+    }
+}
+
+message ProxyOutgoingMessages {
+    oneof ProxyOutgoingMessage {
+        string           node_id            = 1;
+        DownloadRequest  download_request   = 2;
+        CancelDownload   cancel_download    = 3;
+        ClockSyncRequest clock_sync_request = 4;
+    }
+}
+
+message ClockSync {
+    google.protobuf.Timestamp current_time = 1;
+}
+
+message DownloadRequest {
+    string url        = 1;
+    uint64 request_id = 2;
+    uint64 offset     = 3;
+}
+
+message CancelDownload {
+    uint64 request_id = 1;
+}
+
+enum DownloadState {
+    IN_PROGRESS = 0;
+    COMPLETED   = 1;
+    CANCELED    = 2;
+    FAILED      = 3;
+}
+
+message DownloadContent {
+    uint64              request_id = 1;
+    uint64              offset     = 2;
+    bytes               data       = 3;
+    DownloadState       state      = 4;
+    common.v2.ErrorInfo error      = 5;
+}
+
+message ClockSyncRequest {}
