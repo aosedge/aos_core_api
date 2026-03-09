@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package servicemanager.v5;
+
+import "common/v2/common.proto";
+
+/***********************************************************************************************************************
+ * NetworkService
+ **********************************************************************************************************************/
+
+service NetworkService {
+    rpc GetNodeNetworkParams(GetNodeNetworkParamsRequest) returns (GetNodeNetworkParamsResponse) {}
+    rpc AllocateInstanceNetwork(AllocateInstanceNetworkRequest) returns (AllocateInstanceNetworkResponse) {}
+    rpc ReleaseInstanceNetwork(ReleaseInstanceNetworkRequest) returns (ReleaseInstanceNetworkResponse) {}
+    rpc ReleaseNodeNetwork(ReleaseNodeNetworkRequest) returns (ReleaseNodeNetworkResponse) {}
+}
+
+message NetworkServiceData {
+    repeated string hosts               = 1;
+    repeated string allowed_connections = 2;
+    repeated string exposed_ports       = 3;
+}
+
+message GetNodeNetworkParamsRequest {
+    string network_id = 1;
+    string node_id    = 2;
+}
+
+message GetNodeNetworkParamsResponse {
+    string              subnet  = 1;
+    string              ip      = 2;
+    uint64              vlan_id = 3;
+    common.v2.ErrorInfo error   = 4;
+}
+
+message AllocateInstanceNetworkRequest {
+    common.v2.InstanceIdent instance     = 1;
+    string                  network_id   = 2;
+    string                  node_id      = 3;
+    NetworkServiceData      service_data = 4;
+}
+
+message AllocateInstanceNetworkResponse {
+    string              subnet      = 1;
+    string              ip          = 2;
+    repeated string     dns_servers = 3;
+    common.v2.ErrorInfo error       = 4;
+}
+
+message ReleaseInstanceNetworkRequest {
+    common.v2.InstanceIdent instance = 1;
+    string                  node_id  = 2;
+}
+
+message ReleaseInstanceNetworkResponse {
+    common.v2.ErrorInfo error = 1;
+}
+
+message ReleaseNodeNetworkRequest {
+    string network_id = 1;
+    string node_id    = 2;
+}
+
+message ReleaseNodeNetworkResponse {
+    common.v2.ErrorInfo error = 1;
+}
