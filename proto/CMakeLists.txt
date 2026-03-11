@@ -52,6 +52,7 @@ endif()
 if(WITH_SM_API)
     set(SM_PROTO_FILES "${PROTO_SRC_DIR}/common/v2/common.proto"
                        "${PROTO_SRC_DIR}/servicemanager/v5/servicemanager.proto"
+                       "${PROTO_SRC_DIR}/servicemanager/v5/network.proto"
     )
 
     create_core_api_lib(sm "${SM_PROTO_FILES}")
