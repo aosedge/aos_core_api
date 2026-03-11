@@ -199,7 +199,8 @@ message InstanceStatus {
     string                  manifest_digest = 4;
     repeated EnvVarStatus   env_vars        = 5;
     string                  state           = 6;
-    common.v2.ErrorInfo     error           = 7;
+    string                  info            = 7;
+    common.v2.ErrorInfo     error           = 8;
 }
 
 message NodeInstancesStatus {
