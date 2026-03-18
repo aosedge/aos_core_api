@@ -15,7 +15,7 @@ service NetworkService {
     rpc ReleaseNodeNetwork(ReleaseNodeNetworkRequest) returns (ReleaseNodeNetworkResponse) {}
 }
 
-message NetworkServiceData {
+message UpdateItemNetworkParams {
     repeated string hosts               = 1;
     repeated string allowed_connections = 2;
     repeated string exposed_ports       = 3;
@@ -37,7 +37,7 @@ message AllocateInstanceNetworkRequest {
     common.v2.InstanceIdent instance     = 1;
     string                  network_id   = 2;
     string                  node_id      = 3;
-    NetworkServiceData      service_data = 4;
+    UpdateItemNetworkParams service_data = 4;
 }
 
 message AllocateInstanceNetworkResponse {
