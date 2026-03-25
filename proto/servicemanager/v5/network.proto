@@ -13,6 +13,8 @@ service NetworkService {
     rpc AllocateInstanceNetwork(AllocateInstanceNetworkRequest) returns (AllocateInstanceNetworkResponse) {}
     rpc ReleaseInstanceNetwork(ReleaseInstanceNetworkRequest) returns (ReleaseInstanceNetworkResponse) {}
     rpc ReleaseNodeNetwork(ReleaseNodeNetworkRequest) returns (ReleaseNodeNetworkResponse) {}
+    rpc SubscribeInstanceNetworkUpdates(SubscribeInstanceNetworkUpdatesRequest)
+        returns (stream InstanceNetworkUpdateNotification) {}
 }
 
 message UpdateItemNetworkParams {
@@ -40,11 +42,34 @@ message AllocateInstanceNetworkRequest {
     UpdateItemNetworkParams service_data = 4;
 }
 
+message FirewallRule {
+    string dst_ip   = 1;
+    string dst_port = 2;
+    string proto    = 3;
+    string src_ip   = 4;
+}
+
 message AllocateInstanceNetworkResponse {
-    string              subnet      = 1;
-    string              ip          = 2;
-    repeated string     dns_servers = 3;
-    common.v2.ErrorInfo error       = 4;
+    string                subnet         = 1;
+    string                ip             = 2;
+    repeated string       dns_servers    = 3;
+    common.v2.ErrorInfo   error          = 4;
+    repeated FirewallRule firewall_rules = 5;
+}
+
+message PendingFirewallUpdate {
+    common.v2.InstanceIdent instance       = 1;
+    repeated FirewallRule   firewall_rules = 2;
+}
+
+message SubscribeInstanceNetworkUpdatesRequest {
+    string node_id = 1;
+}
+
+message InstanceNetworkUpdateNotification {
+    oneof update {
+        PendingFirewallUpdate pending_firewall_update = 1;
+    }
 }
 
 message ReleaseInstanceNetworkRequest {
