@@ -15,6 +15,7 @@ service NetworkService {
     rpc ReleaseNodeNetwork(ReleaseNodeNetworkRequest) returns (ReleaseNodeNetworkResponse) {}
     rpc SubscribeInstanceNetworkUpdates(SubscribeInstanceNetworkUpdatesRequest)
         returns (stream InstanceNetworkUpdateNotification) {}
+    rpc SyncNetworkState(SyncNetworkStateRequest) returns (SyncNetworkStateResponse) {}
 }
 
 message UpdateItemNetworkParams {
@@ -87,5 +88,21 @@ message ReleaseNodeNetworkRequest {
 }
 
 message ReleaseNodeNetworkResponse {
+    common.v2.ErrorInfo error = 1;
+}
+
+message InstanceNetworkStateInfo {
+    common.v2.InstanceIdent instance       = 1;
+    string                  network_id     = 2;
+    string                  ip             = 3;
+    repeated FirewallRule   firewall_rules = 4;
+}
+
+message SyncNetworkStateRequest {
+    string                            node_id   = 1;
+    repeated InstanceNetworkStateInfo instances = 2;
+}
+
+message SyncNetworkStateResponse {
     common.v2.ErrorInfo error = 1;
 }
