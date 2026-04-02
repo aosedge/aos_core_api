@@ -69,27 +69,19 @@ message EnvVarInfo {
     string value = 2;
 }
 
-message RuntimeDependency {
-    string item_id   = 1;
-    string version   = 2;
-    string condition = 3;
-}
-
 message InstanceInfo {
-    common.v2.InstanceIdent    instance              = 1;
-    string                     version               = 2;
-    string                     manifest_digest       = 3;
-    string                     owner_id              = 4;
-    string                     runtime_id            = 5;
-    uint32                     uid                   = 6;
-    uint32                     gid                   = 7;
-    uint64                     priority              = 8;
-    string                     storage_path          = 9;
-    string                     state_path            = 10;
-    repeated EnvVarInfo        env_vars              = 11;
-    MonitoringParameters       monitoring_parameters = 12;
-    string                     state_dependencies    = 13;
-    repeated RuntimeDependency runtime_dependencies  = 14;
+    common.v2.InstanceIdent instance              = 1;
+    string                  version               = 2;
+    string                  manifest_digest       = 3;
+    string                  owner_id              = 4;
+    string                  runtime_id            = 5;
+    uint32                  uid                   = 6;
+    uint32                  gid                   = 7;
+    uint64                  priority              = 8;
+    string                  storage_path          = 9;
+    string                  state_path            = 10;
+    repeated EnvVarInfo     env_vars              = 11;
+    MonitoringParameters    monitoring_parameters = 12;
 }
 
 message RunInstances {
