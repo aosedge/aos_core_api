@@ -1,0 +1,366 @@
+syntax = "proto3";
+
+package servicemanager.v5;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "common/v2/common.proto";
+
+/***********************************************************************************************************************
+ * SMService
+ **********************************************************************************************************************/
+
+service SMService {
+    rpc RegisterSM(stream SMOutgoingMessages) returns (stream SMIncomingMessages) {}
+    rpc GetBlobsInfos(BlobsInfosRequest) returns (BlobsInfos) {}
+}
+
+service ProxyService {
+    rpc RegisterSM(stream ProxyOutgoingMessages) returns (stream ProxyIncomingMessages) {}
+}
+
+message SMIncomingMessages {
+    oneof SMIncomingMessage {
+        GetNodeConfigStatus     get_node_config_status     = 1;
+        CheckNodeConfig         check_node_config          = 2;
+        SetNodeConfig           set_node_config            = 3;
+        UpdateInstances         update_instances           = 4;
+        SystemLogRequest        system_log_request         = 5;
+        InstanceLogRequest      instance_log_request       = 6;
+        InstanceCrashLogRequest instance_crash_log_request = 7;
+        GetAverageMonitoring    get_average_monitoring     = 8;
+        ConnectionStatus        connection_status          = 9;
+        UpdateNetworks          update_networks            = 10;
+    }
+}
+
+message ProxyIncomingMessages {
+    oneof ProxyIncomingMessage {
+        DownloadContent download_content = 1;
+        ClockSync       clock_sync       = 2;
+    }
+}
+
+message SMOutgoingMessages {
+    oneof SMOutgoingMessage {
+        SMInfo                sm_info                 = 1;
+        NodeConfigStatus      node_config_status      = 2;
+        UpdateInstancesStatus update_instances_status = 3;
+        NodeInstancesStatus   node_instances_status   = 4;
+        LogData               log                     = 5;
+        InstantMonitoring     instant_monitoring      = 6;
+        AverageMonitoring     average_monitoring      = 7;
+        Alert                 alert                   = 8;
+    }
+}
+
+message ProxyOutgoingMessages {
+    oneof ProxyOutgoingMessage {
+        string           node_id            = 1;
+        DownloadRequest  download_request   = 2;
+        CancelDownload   cancel_download    = 3;
+        ClockSyncRequest clock_sync_request = 4;
+    }
+}
+
+message BlobsInfosRequest {
+    repeated string digests = 1;
+}
+
+message BlobsInfos {
+    repeated string urls = 1;
+}
+
+message GetNodeConfigStatus {}
+
+message CheckNodeConfig {
+    string node_config = 1;
+    string version     = 2;
+}
+
+message SetNodeConfig {
+    string node_config = 1;
+    string version     = 2;
+}
+
+message EnvVarInfo {
+    string name  = 1;
+    string value = 2;
+}
+
+message InstanceInfo {
+    common.v2.InstanceIdent instance              = 1;
+    string                  version               = 2;
+    string                  manifest_digest       = 3;
+    string                  owner_id              = 4;
+    string                  runtime_id            = 5;
+    uint32                  uid                   = 6;
+    uint32                  gid                   = 7;
+    uint64                  priority              = 8;
+    string                  storage_path          = 9;
+    string                  state_path            = 10;
+    repeated EnvVarInfo     env_vars              = 11;
+    NetworkParameters       network_parameters    = 12;
+    MonitoringParameters    monitoring_parameters = 13;
+}
+
+message UpdateInstances {
+    repeated InstanceInfo start_instances           = 1;
+    repeated common.v2.InstanceIdent stop_instances = 2;
+}
+
+message SystemLogRequest {
+    string                    correlation_id = 1;
+    google.protobuf.Timestamp from           = 2;
+    google.protobuf.Timestamp till           = 3;
+}
+
+message InstanceLogRequest {
+    string                    correlation_id = 1;
+    common.v2.InstanceFilter  filter         = 2;
+    google.protobuf.Timestamp from           = 3;
+    google.protobuf.Timestamp till           = 4;
+}
+
+message InstanceCrashLogRequest {
+    string                    correlation_id = 1;
+    common.v2.InstanceFilter  filter         = 2;
+    google.protobuf.Timestamp from           = 3;
+    google.protobuf.Timestamp till           = 4;
+}
+
+message AlertRulePercents {
+    google.protobuf.Duration duration      = 1;
+    double                   min_threshold = 2;
+    double                   max_threshold = 3;
+}
+
+message AlertRulePoints {
+    google.protobuf.Duration duration      = 1;
+    uint64                   min_threshold = 2;
+    uint64                   max_threshold = 3;
+}
+
+message PartitionAlertRule {
+    string                   name          = 1;
+    google.protobuf.Duration duration      = 2;
+    double                   min_threshold = 3;
+    double                   max_threshold = 4;
+}
+
+message AlertRules {
+    AlertRulePercents           ram        = 1;
+    AlertRulePercents           cpu        = 2;
+    repeated PartitionAlertRule partitions = 3;
+    AlertRulePoints             download   = 4;
+    AlertRulePoints             upload     = 5;
+}
+
+message MonitoringParameters {
+    AlertRules alert_rules = 1;
+}
+
+message GetAverageMonitoring {}
+
+enum ConnectionEnum {
+    DISCONNECTED = 0;
+    CONNECTED    = 1;
+}
+
+message ConnectionStatus {
+    ConnectionEnum cloud_status = 1;
+}
+
+message FirewallRule {
+    string dst_ip   = 1;
+    string dst_port = 2;
+    string proto    = 3;
+    string src_ip   = 4;
+}
+
+message NetworkParameters {
+    string                network_id  = 1;
+    string                subnet      = 2;
+    string                ip          = 3;
+    repeated string       dns_servers = 4;
+    repeated FirewallRule rules       = 5;
+}
+
+message UpdateNetworkParameters {
+    string network_id = 1;
+    string subnet     = 2;
+    string ip         = 3;
+    uint64 vlan_id    = 4;
+}
+
+message UpdateNetworks {
+    repeated UpdateNetworkParameters networks = 1;
+}
+
+message ClockSync {
+    google.protobuf.Timestamp current_time = 1;
+}
+
+message ResourceInfo {
+    string name         = 1;
+    uint64 shared_count = 2;
+}
+
+message RuntimeInfo {
+    string             runtime_id    = 1;
+    string             type          = 2;
+    uint64             max_dmips     = 3;
+    uint64             allowed_dmips = 4;
+    uint64             total_ram     = 5;
+    uint64             allowed_ram   = 6;
+    uint64             max_instances = 7;
+    common.v2.OSInfo   os_info       = 8;
+    common.v2.ArchInfo arch_info     = 9;
+}
+
+message SMInfo {
+    string                node_id   = 1;
+    repeated RuntimeInfo  runtimes  = 2;
+    repeated ResourceInfo resources = 3;
+}
+
+message NodeConfigStatus {
+    string              state   = 1;
+    string              version = 2;
+    common.v2.ErrorInfo error   = 3;
+}
+
+message EnvVarStatus {
+    string              name  = 1;
+    common.v2.ErrorInfo error = 2;
+}
+
+message InstanceStatus {
+    common.v2.InstanceIdent instance        = 1;
+    string                  version         = 2;
+    string                  runtime_id      = 3;
+    string                  manifest_digest = 4;
+    repeated EnvVarStatus   env_vars        = 5;
+    string                  state           = 6;
+    common.v2.ErrorInfo     error           = 7;
+}
+
+message UpdateInstancesStatus {
+    repeated InstanceStatus instances = 1;
+}
+
+message NodeInstancesStatus {
+    repeated InstanceStatus instances = 1;
+}
+
+message LogData {
+    string              correlation_id = 1;
+    uint64              part_count     = 2;
+    uint64              part           = 3;
+    bytes               data           = 4;
+    string              status         = 5;
+    common.v2.ErrorInfo error          = 6;
+}
+
+message PartitionUsage {
+    string name      = 1;
+    uint64 used_size = 2;
+}
+
+message MonitoringData {
+    google.protobuf.Timestamp timestamp  = 1;
+    uint64                    ram        = 2;
+    uint64                    cpu        = 3;
+    repeated PartitionUsage   partitions = 4;
+    uint64                    download   = 5;
+    uint64                    upload     = 6;
+}
+
+message InstanceMonitoring {
+    common.v2.InstanceIdent instance        = 1;
+    string                  runtime_id      = 2;
+    MonitoringData          monitoring_data = 3;
+}
+
+message InstantMonitoring {
+    MonitoringData              node_monitoring      = 1;
+    repeated InstanceMonitoring instances_monitoring = 2;
+}
+
+message AverageMonitoring {
+    MonitoringData              node_monitoring      = 1;
+    repeated InstanceMonitoring instances_monitoring = 2;
+}
+
+message SystemQuotaAlert {
+    string parameter = 1;
+    uint64 value     = 2;
+    string status    = 3;
+}
+
+message InstanceQuotaAlert {
+    common.v2.InstanceIdent instance  = 1;
+    string                  parameter = 2;
+    uint64                  value     = 3;
+    string                  status    = 4;
+}
+
+message ResourceAllocateAlert {
+    common.v2.InstanceIdent instance = 1;
+    string                  resource = 2;
+    string                  message  = 3;
+}
+
+message SystemAlert {
+    string message = 1;
+}
+
+message CoreAlert {
+    string core_component = 1;
+    string message        = 2;
+}
+
+message InstanceAlert {
+    common.v2.InstanceIdent instance        = 1;
+    string                  service_version = 2;
+    string                  message         = 3;
+}
+
+message Alert {
+    google.protobuf.Timestamp timestamp = 1;
+    oneof                     AlertItem {
+        SystemQuotaAlert      system_quota_alert      = 2;
+        InstanceQuotaAlert    instance_quota_alert    = 3;
+        ResourceAllocateAlert resource_allocate_alert = 4;
+        SystemAlert           system_alert            = 5;
+        CoreAlert             core_alert              = 6;
+        InstanceAlert         instance_alert          = 7;
+    }
+}
+
+message DownloadRequest {
+    string url        = 1;
+    uint64 request_id = 2;
+    uint64 offset     = 3;
+}
+
+message CancelDownload {
+    uint64 request_id = 1;
+}
+
+enum DownloadState {
+    IN_PROGRESS = 0;
+    COMPLETED   = 1;
+    CANCELED    = 2;
+    FAILED      = 3;
+}
+
+message DownloadContent {
+    uint64              request_id = 1;
+    uint64              offset     = 2;
+    bytes               data       = 3;
+    DownloadState       state      = 4;
+    common.v2.ErrorInfo error      = 5;
+}
+
+message ClockSyncRequest {}
