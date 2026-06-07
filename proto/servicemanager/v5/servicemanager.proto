@@ -30,7 +30,6 @@ message SMIncomingMessages {
         InstanceCrashLogRequest instance_crash_log_request = 7;
         GetAverageMonitoring    get_average_monitoring     = 8;
         ConnectionStatus        connection_status          = 9;
-        UpdateNetworks          update_networks            = 10;
     }
 }
 
@@ -100,8 +99,7 @@ message InstanceInfo {
     string                  storage_path          = 9;
     string                  state_path            = 10;
     repeated EnvVarInfo     env_vars              = 11;
-    NetworkParameters       network_parameters    = 12;
-    MonitoringParameters    monitoring_parameters = 13;
+    MonitoringParameters    monitoring_parameters = 12;
 }
 
 message UpdateInstances {
@@ -169,32 +167,6 @@ enum ConnectionEnum {
 
 message ConnectionStatus {
     ConnectionEnum cloud_status = 1;
-}
-
-message FirewallRule {
-    string dst_ip   = 1;
-    string dst_port = 2;
-    string proto    = 3;
-    string src_ip   = 4;
-}
-
-message NetworkParameters {
-    string                network_id  = 1;
-    string                subnet      = 2;
-    string                ip          = 3;
-    repeated string       dns_servers = 4;
-    repeated FirewallRule rules       = 5;
-}
-
-message UpdateNetworkParameters {
-    string network_id = 1;
-    string subnet     = 2;
-    string ip         = 3;
-    uint64 vlan_id    = 4;
-}
-
-message UpdateNetworks {
-    repeated UpdateNetworkParameters networks = 1;
 }
 
 message ClockSync {

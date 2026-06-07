@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package servicemanager.v5;
+
+import "common/v2/common.proto";
+
+/***********************************************************************************************************************
+ * NetworkService
+ **********************************************************************************************************************/
+
+service NetworkService {
+    rpc GetNodeNetworkParams(GetNodeNetworkParamsRequest) returns (GetNodeNetworkParamsResponse) {}
+    rpc AllocateInstanceNetwork(AllocateInstanceNetworkRequest) returns (AllocateInstanceNetworkResponse) {}
+    rpc ReleaseInstanceNetwork(ReleaseInstanceNetworkRequest) returns (ReleaseInstanceNetworkResponse) {}
+    rpc ReleaseNodeNetwork(ReleaseNodeNetworkRequest) returns (ReleaseNodeNetworkResponse) {}
+    rpc SubscribeInstanceNetworkUpdates(SubscribeInstanceNetworkUpdatesRequest)
+        returns (stream InstanceNetworkUpdateNotification) {}
+    rpc SyncNetworkState(SyncNetworkStateRequest) returns (SyncNetworkStateResponse) {}
+}
+
+message UpdateItemNetworkParams {
+    repeated string hosts               = 1;
+    repeated string allowed_connections = 2;
+    repeated string exposed_ports       = 3;
+}
+
+message GetNodeNetworkParamsRequest {
+    string network_id = 1;
+    string node_id    = 2;
+}
+
+message GetNodeNetworkParamsResponse {
+    string              subnet  = 1;
+    string              ip      = 2;
+    uint64              vlan_id = 3;
+    common.v2.ErrorInfo error   = 4;
+}
+
+message AllocateInstanceNetworkRequest {
+    common.v2.InstanceIdent instance     = 1;
+    string                  network_id   = 2;
+    string                  node_id      = 3;
+    UpdateItemNetworkParams service_data = 4;
+}
+
+message FirewallRule {
+    string dst_ip   = 1;
+    string dst_port = 2;
+    string proto    = 3;
+    string src_ip   = 4;
+}
+
+message AllocateInstanceNetworkResponse {
+    string                subnet         = 1;
+    string                ip             = 2;
+    repeated string       dns_servers    = 3;
+    common.v2.ErrorInfo   error          = 4;
+    repeated FirewallRule firewall_rules = 5;
+}
+
+message PendingFirewallUpdate {
+    common.v2.InstanceIdent instance       = 1;
+    repeated FirewallRule   firewall_rules = 2;
+}
+
+message SubscribeInstanceNetworkUpdatesRequest {
+    string node_id = 1;
+}
+
+message InstanceNetworkUpdateNotification {
+    oneof update {
+        PendingFirewallUpdate pending_firewall_update = 1;
+    }
+}
+
+message ReleaseInstanceNetworkRequest {
+    common.v2.InstanceIdent instance = 1;
+    string                  node_id  = 2;
+}
+
+message ReleaseInstanceNetworkResponse {
+    common.v2.ErrorInfo error = 1;
+}
+
+message ReleaseNodeNetworkRequest {
+    string network_id = 1;
+    string node_id    = 2;
+}
+
+message ReleaseNodeNetworkResponse {
+    common.v2.ErrorInfo error = 1;
+}
+
+message InstanceNetworkStateInfo {
+    common.v2.InstanceIdent instance       = 1;
+    string                  network_id     = 2;
+    string                  ip             = 3;
+    repeated FirewallRule   firewall_rules = 4;
+}
+
+message SyncNetworkStateRequest {
+    string                            node_id   = 1;
+    repeated InstanceNetworkStateInfo instances = 2;
+}
+
+message SyncNetworkStateResponse {
+    common.v2.ErrorInfo error = 1;
+}
