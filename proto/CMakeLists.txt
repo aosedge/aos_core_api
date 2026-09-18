@@ -42,7 +42,7 @@ endfunction()
 # ######################################################################################################################
 
 if(WITH_IAM_API)
-    set(IAM_PROTO_FILES "${PROTO_SRC_DIR}/common/v2/common.proto" "${PROTO_SRC_DIR}/iamanager/v6/iamanager.proto"
+    set(IAM_PROTO_FILES "${PROTO_SRC_DIR}/common/v2/common.proto" "${PROTO_SRC_DIR}/iamanager/v7/iamanager.proto"
                         "${PROTO_SRC_DIR}/iamanager/version.proto"
     )
 
