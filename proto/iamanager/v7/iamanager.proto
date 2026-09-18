@@ -18,7 +18,8 @@ service IAMPublicCurrentNodeService {
 
 service IAMPublicCertService {
     rpc GetCert(GetCertRequest) returns (CertInfo) {}
-    rpc SubscribeCertChanged(SubscribeCertChangedRequest) returns (stream CertInfo) {}
+    rpc GetAllCerts(GetCertRequest) returns (CertInfoList) {}
+    rpc SubscribeCertsChanged(SubscribeCertsChangedRequest) returns (stream CertInfoList) {}
 }
 
 service IAMPublicPermissionsService {
@@ -45,6 +46,7 @@ service IAMProvisioningService {
 }
 
 service IAMCertificateService {
+    rpc UpdateRootCerts(UpdateRootCertsRequest) returns (UpdateRootCertsResponse) {}
     rpc CreateKey(CreateKeyRequest) returns (CreateKeyResponse) {}
     rpc ApplyCert(ApplyCertRequest) returns (ApplyCertResponse) {}
 }
@@ -95,7 +97,7 @@ message GetCertRequest {
     string serial = 3;
 }
 
-message SubscribeCertChangedRequest {
+message SubscribeCertsChangedRequest {
     string type = 1;
 }
 
@@ -105,6 +107,10 @@ message CertInfo {
     string key_url  = 3;
     bytes  serial   = 4;
     bytes  issuer   = 5;
+}
+
+message CertInfoList {
+    repeated CertInfo certs = 1;
 }
 
 message SystemInfo {
@@ -163,6 +169,16 @@ message ApplyCertResponse {
     string              node_id   = 1;
     CertInfo            cert_info = 2;
     common.v2.ErrorInfo error     = 3;
+}
+
+message UpdateRootCertsRequest {
+    string          node_id    = 1;
+    repeated string root_certs = 2;
+}
+
+message UpdateRootCertsResponse {
+    string              node_id = 1;
+    common.v2.ErrorInfo error   = 2;
 }
 
 message Permissions {
@@ -239,6 +255,7 @@ message IAMIncomingMessages {
         ResumeNodeRequest         resume_node_request         = 6;
         CreateKeyRequest          create_key_request          = 7;
         ApplyCertRequest          apply_cert_request          = 8;
+        UpdateRootCertsRequest    update_root_certs_request   = 9;
     }
 }
 
@@ -253,5 +270,6 @@ message IAMOutgoingMessages {
         ResumeNodeResponse         resume_node_response         = 7;
         CreateKeyResponse          create_key_response          = 8;
         ApplyCertResponse          apply_cert_response          = 9;
+        UpdateRootCertsResponse    update_root_certs_response   = 10;
     }
 }
