@@ -19,6 +19,7 @@ service IAMPublicCurrentNodeService {
 service IAMPublicCertService {
     rpc GetCert(GetCertRequest) returns (CertInfo) {}
     rpc GetAllCerts(GetCertRequest) returns (CertInfoList) {}
+    rpc GetRootCertType(google.protobuf.Empty) returns (RootCertType) {}
     rpc SubscribeCertsChanged(SubscribeCertsChangedRequest) returns (stream CertInfoList) {}
 }
 
@@ -47,6 +48,7 @@ service IAMProvisioningService {
 
 service IAMCertificateService {
     rpc UpdateRootCerts(UpdateRootCertsRequest) returns (UpdateRootCertsResponse) {}
+    rpc GetRootCerts(GetRootCertsRequest) returns (GetRootCertsResponse) {}
     rpc CreateKey(CreateKeyRequest) returns (CreateKeyResponse) {}
     rpc ApplyCert(ApplyCertRequest) returns (ApplyCertResponse) {}
 }
@@ -111,6 +113,10 @@ message CertInfo {
 
 message CertInfoList {
     repeated CertInfo certs = 1;
+}
+
+message RootCertType {
+    string type = 1;
 }
 
 message SystemInfo {
@@ -179,6 +185,16 @@ message UpdateRootCertsRequest {
 message UpdateRootCertsResponse {
     string              node_id = 1;
     common.v2.ErrorInfo error   = 2;
+}
+
+message GetRootCertsRequest {
+    string node_id = 1;
+}
+
+message GetRootCertsResponse {
+    string              node_id                = 1;
+    repeated string     root_cert_fingerprints = 2;
+    common.v2.ErrorInfo error                  = 3;
 }
 
 message Permissions {
@@ -256,6 +272,7 @@ message IAMIncomingMessages {
         CreateKeyRequest          create_key_request          = 7;
         ApplyCertRequest          apply_cert_request          = 8;
         UpdateRootCertsRequest    update_root_certs_request   = 9;
+        GetRootCertsRequest       get_root_certs_request      = 10;
     }
 }
 
@@ -271,5 +288,6 @@ message IAMOutgoingMessages {
         CreateKeyResponse          create_key_response          = 8;
         ApplyCertResponse          apply_cert_response          = 9;
         UpdateRootCertsResponse    update_root_certs_response   = 10;
+        GetRootCertsResponse       get_root_certs_response      = 11;
     }
 }
