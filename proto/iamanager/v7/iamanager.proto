@@ -18,7 +18,9 @@ service IAMPublicCurrentNodeService {
 
 service IAMPublicCertificateService {
     rpc GetCertKey(GetCertKeyRequest) returns (CertKeyInfo) {}
+    rpc GetRootCerts(google.protobuf.Empty) returns (RootCertsInfos) {}
     rpc SubscribeCertKeyChanged(SubscribeCertKeyChangedRequest) returns (stream CertKeyInfo) {}
+    rpc SubscribeRootCertsChanged(google.protobuf.Empty) returns (stream RootCertsInfos) {}
 }
 
 service IAMPublicPermissionsService {
@@ -45,6 +47,8 @@ service IAMProvisioningService {
 }
 
 service IAMCertificateService {
+    rpc UpdateRootCerts(UpdateRootCertsRequest) returns (UpdateRootCertsResponse) {}
+    rpc GetRootCertsFingerprints(GetRootCertsFingerprintsRequest) returns (RootCertsFingerprints) {}
     rpc CreateKey(CreateKeyRequest) returns (CreateKeyResponse) {}
     rpc ApplyCert(ApplyCertRequest) returns (ApplyCertResponse) {}
 }
@@ -107,6 +111,14 @@ message CertKeyInfo {
     bytes  issuer     = 5;
 }
 
+message RootCertInfo {
+    string cert_url = 1; // URL of the trusted root CA certificate
+}
+
+message RootCertsInfos {
+    repeated RootCertInfo root_certs = 1;
+}
+
 message SystemInfo {
     string system_id  = 1;
     string unit_model = 2;
@@ -163,6 +175,26 @@ message ApplyCertResponse {
     string              node_id   = 1;
     CertKeyInfo         cert_info = 2;
     common.v2.ErrorInfo error     = 3;
+}
+
+message UpdateRootCertsRequest {
+    string          node_id    = 1;
+    repeated string root_certs = 2; // PEM encoded certificates
+}
+
+message UpdateRootCertsResponse {
+    string              node_id = 1;
+    common.v2.ErrorInfo error   = 2;
+}
+
+message GetRootCertsFingerprintsRequest {
+    string node_id = 1;
+}
+
+message RootCertsFingerprints {
+    string              node_id           = 1;
+    repeated string     cert_fingerprints = 2;
+    common.v2.ErrorInfo error             = 3;
 }
 
 message Permissions {
@@ -231,27 +263,31 @@ message DeprovisionResponse {
 
 message IAMIncomingMessages {
     oneof IAMIncomingMessage {
-        StartProvisioningRequest    start_provisioning_request       = 1;
-        GetCertKeyStorageIDsRequest get_cert_key_storage_ids_request = 2;
-        FinishProvisioningRequest   finish_provisioning_request      = 3;
-        DeprovisionRequest          deprovision_request              = 4;
-        PauseNodeRequest            pause_node_request               = 5;
-        ResumeNodeRequest           resume_node_request              = 6;
-        CreateKeyRequest            create_key_request               = 7;
-        ApplyCertRequest            apply_cert_request               = 8;
+        StartProvisioningRequest        start_provisioning_request          = 1;
+        GetCertKeyStorageIDsRequest     get_cert_key_storage_ids_request    = 2;
+        FinishProvisioningRequest       finish_provisioning_request         = 3;
+        DeprovisionRequest              deprovision_request                 = 4;
+        PauseNodeRequest                pause_node_request                  = 5;
+        ResumeNodeRequest               resume_node_request                 = 6;
+        CreateKeyRequest                create_key_request                  = 7;
+        ApplyCertRequest                apply_cert_request                  = 8;
+        UpdateRootCertsRequest          update_root_certs_request           = 9;
+        GetRootCertsFingerprintsRequest get_root_certs_fingerprints_request = 10;
     }
 }
 
 message IAMOutgoingMessages {
     oneof IAMOutgoingMessage {
-        NodeInfo                   node_info                     = 1;
-        StartProvisioningResponse  start_provisioning_response   = 2;
-        CertKeyStorageIDs          cert_key_storage_ids_response = 3;
-        FinishProvisioningResponse finish_provisioning_response  = 4;
-        DeprovisionResponse        deprovision_response          = 5;
-        PauseNodeResponse          pause_node_response           = 6;
-        ResumeNodeResponse         resume_node_response          = 7;
-        CreateKeyResponse          create_key_response           = 8;
-        ApplyCertResponse          apply_cert_response           = 9;
+        NodeInfo                   node_info                            = 1;
+        StartProvisioningResponse  start_provisioning_response          = 2;
+        CertKeyStorageIDs          cert_key_storage_ids_response        = 3;
+        FinishProvisioningResponse finish_provisioning_response         = 4;
+        DeprovisionResponse        deprovision_response                 = 5;
+        PauseNodeResponse          pause_node_response                  = 6;
+        ResumeNodeResponse         resume_node_response                 = 7;
+        CreateKeyResponse          create_key_response                  = 8;
+        ApplyCertResponse          apply_cert_response                  = 9;
+        UpdateRootCertsResponse    update_root_certs_response           = 10;
+        RootCertsFingerprints      get_root_certs_fingerprints_response = 11;
     }
 }
