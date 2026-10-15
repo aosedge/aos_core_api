@@ -16,9 +16,9 @@ service IAMPublicCurrentNodeService {
     rpc SubscribeCurrentNodeChanged(google.protobuf.Empty) returns (stream NodeInfo) {}
 }
 
-service IAMPublicCertService {
-    rpc GetCert(GetCertRequest) returns (CertInfo) {}
-    rpc SubscribeCertChanged(SubscribeCertChangedRequest) returns (stream CertInfo) {}
+service IAMPublicCertificateService {
+    rpc GetCertKey(GetCertKeyRequest) returns (CertKeyInfo) {}
+    rpc SubscribeCertKeyChanged(SubscribeCertKeyChangedRequest) returns (stream CertKeyInfo) {}
 }
 
 service IAMPublicPermissionsService {
@@ -38,7 +38,7 @@ service IAMNodesService {
 }
 
 service IAMProvisioningService {
-    rpc GetCertTypes(GetCertTypesRequest) returns (CertTypes) {}
+    rpc GetCertKeyStorageIDs(GetCertKeyStorageIDsRequest) returns (CertKeyStorageIDs) {}
     rpc StartProvisioning(StartProvisioningRequest) returns (StartProvisioningResponse) {}
     rpc FinishProvisioning(FinishProvisioningRequest) returns (FinishProvisioningResponse) {}
     rpc Deprovision(DeprovisionRequest) returns (DeprovisionResponse) {}
@@ -89,22 +89,22 @@ message NodeInfo {
     common.v2.ErrorInfo    error        = 12;
 }
 
-message GetCertRequest {
-    string type   = 1;
-    bytes  issuer = 2;
-    string serial = 3;
+message GetCertKeyRequest {
+    string storage_id = 1;
+    bytes  issuer     = 2;
+    string serial     = 3;
 }
 
-message SubscribeCertChangedRequest {
-    string type = 1;
+message SubscribeCertKeyChangedRequest {
+    string storage_id = 1;
 }
 
-message CertInfo {
-    string type     = 1;
-    string cert_url = 2;
-    string key_url  = 3;
-    bytes  serial   = 4;
-    bytes  issuer   = 5;
+message CertKeyInfo {
+    string storage_id = 1;
+    string cert_url   = 2;
+    string key_url    = 3;
+    bytes  serial     = 4;
+    bytes  issuer     = 5;
 }
 
 message SystemInfo {
@@ -131,37 +131,37 @@ message NodesID {
     repeated string ids = 1;
 }
 
-message GetCertTypesRequest {
+message GetCertKeyStorageIDsRequest {
     string node_id = 1;
 }
 
-message CertTypes {
-    repeated string types = 1;
+message CertKeyStorageIDs {
+    repeated string storage_ids = 1;
 }
 
 message CreateKeyRequest {
-    string node_id  = 1;
-    string subject  = 2;
-    string type     = 3;
-    string password = 4;
+    string node_id    = 1;
+    string subject    = 2;
+    string storage_id = 3;
+    string password   = 4;
 }
 
 message CreateKeyResponse {
-    string              node_id = 1;
-    string              type    = 2;
-    string              csr     = 3;
-    common.v2.ErrorInfo error   = 4;
+    string              node_id    = 1;
+    string              storage_id = 2;
+    string              csr        = 3;
+    common.v2.ErrorInfo error      = 4;
 }
 
 message ApplyCertRequest {
-    string node_id = 1;
-    string type    = 2;
-    string cert    = 3;
+    string node_id    = 1;
+    string storage_id = 2;
+    string cert       = 3;
 }
 
 message ApplyCertResponse {
     string              node_id   = 1;
-    CertInfo            cert_info = 2;
+    CertKeyInfo         cert_info = 2;
     common.v2.ErrorInfo error     = 3;
 }
 
@@ -231,27 +231,27 @@ message DeprovisionResponse {
 
 message IAMIncomingMessages {
     oneof IAMIncomingMessage {
-        StartProvisioningRequest  start_provisioning_request  = 1;
-        GetCertTypesRequest       get_cert_types_request      = 2;
-        FinishProvisioningRequest finish_provisioning_request = 3;
-        DeprovisionRequest        deprovision_request         = 4;
-        PauseNodeRequest          pause_node_request          = 5;
-        ResumeNodeRequest         resume_node_request         = 6;
-        CreateKeyRequest          create_key_request          = 7;
-        ApplyCertRequest          apply_cert_request          = 8;
+        StartProvisioningRequest    start_provisioning_request       = 1;
+        GetCertKeyStorageIDsRequest get_cert_key_storage_ids_request = 2;
+        FinishProvisioningRequest   finish_provisioning_request      = 3;
+        DeprovisionRequest          deprovision_request              = 4;
+        PauseNodeRequest            pause_node_request               = 5;
+        ResumeNodeRequest           resume_node_request              = 6;
+        CreateKeyRequest            create_key_request               = 7;
+        ApplyCertRequest            apply_cert_request               = 8;
     }
 }
 
 message IAMOutgoingMessages {
     oneof IAMOutgoingMessage {
-        NodeInfo                   node_info                    = 1;
-        StartProvisioningResponse  start_provisioning_response  = 2;
-        CertTypes                  cert_types_response          = 3;
-        FinishProvisioningResponse finish_provisioning_response = 4;
-        DeprovisionResponse        deprovision_response         = 5;
-        PauseNodeResponse          pause_node_response          = 6;
-        ResumeNodeResponse         resume_node_response         = 7;
-        CreateKeyResponse          create_key_response          = 8;
-        ApplyCertResponse          apply_cert_response          = 9;
+        NodeInfo                   node_info                     = 1;
+        StartProvisioningResponse  start_provisioning_response   = 2;
+        CertKeyStorageIDs          cert_key_storage_ids_response = 3;
+        FinishProvisioningResponse finish_provisioning_response  = 4;
+        DeprovisionResponse        deprovision_response          = 5;
+        PauseNodeResponse          pause_node_response           = 6;
+        ResumeNodeResponse         resume_node_response          = 7;
+        CreateKeyResponse          create_key_response           = 8;
+        ApplyCertResponse          apply_cert_response           = 9;
     }
 }
