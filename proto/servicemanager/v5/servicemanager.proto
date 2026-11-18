@@ -92,17 +92,16 @@ message EnvVarInfo {
 
 message InstanceInfo {
     common.v2.InstanceIdent instance              = 1;
-    string                  version               = 2;
-    string                  manifest_digest       = 3;
-    string                  owner_id              = 4;
-    string                  runtime_id            = 5;
-    uint32                  uid                   = 6;
-    uint32                  gid                   = 7;
-    uint64                  priority              = 8;
-    string                  storage_path          = 9;
-    string                  state_path            = 10;
-    repeated EnvVarInfo     env_vars              = 11;
-    MonitoringParameters    monitoring_parameters = 12;
+    string                  manifest_digest       = 2;
+    string                  owner_id              = 3;
+    string                  runtime_id            = 4;
+    uint32                  uid                   = 5;
+    uint32                  gid                   = 6;
+    uint64                  priority              = 7;
+    string                  storage_path          = 8;
+    string                  state_path            = 9;
+    repeated EnvVarInfo     env_vars              = 10;
+    MonitoringParameters    monitoring_parameters = 11;
 }
 
 message UpdateInstances {
@@ -212,7 +211,7 @@ message EnvVarStatus {
 
 message InstanceStatus {
     common.v2.InstanceIdent instance        = 1;
-    string                  version         = 2;
+    bool                    preinstalled    = 2;
     string                  runtime_id      = 3;
     string                  manifest_digest = 4;
     repeated EnvVarStatus   env_vars        = 5;
@@ -296,9 +295,8 @@ message CoreAlert {
 }
 
 message InstanceAlert {
-    common.v2.InstanceIdent instance        = 1;
-    string                  service_version = 2;
-    string                  message         = 3;
+    common.v2.InstanceIdent instance = 1;
+    string                  message  = 2;
 }
 
 message Alert {
