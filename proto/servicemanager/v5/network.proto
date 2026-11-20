@@ -63,6 +63,10 @@ message PendingFirewallUpdate {
     repeated FirewallRule   firewall_rules = 2;
 }
 
+message UnitNetworksUpdate {
+    repeated string network_ids = 1;
+}
+
 message SubscribeInstanceNetworkUpdatesRequest {
     string node_id = 1;
 }
@@ -70,6 +74,7 @@ message SubscribeInstanceNetworkUpdatesRequest {
 message InstanceNetworkUpdateNotification {
     oneof update {
         PendingFirewallUpdate pending_firewall_update = 1;
+        UnitNetworksUpdate    unit_networks_update    = 2;
     }
 }
 
